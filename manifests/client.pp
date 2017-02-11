@@ -17,6 +17,7 @@ class bacula::client{
     owner => 'bacula',
     group => 'bacula',
     content => template('bacula/bacula-fd.conf.erb'),
+    require => Package[$::bacula::bacula_fd_package],
  }
 
  }
