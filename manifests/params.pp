@@ -4,9 +4,15 @@ class bacula::params {
   $workingDirectory = "/var/spool/bacula"
   $pidDirectory = "/var/run"
   $maximumConcurrentJobs = '30'
+  $typebackup = 'file'
+  $dirBackupFile = '/bacula'
 
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
+
+  # Bacula director - bacula-dir.conf
+  $fdport = "9101"
+  
 
   # Different path and package definitions
   case "${::operatingsystem}" {
@@ -14,6 +20,7 @@ class bacula::params {
       case "${::operatingsystemmajrelease}" {
         '7'     : {
           $bacula_dir_package = 'bacula-director'
+          $bacula_dir_service = 'bacula-dir'
           $bacula_sd_package = 'bbacula-storage'
           $bacula_fd_package = 'bacula-client'
           $bacula_fd_service = 'bacula-fd'

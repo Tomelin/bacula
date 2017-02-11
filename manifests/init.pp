@@ -38,6 +38,7 @@
 class bacula (
   
           $bacula_dir_package = $::bacula::params::bacula_dir_package,
+          $bacula_dir_service = $::bacula::params::bacula_dir_service,
           $bacula_sd_package = $::bacula::params::bacula_sd_package,
           $bacula_fd_package = $::bacula::params::bacula_fd_package,
           $bacula_fd_service = $::bacula::params::bacula_fd_service,
@@ -47,6 +48,8 @@ class bacula (
           $workingDirectory = $::bacula::params::workingDirectory,
           $pidDirectory = $::bacula::params::pidDirectory,
           $maximumConcurrentJobs = $::bacula::params::maximumConcurrentJobs,
+          $typebackup = $::bacula::params::typebackup,
+          $dirBackupFile = $::bacula::params::dirBackupFile 
           
 ) inherits bacula::params {
 
