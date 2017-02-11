@@ -1,0 +1,26 @@
+
+Director {
+  Name = "'<%= @bacula-dir %>'"
+  Password = "'<%= @password-fd %>'"
+}
+#
+#
+Director {
+  Name = "'<%= @bacula-mon %>'"
+  Password = "'<%= @password-mon %>'"
+  Monitor = yes
+}
+#
+#
+FileDaemon {                          # this is me
+  Name = "'<%= @hostname %>'"
+  FDport = "'<%= @fdport %>'"                  # where we listen for the director
+  WorkingDirectory = "'<%= @workingDirectory %>'" 
+  Pid Directory = "'<%= @pidDirectory %>'"
+  Maximum Concurrent Jobs = "'<%= @maximumConcurrentJobs %>'"
+  
+}
+Messages {
+  Name = Standard
+  director = "'<%= @bacula-dir %>'" = all, !skipped, !restored
+}

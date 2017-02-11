@@ -35,7 +35,20 @@
 #
 # Copyright 2017 Your name here, unless otherwise noted.
 #
-class bacula {
+class bacula (
+  
+          $bacula_dir_package = $::bacula::params::bacula_dir_package,
+          $bacula_sd_package = $::bacula::params::bacula_sd_package,
+          $bacula_fd_package = $::bacula::params::bacula_fd_package,
+          $bacula_fd_service = $::bacula::params::bacula_fd_service,
+          $bconsole_package = $::bacula::params::bconsole_package,
+          $dirconf = $::bacula::params::dirconf,
+          $fdport  = $::bacula::params::fdport,
+          $workingDirectory = $::bacula::params::workingDirectory,
+          $pidDirectory = $::bacula::params::pidDirectory,
+          $maximumConcurrentJobs = $::bacula::params::maximumConcurrentJobs,
+          
+) inherits bacula::params {
 
 
 }
