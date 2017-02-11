@@ -20,5 +20,4 @@ class bacula::client{
     require => Package[$::bacula::bacula_fd_package],
  }
 
-
  }

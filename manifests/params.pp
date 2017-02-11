@@ -13,7 +13,6 @@ class bacula::params {
   # Bacula director - bacula-dir.conf
   $dirport = "9101"
   
-
   # Different path and package definitions
   case "${::operatingsystem}" {
     'CentOS' : {
