@@ -11,7 +11,7 @@ class bacula::params {
   $fdport = "9102"
 
   # Bacula director - bacula-dir.conf
-  $fdport = "9101"
+  $dirport = "9101"
   
 
   # Different path and package definitions
