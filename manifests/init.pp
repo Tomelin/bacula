@@ -49,9 +49,14 @@ class bacula (
           $pidDirectory = $::bacula::params::pidDirectory,
           $maximumConcurrentJobs = $::bacula::params::maximumConcurrentJobs,
           $typebackup = $::bacula::params::typebackup,
-          $dirBackupFile = $::bacula::params::dirBackupFile 
+          $dirBackupFile = $::bacula::params::dirBackupFile,
+          $is_client  = $::bacula::params::is_client,
           
 ) inherits bacula::params {
 
+if $is_client == true {
+  class { 'bacula::client': }
+ }
+  }
 
-}
+
