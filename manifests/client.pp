@@ -1,4 +1,10 @@
-class bacula::client{
+class bacula::client(
+  
+  $bacula_fd_package = $::bacula::bacula_fd_package,
+  $bacula_fd_service = $::bacula::bacula_fd_service,
+  $dirconf = $::bacula::dirconf,
+  
+){
   
   package { $::bacula::bacula_fd_package:
     ensure => 'present'    
@@ -18,6 +24,7 @@ class bacula::client{
     group => 'bacula',
     content => template('bacula/bacula-fd.conf.erb'),
     require => Package[$::bacula::bacula_fd_package],
+    notify => Service[$::bacula::bacula_fd_service]
  }
 
  }
