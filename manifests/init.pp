@@ -58,8 +58,8 @@ class bacula (
   if $is_client == true {
     class { 'bacula::client': }
   }
-    if $is_director == true {
-    class { 'bacula::director': }
+  if $is_director == true {
+   class { 'bacula::director': }
   }
 }
 
