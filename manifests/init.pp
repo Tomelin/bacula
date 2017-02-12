@@ -61,5 +61,9 @@ class bacula (
     if $is_director == true {
     class { 'bacula::director': }
   }
+  
+  #if $is_console == true {
+   # class { 'bacula::director': }
+  #}
 }
 

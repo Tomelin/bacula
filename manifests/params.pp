@@ -9,7 +9,7 @@ class bacula::params {
   $is_client = true
   $is_storage = false
   $is_director = true
-  $is_console = false
+  $is_console = true
 
   # Bacula client - bacula-fd.conf
   $fdport = "9102"

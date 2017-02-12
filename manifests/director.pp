@@ -1,5 +1,10 @@
 class bacula::director {
-  package { $::bacula::bacula_dir_package: ensure => 'present' }
+  package { $::bacula::bacula_dir_package:
+    ensure => 'present',
+    before => Package['bacula-console']
+  }
+
+  package { 'bacula-console': ensure => 'present', }
 
   service { $::bacula::bacula_dir_service:
     ensure     => 'running',
@@ -14,6 +19,13 @@ class bacula::director {
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/bacula-dir.conf.erb'),
+  }
+
+  file { "$::bacula::dirconf/bconsole.conf":
+    ensure  => 'file',
+    owner   => 'bacula',
+    group   => 'bacula',
+    content => template('bacula/bconsole.conf.erb'),
   }
 
   file { "$::bacula::dirBackupFile":
