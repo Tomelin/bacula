@@ -9,7 +9,7 @@ class bacula::director {
     require    => Package[$::bacula::params::bacula_dir_package],
   }
 
-  file { "$::bacula::dirconf/baculadir.conf":
+  file { "$::bacula::dirconf/bacula-dir.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
