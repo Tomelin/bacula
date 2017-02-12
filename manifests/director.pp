@@ -1,6 +1,9 @@
 class bacula::director {
   package { $::bacula::bacula_dir_package: ensure => 'present' }
 
+
+
+
   service { $::bacula::bacula_dir_service:
     ensure     => 'running',
     enable     => true,
