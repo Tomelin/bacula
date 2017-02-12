@@ -4,15 +4,16 @@
 #
 # Default Bacula Director Configuration file
 Director {                            # define myself
-  Name = bacula-dir
-  DIRport = 9101                # where we listen for UA connections
+  Name = "<%= @hostname %>"
+  DIRport = <%= @dirport %>                 # where we listen for UA connections
   QueryFile = "/etc/bacula/query.sql"
-  WorkingDirectory = "/var/spool/bacula"
-  PidDirectory = "/var/run"
-  Maximum Concurrent Jobs = 20
+  WorkingDirectory = "<%= @workingDirectory %>" 
+  PidDirectory = "<%= @pidDirectory %>"
+  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
   Password = "M2UwNThhOGUxY2EyNDdkYTB"         # Console password
   Messages = Daemon
-  #DirAddress = 127.0.0.1
+  DirAddress = <%= @ipaddress %>
+
 }
 
 
@@ -76,14 +77,14 @@ FileSet {
 
 # Definition of file Virtual Autochanger device
 Storage {
-  Name = File1
+  Name = "<%= @bacula_dir %>"
 # Do not use "localhost" here
   Address = 192.168.110.6            # N.B. Use a fully qualified name here
-  SDPort = 9103
+  SDPort = <%= @sdport %>   
   Password = "M2UwNThhOGUxY2EyNDdkYTB"
   Device = FileStorage
   Media Type = File1
-  Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
+  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>        # run up to 10 jobs a the same time
 }
 
 
