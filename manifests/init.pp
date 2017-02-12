@@ -44,6 +44,7 @@ class bacula (
   $bconsole_package      = $::bacula::params::bconsole_package,
   $dirconf               = $::bacula::params::dirconf,
   $fdport                = $::bacula::params::fdport,
+  $sdport                = $::bacula::params::sdport,
   $workingDirectory      = $::bacula::params::workingDirectory,
   $pidDirectory          = $::bacula::params::pidDirectory,
   $maximumConcurrentJobs = $::bacula::params::maximumConcurrentJobs,

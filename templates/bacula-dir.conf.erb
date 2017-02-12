@@ -79,7 +79,7 @@ FileSet {
 Storage {
   Name = "<%= @bacula_dir %>"
 # Do not use "localhost" here
-  Address = 192.168.110.6            # N.B. Use a fully qualified name here
+  Address = <%= @ipaddress %>            # N.B. Use a fully qualified name here
   SDPort = <%= @sdport %>   
   Password = "M2UwNThhOGUxY2EyNDdkYTB"
   Device = FileStorage
