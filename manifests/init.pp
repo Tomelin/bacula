@@ -51,6 +51,11 @@ class bacula (
           $typebackup = $::bacula::params::typebackup,
           $dirBackupFile = $::bacula::params::dirBackupFile,
           $is_client  = $::bacula::params::is_client,
+          $is_storage  = $::bacula::params::is_storage,
+          $is_director  = $::bacula::params::is_director,
+          $is_console  = $::bacula::params::is_console,
+          $password_fd = $::bacula::params::password_fd,
+          $bacula_dir = $::bacula::params::bacula_dir,
           
 ) inherits bacula::params {
 

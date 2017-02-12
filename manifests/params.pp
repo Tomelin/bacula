@@ -7,12 +7,17 @@ class bacula::params {
   $typebackup = 'file'
   $dirBackupFile = '/bacula'
   $is_client = true
+  $is_storage = false
+  $is_director = false
+  $is_console = false
 
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
+  $password_fd = "teste123BackupBacula2017"
 
   # Bacula director - bacula-dir.conf
   $dirport = "9101"
+  $bacula_dir = "bacula-dir"
   
   # Different path and package definitions
   case "${::operatingsystem}" {

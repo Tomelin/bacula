@@ -4,11 +4,11 @@ Director {
 }
 #
 #
-Director {
-  Name = "<%= @bacula_mon %>"
-  Password = "<%= @password_mon %>"
-  Monitor = yes
-}
+#Director {
+#  Name = "<%= @bacula_mon %>"
+#  Password = "<%= @password_mon %>"
+#  Monitor = yes
+#}
 #
 #
 FileDaemon {                          # this is me
@@ -16,7 +16,7 @@ FileDaemon {                          # this is me
   FDport = "<%= @fdport %>"                  # where we listen for the director
   WorkingDirectory = "<%= @workingDirectory %>" 
   Pid Directory = "<%= @pidDirectory %>"
-  Maximum Concurrent Jobs = "<%= @maximumConcurrentJobs %>"
+  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
   
 }
 Messages {
