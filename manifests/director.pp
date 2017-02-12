@@ -1,9 +1,6 @@
 class bacula::director {
   package { $::bacula::bacula_dir_package: ensure => 'present' }
 
-
-
-
   service { $::bacula::bacula_dir_service:
     ensure     => 'running',
     enable     => true,
@@ -18,23 +15,42 @@ class bacula::director {
     group   => 'bacula',
     content => template('bacula/bacula-dir.conf.erb'),
   }
-  
-    file { "$::bacula::dirBackupFile":
+
+  file { "$::bacula::dirBackupFile":
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-    
   }
-  
-  if $::bacula::typebackup == 'file'{
-  file { "$::bacula::dirBackupFile/backup":
+
+  file { "$::bacula::dirconf/clients":
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-    
   }
-}
+
+  file { "$::bacula::dirconf/jobs":
+    ensure  => 'directory',
+    recurse => true,
+    owner   => 'bacula',
+    group   => 'bacula',
+  }
+
+  file { "$::bacula::dirconf/pool":
+    ensure  => 'directory',
+    recurse => true,
+    owner   => 'bacula',
+    group   => 'bacula',
+  }
+
+  if $::bacula::typebackup == 'file' {
+    file { "$::bacula::dirBackupFile/backup":
+      ensure  => 'directory',
+      recurse => true,
+      owner   => 'bacula',
+      group   => 'bacula',
+    }
+  }
 
 }
