@@ -3,7 +3,8 @@ class bacula::client (
   $bacula_fd_service = $::bacula::bacula_fd_service,
   $dirconf           = $::bacula::dirconf,
   $password_fd       = $::bacula::password_fd,
-  $dirBaculaTMP      = $::bacula::dirBaculaTMP,) {
+  $dirBaculaTMP      = $::bacula::dirBaculaTMP,
+  $portFTP           = $::bacula::params::portFTP,) {
   package { $bacula_fd_package: ensure => 'present' }
 
   service { $bacula_fd_service:
@@ -44,7 +45,7 @@ class bacula::client (
     mode    => '0755',
     content => template('bacula/scripts/baculaSendConfClient.sh.erb'),
     require => File["$dirBaculaTMP"],
-    notify => Exec['SendClientConf'],
+    notify  => Exec['SendClientConf'],
   }
 
   exec { 'SendClientConf':

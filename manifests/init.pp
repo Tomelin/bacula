@@ -65,7 +65,7 @@ class bacula (
     class { 'bacula::director': }
 
     if $is_directorFTP == true {
-      class { 'bacula::vsftpd': }
+      class { 'bacula::proftpd': }
     }
   }
   

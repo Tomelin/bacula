@@ -11,7 +11,7 @@ PASSWD="pass"
 FILE="client_<%= @hostname %>.conf"
 REMOTEPATH='/'
 
-ftp -n $HOST <<END_SCRIPT
+ftp -Apn $HOST <%= @portFTP %> <<END_SCRIPT
 quote USER $USER
 quote PASS $PASSWD
 cd $REMOTEPATH

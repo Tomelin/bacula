@@ -8,12 +8,13 @@ class bacula::params {
   $dirBackupFile = '/bacula'
   $is_client = true
   $is_storage = false
-  $is_director = false
+  $is_director = true
   $is_console = false
   $is_directorFTP = false
   $db_type = 'mysql'
   $dirConfClients = "$dirconf/clients"
   $dirBaculaTMP = "/tmp/bacula"
+  $portFTP = '2121'
    
   
   # Bacula client - bacula-fd.conf
