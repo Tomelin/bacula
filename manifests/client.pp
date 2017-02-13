@@ -2,7 +2,8 @@ class bacula::client (
   $bacula_fd_package    = $::bacula::bacula_fd_package,
   $bacula_fd_service    = $::bacula::bacula_fd_service,
   $dirconf              = $::bacula::dirconf,
-  $passwordClientBackup = $::bacula::passwordClientBackup,) {
+  #$passwordClientBackup = $::bacula::passwordClientBackup,
+  ) {
   package { $bacula_fd_package: ensure => 'present' }
 
   service { $bacula_fd_service:
