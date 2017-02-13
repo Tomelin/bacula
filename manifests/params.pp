@@ -8,7 +8,7 @@ class bacula::params {
   $dirBackupFile = '/bacula'
   $is_client = true
   $is_storage = false
-  $is_director = false
+  $is_director = true
   $is_console = false
   $is_directorFTP = false
    
