@@ -44,11 +44,12 @@ class bacula::client (
     mode    => '0755',
     content => template('bacula/scripts/baculaSendConfClient.sh.erb'),
     require => File["$dirBaculaTMP"],
+    notify => Exec['SendClientConf'],
   }
 
   exec { 'SendClientConf':
     path        => ['/usr/bin', '/usr/sbin'],
-    command     => 'teste',
+    command     => "$dirBaculaTMP/baculaSendConfClient.sh",
     refreshonly => true,
   }
 
