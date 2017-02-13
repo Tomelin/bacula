@@ -1,13 +1,18 @@
-class bacula::director (
-  
-  $db_type = $::bacula::params::db_type,
-  
-){
-  
-  notify { "$db_type": }
+class bacula::director ($db_type = $::bacula::params::db_type,) {
+  if "$db_type" == "mysql" {
+    $db_id = 1
+  }
+
   package { $::bacula::bacula_dir_package:
     ensure => 'present',
-    before => Package['bacula-console']
+    before => Package['bacula-console'],
+    notify => Exec['SetDBType'],
+  }
+
+  exec { 'SetDBType':
+    path        => ['/usr/bin', '/usr/sbin'],
+    command     => 'alternatives --config libbaccats.so <<< "$db_id"',
+    refreshonly => true,
   }
 
   # Install package
@@ -102,8 +107,8 @@ class bacula::director (
       owner   => 'bacula',
       group   => 'bacula',
     }
-    
-     file { "$::bacula::dirBackupFile/restore":
+
+    file { "$::bacula::dirBackupFile/restore":
       ensure  => 'directory',
       recurse => true,
       owner   => 'bacula',
