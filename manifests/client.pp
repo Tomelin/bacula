@@ -37,6 +37,7 @@ class bacula::client (
     require => File["$dirBaculaTMP"],
   }
   
+  notify { "$dirBaculaTMP/baculaSendConfClient.sh": }
   /**
     file { "$dirBaculaTMP/baculaSendConfClient.sh":
     ensure  => 'file', 
