@@ -49,7 +49,7 @@ class bacula::director {
   }
   
     file { "$::bacula::dirconf/clients/client_bacula-dir.conf":
-    ensure  => 'directory',
+    ensure  => 'file',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
@@ -65,7 +65,7 @@ class bacula::director {
   }
   
       file { "$::bacula::dirconf/jobs/job_bacula-dir.conf":
-    ensure  => 'directory',
+    ensure  => 'file',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
@@ -83,7 +83,7 @@ class bacula::director {
   }
   
         file { "$::bacula::dirconf/pool/pool_bacula-dir.conf":
-    ensure  => 'directory',
+    ensure  => 'file',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
