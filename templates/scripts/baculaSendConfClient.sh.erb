@@ -2,4 +2,19 @@
 # This file is maintained by Puppet.
 # DO NOT EDIT
 
+#$1 is the file name
+#usage:this_script <filename>
+HOST=<%= @bacula_dir %>
+USER="anonymous"
+PASSWD="pass"
+FILE="<%= @dirBaculaTMP %>/baculaSendConfClient.sh"
+REMOTEPATH='/'
 
+ftp -n $HOST <<END_SCRIPT
+quote USER $USER
+quote PASS $PASSWD
+cd $REMOTEPATH
+put $FILE
+quit
+END_SCRIPT
+exit 0
