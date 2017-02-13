@@ -13,7 +13,7 @@ class bacula::params {
   $is_directorFTP = false
   $passwordClient = "${::passwordClientBackup}"
   
-
+  
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
   $password_fd = "teste123BackupBacula2017"

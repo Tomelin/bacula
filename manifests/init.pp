@@ -59,6 +59,9 @@ class bacula (
   $ftp_package           = $::bacula::params::ftp_package,
   $passwordClient  = $::bacula::params::passwordClient
   ) inherits bacula::params {
+    
+    notify { "${::passwordClientBackup}": }
+    notify { "${::passwordClient}": }
   if $is_client == true {
     class { 'bacula::client': }
   }
