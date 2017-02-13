@@ -57,6 +57,7 @@ class bacula (
   $password_fd           = $::bacula::params::password_fd,
   $bacula_dir            = $::bacula::params::bacula_dir,
   $ftp_package           = $::bacula::params::ftp_package,
+  $dirBaculaTMP     = $::bacula::params::dirBaculaTMP,
   
   ) inherits bacula::params {
     

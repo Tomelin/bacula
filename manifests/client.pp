@@ -3,8 +3,7 @@ class bacula::client (
   $bacula_fd_service = $::bacula::bacula_fd_service,
   $dirconf           = $::bacula::dirconf,
   $password_fd       = $::bacula::password_fd,
-  
-  ) {
+  $dirBaculaTMP     = $::bacula::dirBaculaTMP,) {
   package { $bacula_fd_package: ensure => 'present' }
 
   service { $bacula_fd_service:
@@ -24,18 +23,30 @@ class bacula::client (
     notify  => Service[$bacula_fd_service]
   }
 
-  file { "/tmp/client_${::hostname}.conf":
+  file { "$dirBaculaTMP":
+    ensure => 'directory',
+    owner  => 'bacula',
+    group  => 'bacula',
+  }
+
+  file { "$dirBaculaTMP/client_${::hostname}.conf":
+    ensure  => 'file',
+    owner   => 'bacula',
+    group   => 'bacula',
+    content => template('bacula/director/client_conf.erb'),
+  }
+  
+    file { "$dirBaculaTMP/scripts/baculaSendConfClient.sh.erb":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/client_conf.erb'),
   }
 
-  /**
-   * exec { 'SendClientConf':
-   *  path        => ['/usr/bin', '/usr/sbin'],
-   *  command     =>
-   *  refreshonly => true,
-   *}
-   */
+  exec { 'SendClientConf':
+    path        => ['/usr/bin', '/usr/sbin'],
+    command     => 'teste',
+    refreshonly => true,
+  }
+
 }
