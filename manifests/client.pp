@@ -24,7 +24,7 @@ class bacula::client (
     notify  => Service[$bacula_fd_service]
   }
 
-  file { "tmp/client_${::hostname}.conf":
+  file { "/tmp/client_${::hostname}.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
