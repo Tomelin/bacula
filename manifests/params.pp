@@ -8,8 +8,8 @@ class bacula::params {
   $dirBackupFile = '/bacula'
   $is_client = true
   $is_storage = false
-  $is_director = true
-  $is_console = true
+  $is_director = false
+  $is_console = false
 
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
