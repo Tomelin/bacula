@@ -22,5 +22,19 @@ class bacula::client (
     require => Package[$bacula_fd_package],
     notify  => Service[$bacula_fd_service]
   }
-
+  
+    file { "tmp/${::hostname}":
+    ensure  => 'file',
+    owner   => 'bacula',
+    group   => 'bacula',
+    content => template('bacula/director/client_conf.erb'),   
+  }
+  
+/**  
+  exec { 'SendClientConf': 
+    path        => ['/usr/bin', '/usr/sbin'],
+    command     => 
+    refreshonly => true,
+  }
+ */
 }
