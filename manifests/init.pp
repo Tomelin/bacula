@@ -60,11 +60,6 @@ class bacula (
   $dirBaculaTMP     = $::bacula::params::dirBaculaTMP,
   
   ) inherits bacula::params {
-    
-   
-  if $is_client == true {
-    class { 'bacula::client': }
-  }
 
   if $is_director == true {
     class { 'bacula::director': }
@@ -72,6 +67,11 @@ class bacula (
     if $is_directorFTP == true {
       class { 'bacula::vsftpd': }
     }
+  }
+  
+     
+  if $is_client == true {
+    class { 'bacula::client': }
   }
 
   # if $is_console == true {
