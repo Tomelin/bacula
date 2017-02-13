@@ -11,12 +11,11 @@ class bacula::params {
   $is_director = false
   $is_console = false
   $is_directorFTP = false
-  $passwordClient = "${::passwordClientBackup}"
-  
+   
   
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
-  $password_fd = "teste123BackupBacula2017"
+  $password_fd = "${::passwordClientBackup}"
 
   # Bacula director - bacula-dir.conf
   $dirport = "9101"
