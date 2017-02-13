@@ -1,0 +1,10 @@
+Client {
+  Name = bacula-fd
+  Address = localhost
+  FDPort = 9102
+  Catalog = MyCatalog
+  Password = "@@FD_PASSWORD@@"          # password for FileDaemon
+  File Retention = 30 days            # 30 days
+  Job Retention = 6 months            # six months
+  AutoPrune = yes                     # Prune expired Jobs/Files
+}

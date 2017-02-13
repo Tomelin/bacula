@@ -1,0 +1,57 @@
+JobDefs {
+  Name = "DefaultJob"
+  Type = Backup
+  Level = Incremental
+  Client = bacula-fd
+  FileSet = "Full Set"
+  Schedule = "WeeklyCycle"
+  Storage = File
+  Messages = Standard
+  Pool = File
+  Priority = 10
+  Write Bootstrap = "/var/spool/bacula/%c.bsr"
+}
+
+
+Job {
+  Name = "BackupClient1"
+  JobDefs = "DefaultJob"
+}
+
+#Job {
+#  Name = "BackupClient2"
+#  Client = bacula2-fd
+#  JobDefs = "DefaultJob"
+#}
+
+# Backup the catalog database (after the nightly save)
+Job {
+  Name = "BackupCatalog"
+  JobDefs = "DefaultJob"
+  Level = Full
+  FileSet="Catalog"
+  Schedule = "WeeklyCycleAfterBackup"
+  # This creates an ASCII copy of the catalog
+  # Arguments to make_catalog_backup.pl are:
+  #  make_catalog_backup.pl <catalog-name>
+  RunBeforeJob = "/usr/libexec/bacula/make_catalog_backup.pl MyCatalog"
+  # This deletes the copy of the catalog
+  RunAfterJob  = "/usr/libexec/bacula/delete_catalog_backup"
+  Write Bootstrap = "/var/spool/bacula/%n.bsr"
+  Priority = 11                   # run after main backup
+}
+
+#
+# Standard Restore template, to be changed by Console program
+#  Only one such job is needed for all Jobs/Clients/Storage ...
+#
+Job {
+  Name = "RestoreFiles"
+  Type = Restore
+  Client=bacula-fd
+  FileSet="Full Set"
+  Storage = File
+  Pool = Default
+  Messages = Standard
+  Where = /tmp/bacula-restores
+}
