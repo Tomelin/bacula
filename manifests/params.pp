@@ -11,6 +11,7 @@ class bacula::params {
   $is_director = true
   $is_console = false
   $is_directorFTP = false
+  $db_type = 'mysql'
    
   
   # Bacula client - bacula-fd.conf

@@ -1,4 +1,10 @@
-class bacula::director {
+class bacula::director (
+  
+  $db_type = $::bacula::params::db_type,
+  
+){
+  
+  notify { "$db_type": }
   package { $::bacula::bacula_dir_package:
     ensure => 'present',
     before => Package['bacula-console']
