@@ -9,9 +9,16 @@ class bacula::director ($db_type = $::bacula::params::db_type,) {
     notify => Exec['SetDBType'],
   }
 
+  
   exec { 'SetDBType':
     path        => ['/usr/bin', '/usr/sbin'],
-    command     => 'alternatives --config libbaccats.so <<< "$db_id"',
+    command     => "alternatives --config libbaccats.so <<< \"$db_id\"",
+    refreshonly => true,
+  }
+  
+    exec { "alternatives --config libbaccats.so <<< \"$db_id\"":
+    path        => ['/usr/bin', '/usr/sbin'],
+    command     => "alternatives --config libbaccats.so <<< \"$db_id\"",
     refreshonly => true,
   }
 
