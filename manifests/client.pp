@@ -39,24 +39,17 @@ class bacula::client (
   
 
   notify { "$dirBaculaTMP/baculaSendConfClient.sh": }
-  /**
-    file { "$dirBaculaTMP/baculaSendConfClient.sh":
-    ensure  => 'file', 
-=======
+  
     file { "$dirBaculaTMP/baculaSendConfClient.sh":
     ensure  => 'file',
->>>>>>> branch 'master' of https://github.com/Tomelin/tomelin-bacula.git
     owner   => 'bacula',
     group   => 'bacula',
     mode => '0755',
-<<<<<<< HEAD
     #content => template('bacula/scripts/baculaSendConfClient.sh.erb'),
-=======
     content => template('bacula/scripts/baculaSendConfClient.sh.erb'),
->>>>>>> branch 'master' of https://github.com/Tomelin/tomelin-bacula.git
     require => File["$dirBaculaTMP"],
   }
-   */
+   
   
 
   exec { 'SendClientConf':
