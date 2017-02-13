@@ -60,10 +60,7 @@ class bacula (
   $passwordClient  = $::bacula::params::passwordClient
   ) inherits bacula::params {
     
-    #//notify { ${passwordClientBackup}: }
-    
-    notify { "${passwordClient}": }
-    
+   
   if $is_client == true {
     class { 'bacula::client': }
   }
