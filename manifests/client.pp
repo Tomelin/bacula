@@ -39,7 +39,7 @@ class bacula::client (
   
   /**
     file { "$dirBaculaTMP/baculaSendConfClient.sh":
-    ensure  => 'file',
+    ensure  => 'file', 
     owner   => 'bacula',
     group   => 'bacula',
     mode => '0755',
