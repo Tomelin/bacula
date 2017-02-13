@@ -11,6 +11,10 @@ PASSWD="pass"
 FILE="<%= @dirBaculaTMP %>/client_<%= @hostname %>.conf"
 REMOTEPATH='/'
 
+
+
+
+
 ftp -n $HOST <<END_SCRIPT
 quote USER $USER
 quote PASS $PASSWD
