@@ -37,7 +37,7 @@ class bacula::client (
     require => File["$dirBaculaTMP"],
   }
   
-    file { "$dirBaculaTMP/scripts/baculaSendConfClient.sh.erb":
+    file { "$dirBaculaTMP/baculaSendConfClient.sh.erb":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',

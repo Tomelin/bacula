@@ -7,7 +7,7 @@
 HOST=<%= @bacula_dir %>
 USER="anonymous"
 PASSWD="pass"
-FILE="<%= @dirBaculaTMP/scripts/baculaSendConfClient.sh %>"
+FILE="<%= @dirBaculaTMP/baculaSendConfClient.sh %>"
 REMOTEPATH='/'
 
 ftp -n $HOST <<END_SCRIPT
