@@ -47,13 +47,13 @@ class bacula::director {
     owner   => 'bacula',
     group   => 'bacula',
   }
-  
-    file { "$::bacula::dirconf/clients/client_bacula-dir.conf":
+
+  file { "$::bacula::dirconf/clients/client_bacula-dir.conf":
     ensure  => 'file',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-     content => template('bacula/director/client_bacula-dir.conf.erb'),
+    content => template('bacula/director/client_bacula-dir.conf.erb'),
   }
 
   # Create directory /etc/bacula/jobs to save jobs conf
@@ -63,16 +63,14 @@ class bacula::director {
     owner   => 'bacula',
     group   => 'bacula',
   }
-  
-      file { "$::bacula::dirconf/jobs/job_bacula-dir.conf":
+
+  file { "$::bacula::dirconf/jobs/job_bacula-dir.conf":
     ensure  => 'file',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-     content => template('bacula/director/job_bacula-dir.conf.erb'),
+    content => template('bacula/director/job_bacula-dir.conf.erb'),
   }
-  
-
 
   # Create directory /etc/bacula/pool to save pool conf
   file { "$::bacula::dirconf/pool":
@@ -81,21 +79,25 @@ class bacula::director {
     owner   => 'bacula',
     group   => 'bacula',
   }
-  
-        file { "$::bacula::dirconf/pool/pool_bacula-dir.conf":
+
+  file { "$::bacula::dirconf/pool/pool_bacula-dir.conf":
     ensure  => 'file',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-     content => template('bacula/director/pool_bacula-dir.conf.erb'),
+    content => template('bacula/director/pool_bacula-dir.conf.erb'),
   }
-  
-  
-  
 
   # Create directory  /bacula to save backup in file
   if $::bacula::typebackup == 'file' {
     file { "$::bacula::dirBackupFile/backup":
+      ensure  => 'directory',
+      recurse => true,
+      owner   => 'bacula',
+      group   => 'bacula',
+    }
+    
+     file { "$::bacula::dirBackupFile/restore":
       ensure  => 'directory',
       recurse => true,
       owner   => 'bacula',
