@@ -16,8 +16,6 @@ class bacula::director ($db_type = $::bacula::params::db_type,) {
     refreshonly => true,
   }
   
-
-
   # Install package
   package { 'bacula-console': ensure => 'present', }
 
