@@ -55,12 +55,16 @@ class bacula (
   $is_director           = $::bacula::params::is_director,
   $is_console            = $::bacula::params::is_console,
   $password_fd           = $::bacula::params::password_fd,
-  $bacula_dir            = $::bacula::params::bacula_dir,) inherits bacula::params {
+  $bacula_dir            = $::bacula::params::bacula_dir,
+  $ftp_package           = $::bacula::params::ftp_package, ) inherits bacula::params {
   if $is_client == true {
     class { 'bacula::client': }
   }
     if $is_director == true {
     class { 'bacula::director': }
+      if $ftp_package == true {
+        class { 'bacula::ftp': }
+      }
   }
   
   #if $is_console == true {

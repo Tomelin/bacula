@@ -10,6 +10,7 @@ class bacula::params {
   $is_storage = false
   $is_director = false
   $is_console = false
+  $is_directorFTP = false
 
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
@@ -34,6 +35,7 @@ class bacula::params {
           $bacula_fd_package = 'bacula-client'
           $bacula_fd_service = 'bacula-fd'
           $bconsole_package = 'bacula-console'
+          $ftp_package = 'vsftpd'
 
         }
         default : {

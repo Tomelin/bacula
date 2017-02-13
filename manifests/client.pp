@@ -13,7 +13,7 @@ class bacula::client(
   service { $bacula_fd_service:
     ensure => 'running',
     enable => true,
-        hasrestart => true,
+    hasrestart => true,
     hasstatus  => true,
     require => Package[$bacula_fd_package],
     }
