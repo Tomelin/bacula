@@ -1,18 +1,3 @@
-Pool {
-<% pools.each do |pool| -%>
-<% if @pool['name'] != '' -%>
-controlkey <%= @pool['name'] %>
-<% end -%>
-  Name = "<%= pool['name'] %>"
-  Pool Type = "<%= pool['poolType'] %>"
-  Recycle = <%= pool['recycle'] %>
-  AutoPrune = <%= pool['autoPrune'] %>
-  Volume Retention = <%= pool['volumeRetention'] %>
-  Maximum Volume Bytes = <%= pool['maximumVolumeBytes'] %> 
-  Maximum Volumes = <%= pool['maximumVolumes'] %>
-  Label Format = "<%= pool['labelFormat'] %>"
-
-<% end -%>
 
 
 Pool {
