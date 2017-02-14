@@ -9,13 +9,13 @@ class bacula::director (
     $db_id = 3
   }
 
-/**
+
   package { $bacula_dir_package:
     ensure => 'present',
-    before => Package['bacula-console'],
+#    before => Package['bacula-console'],
     notify => Exec['SetDBType'],
   }
- */
+
   exec { 'SetDBType':
     path        => ['/usr/bin', '/usr/sbin'],
     command     => "alternatives --config libbaccats.so <<< $db_id",
