@@ -23,6 +23,8 @@ class bacula::director::pool (
     }
 
     ]) {
+      
+      /**
   $pools.each |$name, $pool| {
     notify { $pool: }
 #    file { "/etc/bacula/pool/pool_$pool['name'].conf":
@@ -32,7 +34,7 @@ class bacula::director::pool (
 #      content => template('bacula/director/pool_conf.erb')
 #    }
   }
-  
+   */
   
   $teste = $pools[0]['name']
 
