@@ -23,6 +23,17 @@ class bacula::director::pool (
     }
 
     ]) {
+  $pools.each |$name, $pool| {
+    notify { $pool: }
+#    file { "/etc/bacula/pool/pool_$pool['name'].conf":
+#      ensure  => 'file',
+#      owner   => 'bacula',
+#      group   => 'bacula',
+#      content => template('bacula/director/pool_conf.erb')
+#    }
+  }
+  
+  
   $teste = $pools[0]['name']
 
   file { "/etc/bacula/pool/pool_$teste.conf":
