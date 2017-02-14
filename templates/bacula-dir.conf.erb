@@ -120,6 +120,16 @@ Storage {
   Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>        # run up to 10 jobs a the same time
 }
 
+Storage {
+  Name = File1
+  Address = <%= @ipaddress %> 
+  SDPort = <%= @sdport %>   
+  Password = "MWMxMzRmODZlMWIxZGZkODZiNmJhMWUyY"
+  Device = FileStorage
+  Media Type = File1
+  Maximum Concurrent Jobs = 10
+}
+
 
 # Generic catalog service
 Catalog {
