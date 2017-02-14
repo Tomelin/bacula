@@ -35,8 +35,9 @@ class bacula::director::pool (
     ]) {
       
       $foo = [ 'one', {'second' => 'two', 'third' => 'three'} ]
-notice( $foo[1]['third'] )
-      notify { $pools[0]: }
+      notify{ $foo[1]['third']: }
+      notice( $foo[1]['third'] )
+      notify { $pools[0]['name']: }
   file { "/etc/bacula/pool/pool.conf":
     ensure  => 'file',
     owner   => 'bacula',
