@@ -1,3 +1,23 @@
+
+<% pools.each do |pool| -%>
+		<% if @pool['name'] != '' -%>
+			name = "<%= @pool['name'] %>"
+		<% end -%>
+		<% if @pool['name'] != '' -%>
+			PoolType = "<%= @pool['poolType'] %>"
+		<% end -%>
+		<% if @pool['recycle'] != '' -%>
+			Recycle = "<%= @pool['recycle'] %>"
+		<% end -%>
+		<% if @pool['autoPrune'] != '' -%>
+			AutoPrune = "<%= @pool['autoPrune'] %>"
+		<% end -%>
+	
+<% end -%>
+
+
+
+
 Pool {
   Name = Default
   Pool Type = Backup
