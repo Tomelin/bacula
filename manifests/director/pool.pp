@@ -1,7 +1,7 @@
 class bacula::director::pool (
   $pools = [
     {
-      name               => 'PoolDiario2',
+      name               => 'PoolDiario3',
       poolType           => 'Backup',
       recycle            => 'yes',
       autoPrune          => 'yes',
