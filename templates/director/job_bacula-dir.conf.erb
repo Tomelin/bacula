@@ -1,57 +1,77 @@
 JobDefs {
-  Name = "DefaultJob"
+  Name = "DefaultJobDiario"
   Type = Backup
   Level = Incremental
   Client = bacula-fd
   FileSet = "Full Set"
-  Schedule = "WeeklyCycle"
-  Storage = File
+  Schedule = "Diario"
+  Storage = File1
   Messages = Standard
-  Pool = File
-  Priority = 10
+  Pool = PoolDiario
+  SpoolAttributes = yes
+  Priority = 10 #1 - 11
   Write Bootstrap = "/var/spool/bacula/%c.bsr"
 }
-
-
-Job {
-  Name = "BackupClient1"
-  JobDefs = "DefaultJob"
+JobDefs {
+  Name = "DefaultJobMensal"
+  Type = Backup
+  Level = Incremental
+  Client = bacula-fd
+  FileSet = "Full Set"
+  Schedule = "Mensal"
+  Storage = File1
+  Messages = Standard
+  Pool = PoolMensal
+  SpoolAttributes = yes
+  Priority = 10 #1 - 11
+  Write Bootstrap = "/var/spool/bacula/%c.bsr"
 }
-
-#Job {
-#  Name = "BackupClient2"
-#  Client = bacula2-fd
-#  JobDefs = "DefaultJob"
-#}
-
-# Backup the catalog database (after the nightly save)
 Job {
-  Name = "BackupCatalog"
-  JobDefs = "DefaultJob"
-  Level = Full
-  FileSet="Catalog"
-  Schedule = "WeeklyCycleAfterBackup"
-  # This creates an ASCII copy of the catalog
-  # Arguments to make_catalog_backup.pl are:
-  #  make_catalog_backup.pl <catalog-name>
-  RunBeforeJob = "/usr/libexec/bacula/make_catalog_backup.pl MyCatalog"
-  # This deletes the copy of the catalog
-  RunAfterJob  = "/usr/libexec/bacula/delete_catalog_backup"
-  Write Bootstrap = "/var/spool/bacula/%n.bsr"
-  Priority = 11                   # run after main backup
-}
-
-#
-# Standard Restore template, to be changed by Console program
-#  Only one such job is needed for all Jobs/Clients/Storage ...
-#
-Job {
-  Name = "RestoreFiles"
+  Name = "RestoreLocalFiles"
   Type = Restore
   Client=bacula-fd
   FileSet="Full Set"
-  Storage = File
-  Pool = Default
+  Storage = File1
+  Pool = File
   Messages = Standard
-  Where = "<%= @dirBackupFile %>/restore"
+  Where = /bacula/restore
+}
+
+
+Job {
+  Name = "BackupLocalFilesDiario"
+  JobDefs = "DefaultJobDiario"
+}
+Job {
+  Name = "BackupGmailDiario"
+  JobDefs = "DefaultJobDiario"
+  FileSet = "baculaGmail-fs"
+  RunBeforeJob = "sudo gmvault sync -d /mail/bacula bacula@eftech.com.br"
+  RunAfterJob = "sudo rm -rf /mail/bacula"
+}
+Job {
+  Name = "BackupWindowsMensal"
+  JobDefs = "DefaultJobMensal"
+  Client = "windows-fd"
+  Fileset = "windows-fs"
+}
+Job {
+  Name = "BackupGmailMensal"
+  JobDefs = "DefaultJobMensal"
+  FileSet = "baculaGmail-fs"
+  RunBeforeJob = "sudo gmvault sync -d /mail/bacula bacula@eftech.com.br"
+  RunAfterJob = "sudo rm -rf /mail/bacula"
+}
+Job {
+  Name = "RestoreGMAIL"
+  Type = Restore
+  Client=bacula-fd
+  FileSet="baculaGmail-fs"
+  Storage = File1
+  Pool = File
+  Messages = Standard
+  Where = /
+  Bootstrap = "/var/spool/bacula/%c.bsr"
+  RunBeforeJob = "sudo rm -rf /mail/bacula/*"
+  RunAfterJob = "sudo gmvault restore -d /mail/bacula --type quick bacula@eftech.com.br"
 }
