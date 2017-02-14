@@ -1,4 +1,7 @@
-class bacula::director ($db_type = $::bacula::params::db_type,) {
+class bacula::director (
+  $db_type            = $::bacula::params::db_type,
+  $bacula_dir_package = $::bacula::bacula_dir_package,
+  $bacula_dir_service = $::bacula::bacula_dir_service,) {
   if "$db_type" == "mysql" {
     $db_id = 1
   } else {
