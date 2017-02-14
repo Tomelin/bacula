@@ -10,17 +10,7 @@ class bacula::director::pool (
       maximumVolumes     => '100',
       labelFormat        => 'Local-'
     }
-    ,
-    {
-      name               => 'PoolDiario2',
-      poolType           => 'Backup2',
-      recycle            => 'yes',
-      autoPrune          => 'yes',
-      volumeRetention    => '20 days',
-      maximumVolumeBytes => '5G',
-      maximumVolumes     => '10',
-      labelFormat        => 'Local2'
-    }
+    
     ]) {
   $teste = $pools[0]['name']
 
