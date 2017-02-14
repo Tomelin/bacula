@@ -1,6 +1,6 @@
 
 Pool {
-<% pools.each do |pool| -%>
+<% pools do |pool| -%>
   Name = "<%= pool['name'] %>"
   Pool Type = "<%= pool['poolType'] %>"
   Recycle = <%= pool['recycle'] %>
