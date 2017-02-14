@@ -1,7 +1,7 @@
 
 <% pools.each do |pool| -%>
-		<% if @pool['name'] != '' -%>
-			name = "<%= @pool['name'] %>"
+		<% if @pool != '' -%>
+			name = "<%= @pool %>"
 		<% end -%>
 		<% if @pool['name'] != '' -%>
 			PoolType = "<%= @pool['poolType'] %>"
