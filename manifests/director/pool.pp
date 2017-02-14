@@ -14,7 +14,7 @@ class bacula::director::pool (
     ]) {
   $teste = $pools[0]['name']
 
-  file { "/etc/bacula/pool/pool_$teste.conf":
+  file { "/etc/bacula/pool/pool$teste.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
