@@ -11,7 +11,7 @@ class bacula::director::pool (
       labelFormat        => 'Local-'
     },
         {
-      name               => 'PoolDiario3',
+      name               => 'PoolDiario4',
       poolType           => 'Backup',
       recycle            => 'yes',
       autoPrune          => 'yes',
