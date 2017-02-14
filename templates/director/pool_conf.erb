@@ -1,11 +1,12 @@
 template
 
-
+Name = <%= pools['name'] %>
+Name = <%= pools[0]['name'] %>
 <% pools.each do |pool| -%>
-
+teste = <%= pool %>
 Pool {
   Name = <%= pool['name'] %>
-  Pool Type = B<%= pool['poolType'] %>
+  Pool Type = <%= pool['poolType'] %>
   Recycle = <%= pool['recycle'] %>
   AutoPrune = <%= pool['autoPrune'] %>
   Volume Retention = <%= pool['volumeRetention'] %>
