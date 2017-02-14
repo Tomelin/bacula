@@ -1,7 +1,8 @@
 
 
-Pool {
+
 <% pools.each do |pool| -%>
+Pool {
   Name = "<%= pool['name'] %>"
   Pool Type = "<%= pool['poolType'] %>"
   Recycle = <%= pool['recycle'] %>
@@ -10,9 +11,9 @@ Pool {
   Maximum Volume Bytes = <%= pool['maximumVolumeBytes'] %> 
   Maximum Volumes = <%= pool['maximumVolumes'] %>
   Label Format = "<%= pool['labelFormat'] %>"
-
-<% end -%>
 }
+<% end -%>
+
 
 
 Pool {

@@ -9,8 +9,9 @@ class bacula::director::pool (
       maximumVolumeBytes => '1G',
       maximumVolumes     => '100',
       labelFormat        => 'Local-'
-    },
-        {
+    }
+    ,
+    {
       name               => 'PoolDiario4',
       poolType           => 'Backup',
       recycle            => 'yes',
@@ -20,7 +21,7 @@ class bacula::director::pool (
       maximumVolumes     => '100',
       labelFormat        => 'Local-'
     }
-    
+
     ]) {
   $teste = $pools[0]['name']
 
