@@ -10,10 +10,9 @@ Director {                            # define myself
   WorkingDirectory = "<%= @workingDirectory %>" 
   PidDirectory = "<%= @pidDirectory %>"
   Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
-  Password = "M2UwNThhOGUxY2EyNDdkYTB"         # Console password
+  Password = "<%= @passwordclient %>"         # Console password
   Messages = Daemon
   DirAddress = <%= @ipaddress %>
-
 }
 
 
@@ -47,10 +46,9 @@ FileSet {
   }
 }
 
-#
-# When to do the backups, full backup on first sunday of the month,
-#  differential (i.e. incremental since full) every other sunday,
-#  and incremental backups other days
+
+
+# Schedule temporary, waiting create class
 Schedule {
   Name = "WeeklyCycle"
   Run = Full 1st sun at 23:05
@@ -63,6 +61,41 @@ Schedule {
   Name = "WeeklyCycleAfterBackup"
   Run = Full sun-sat at 23:10
 }
+
+Schedule { 
+  Name = "Diario"
+  Run = Full sun at 8:00
+  Run = Incremental mon-fri at 18:00
+}
+Schedule {
+  Name = "Mensal"
+  Run = Full 1st sat at 8:00
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # This is the backup of the catalog
 FileSet {
@@ -138,3 +171,4 @@ Console {
 
 #INCLUDE POOL
 @|"sh -c 'for f in /etc/bacula/pool/*.conf ; do echo @${f} ; done'"
+@|"sh -c 'for f in /etc/bacula/conf.d/*.conf ; do echo @${f} ; done'"
