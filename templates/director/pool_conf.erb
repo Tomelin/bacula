@@ -4,14 +4,14 @@ Name =
 Name = <%= @pools[0]['name'] %>
 Pool {
 <% pools.each do |pool| -%>
-  Name = <%= pool['name'] %>
-  Pool Type = <%= pool['poolType'] %>
+  Name = "<%= pool['name'] %>"
+  Pool Type = "<%= pool['poolType'] %>"
   Recycle = <%= pool['recycle'] %>
   AutoPrune = <%= pool['autoPrune'] %>
-  Volume Retention = <%= pool['volumeRetention'] %>
-  Maximum Volume Bytes = <%= pool['maximumVolumeBytes'] %> 
+  Volume Retention = "<%= pool['volumeRetention'] %>"
+  Maximum Volume Bytes = "<%= pool['maximumVolumeBytes'] %>" 
   Maximum Volumes = <%= pool['maximumVolumes'] %>
-  Label Format = <%= pool['labelFormat'] %>
+  Label Format = "<%= pool['labelFormat'] %>"
 
 <% end -%>
 }

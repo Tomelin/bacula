@@ -9,7 +9,17 @@ class bacula::director::pool (
       maximumVolumes     => '100',
       labelFormat        => 'Local-'
     }
-    ,]) {
+    ,
+    {
+      name               => 'PoolDiario2',
+      poolType           => 'Backup2',
+      recycle            => 'yes',
+      autoPrune          => 'yes',
+      volumeRetention    => '20 days',
+      maximumVolumeBytes => '5G',
+      maximumVolumes     => '10',
+      labelFormat        => 'Local2'
+    }]) {
   # $foo = [ 'one', {'second' => 'two', 'third' => 'three'} ]
   # notify{ $foo[1]['third']: }
   # notice( $foo[1]['third'] )
