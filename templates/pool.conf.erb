@@ -1,29 +1,43 @@
-
-# Default pool definition
 Pool {
   Name = Default
   Pool Type = Backup
-  Recycle = yes                       # Bacula can automatically recycle Volumes
-  AutoPrune = yes                     # Prune expired volumes
-  Volume Retention = 365 days         # one year
-  Maximum Volume Bytes = 50G          # Limit Volume size to something reasonable
-  Maximum Volumes = 100               # Limit number of Volumes in Pool
+  Recycle = yes
+  AutoPrune = yes
+  Volume Retention = 365 days
+  Maximum Volume Bytes = 50G
+  Maximum Volumes = 100 
 }
-
-# File Pool definition
+Pool {
+  Name = PoolMensal
+  Pool Type = Backup
+  Recycle = yes 
+  AutoPrune = yes
+  Volume Retention = 365 days 
+  Maximum Volume Bytes = 1G 
+  Maximum Volumes = 100 
+  Label Format = "Local-"
+}
+Pool {
+  Name = PoolDiario
+  Pool Type = Backup
+  Recycle = yes 
+  AutoPrune = yes
+  Volume Retention = 30 days 
+  Maximum Volume Bytes = 1G 
+  Maximum Volumes = 100 
+  Label Format = "Local-"
+}
+ 
 Pool {
   Name = File
   Pool Type = Backup
-  Recycle = yes                       # Bacula can automatically recycle Volumes
-  AutoPrune = yes                     # Prune expired volumes
-  Volume Retention = 365 days         # one year
-  Maximum Volume Bytes = 50G          # Limit Volume size to something reasonable
-  Maximum Volumes = 100               # Limit number of Volumes in Pool
-  Label Format = "Local-"               # Auto label
+  Recycle = yes 
+  AutoPrune = yes
+  Volume Retention = 365 days 
+  Maximum Volume Bytes = 50G 
+  Maximum Volumes = 100 
+  Label Format = "Local-"
 }
-
-
-# Scratch pool definition
 Pool {
   Name = Scratch
   Pool Type = Backup
