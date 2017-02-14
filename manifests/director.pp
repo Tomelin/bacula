@@ -1,14 +1,15 @@
 class bacula::director (
   $db_type            = $::bacula::params::db_type,
   $bacula_dir_package = $::bacula::bacula_dir_package,
-  $bacula_dir_service = $::bacula::bacula_dir_service,) {
+  $bacula_dir_service = $::bacula::bacula_dir_service,
+  $dirconf            = $::bacula::dirconf,) {
   if "$db_type" == "mysql" {
     $db_id = 1
   } else {
     $db_id = 3
   }
 
-  package { $::bacula::bacula_dir_package:
+  package { $bacula_dir_package:
     ensure => 'present',
     before => Package['bacula-console'],
     notify => Exec['SetDBType'],
@@ -18,33 +19,33 @@ class bacula::director (
     path        => ['/usr/bin', '/usr/sbin'],
     command     => "alternatives --config libbaccats.so <<< $db_id",
     refreshonly => true,
-    notify      => Service[$::bacula::bacula_dir_service],
+    notify      => Service[$bacula_dir_service],
   }
 
   # Install package
   # package { 'bacula-console': ensure => 'present', }
 
   # start server
-  service { $::bacula::bacula_dir_service:
+  service { $bacula_dir_service:
     ensure     => 'running',
     enable     => true,
     hasrestart => true,
     hasstatus  => true,
-    require    => Package[$::bacula::bacula_dir_package],
+    require    => Package[$bacula_dir_package],
   }
 
   # Create file bacula-dir.conf
-  file { "$::bacula::dirconf/bacula-dir.conf":
+  file { "$dirconf/bacula-dir.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/bacula-dir.conf.erb'),
-    require => Package[$::bacula::bacula_dir_package],
+    require => Package[$bacula_dir_package],
   }
 
   /**
    * # Create file bconsole.conf
-   * file { "$::bacula::dirconf/bconsole.conf":
+   * file { "$dirconf/bconsole.conf":
    *  ensure  => 'file',
    *  owner   => 'bacula',
    *  group   => 'bacula',
@@ -58,17 +59,17 @@ class bacula::director (
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-    require => Package[$::bacula::bacula_dir_package],
+    require => Package[$bacula_dir_package],
   }
 
   # Create directory /etc/bacula/clients to save client conf
-  file { "$::bacula::dirconf/clients":
+  file { "$dirconf/clients":
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
     mode    => '0777',
-    require => Package[$::bacula::bacula_dir_package],
+    require => Package[$bacula_dir_package],
   }
 
   file { "$::bacula::dirconf/clients/client_bacula-dir.conf":
@@ -77,19 +78,19 @@ class bacula::director (
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/client_bacula-dir.conf.erb'),
-    require => File["$::bacula::dirconf/clients"],
+    require => File["$dirconf/clients"],
   }
 
   # Create directory /etc/bacula/jobs to save jobs conf
-  file { "$::bacula::dirconf/jobs":
+  file { "$dirconf/jobs":
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-    require => Package[$::bacula::bacula_dir_package],
+    require => Package[$bacula_dir_package],
   }
 
-  file { "$::bacula::dirconf/jobs/job_bacula-dir.conf":
+  file { "$dirconf/jobs/job_bacula-dir.conf":
     ensure  => 'file',
     recurse => true,
     owner   => 'bacula',
@@ -99,21 +100,21 @@ class bacula::director (
   }
 
   # Create directory /etc/bacula/pool to save pool conf
-  file { "$::bacula::dirconf/pool":
+  file { "$dirconf/pool":
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-    require => Package[$::bacula::bacula_dir_package],
+    require => Package[$bacula_dir_package],
   }
 
-  file { "$::bacula::dirconf/pool/pool_bacula-dir.conf":
+  file { "$dirconf/pool/pool_bacula-dir.conf":
     ensure  => 'file',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/pool_bacula-dir.conf.erb'),
-    require => File["$::bacula::dirconf/pool"],
+    require => File["$dirconf/pool"],
   }
 
   # Create directory  /bacula to save backup in file
