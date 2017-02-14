@@ -9,6 +9,16 @@ class bacula::director::pool (
       maximumVolumeBytes => '1G',
       maximumVolumes     => '100',
       labelFormat        => 'Local-'
+    },
+        {
+      name               => 'PoolDiario3',
+      poolType           => 'Backup',
+      recycle            => 'yes',
+      autoPrune          => 'yes',
+      volumeRetention    => '30 days',
+      maximumVolumeBytes => '1G',
+      maximumVolumes     => '100',
+      labelFormat        => 'Local-'
     }
     
     ]) {
