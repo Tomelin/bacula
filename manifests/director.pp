@@ -134,5 +134,7 @@ class bacula::director (
       group   => 'bacula',
     }
   }
+  
+  class { 'bacula::director::pool': }
 
 }

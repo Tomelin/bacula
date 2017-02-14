@@ -33,11 +33,11 @@ class bacula::director::pool (
     }
     ,
     ]) {
-  file { "/etc/bacula/jobs/job_$pools[name].conf":
+  file { "/etc/bacula/pool/pool_$pools[name].conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
-    content => template('bacula/director/jobs.pp')
+    content => template('bacula/director/pool_conf.erb')
   }
 
 }
