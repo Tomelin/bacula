@@ -61,6 +61,7 @@ class bacula (
   
   ) inherits bacula::params {
 
+
   if $is_director == true {
     class { 'bacula::director': }
 
@@ -68,7 +69,7 @@ class bacula (
       class { 'bacula::proftpd': }
     }
   }
-  
+
      
   if $is_client == true {
     class { 'bacula::client': }

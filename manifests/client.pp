@@ -4,7 +4,7 @@ class bacula::client (
   $dirconf           = $::bacula::dirconf,
   $password_fd       = $::bacula::password_fd,
   $dirBaculaTMP      = $::bacula::dirBaculaTMP,
-  $portFTP           = $::bacula::params::portFTP,) inherits bacula {
+  $portFTP           = $::bacula::params::portFTP,)  {
     
   package { $bacula_fd_package: ensure => 'present' }
 
