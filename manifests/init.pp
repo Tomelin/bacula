@@ -74,8 +74,6 @@ class bacula (
     class { 'bacula::client': }
   }
 
-  # if $is_console == true {
-  # class { 'bacula::director': }
-  #}
+
 }
 
