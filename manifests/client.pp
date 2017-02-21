@@ -1,13 +1,15 @@
 class bacula::client (
-  $bacula_fd_package = $::bacula::bacula_fd_package,
-  $bacula_fd_service = $::bacula::bacula_fd_service,
-  $dirconf           = $::bacula::dirconf,
-  $password_fd       = $::bacula::password_fd,
-  $dirBaculaTMP      = $::bacula::dirBaculaTMP,
-  $portFTP           = $::bacula::portFTP,
-  $bacula_dir        = $::bacula::bacula_dir,
-  )  {
-    
+  $bacula_fd_package     = $::bacula::bacula_fd_package,
+  $bacula_fd_service     = $::bacula::bacula_fd_service,
+  $dirconf               = $::bacula::dirconf,
+  $password_fd           = $::bacula::password_fd,
+  $dirBaculaTMP          = $::bacula::dirBaculaTMP,
+  $portFTP               = $::bacula::portFTP,
+  $bacula_dir            = $::bacula::bacula_dir,
+  $fdport                = $::bacula::fdport,
+  $workingDirectory      = $::bacula::workingDirectory,
+  $pidDirectory          = $::bacula::pidDirectory,
+  $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,) {
   package { $bacula_fd_package: ensure => 'present' }
 
   service { $bacula_fd_service:
