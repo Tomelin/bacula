@@ -4,7 +4,9 @@ class bacula::client (
   $dirconf           = $::bacula::dirconf,
   $password_fd       = $::bacula::password_fd,
   $dirBaculaTMP      = $::bacula::dirBaculaTMP,
-  $portFTP           = $::bacula::params::portFTP,)  {
+  $portFTP           = $::bacula::portFTP,
+  $bacula_dir        = $::bacula::bacula_dir,
+  )  {
     
   package { $bacula_fd_package: ensure => 'present' }
 

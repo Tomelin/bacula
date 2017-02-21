@@ -58,6 +58,7 @@ class bacula (
   $bacula_dir            = $::bacula::params::bacula_dir,
   $ftp_package           = $::bacula::params::ftp_package,
   $dirBaculaTMP     = $::bacula::params::dirBaculaTMP,
+  $portFTP =  $::bacula::params::portFTP,
   
   ) inherits bacula::params {
 
