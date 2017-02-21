@@ -2,7 +2,7 @@ class bacula::director (
   $db_type            = $::bacula::params::db_type,
   $bacula_dir_package = $::bacula::bacula_dir_package,
   $bacula_dir_service = $::bacula::bacula_dir_service,
-  $dirconf            = $::bacula::dirconf,) {
+  $dirconf            = $::bacula::dirconf,) inherits bacula  {
   if "$db_type" == "mysql" {
     $db_id = 1
   } else {
