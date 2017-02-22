@@ -1,6 +1,6 @@
 {
 	"name": "tomelin-bacula",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"author": "tomelin",
 	"summary": "This module puppet for bacula backup",
 	"license": "Apache-2.0",
