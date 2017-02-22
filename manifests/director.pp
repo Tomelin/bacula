@@ -15,6 +15,8 @@ class bacula::director (
    */
    
    
+   
+   
   package { $bacula_dir_package:
     ensure => 'present',
     #    before => Package['bacula-console'],
