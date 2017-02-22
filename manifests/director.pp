@@ -8,11 +8,7 @@ class bacula::director (
   $pidDirectory          = $::bacula::pidDirectory,
   $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,
   $db_package            = $::bacula::db_package,) {
-  if "$db_type" == "mysql" {
-    package { $db_package: ensure => 'present', }
-  } else {
-    $db_id = 3
-  }
+
 
   /**
    *
@@ -146,6 +142,12 @@ class bacula::director (
   }
 
   class { 'bacula::director::pool': }
-  class { 'bacula::director::db': }
+  
+    if "$db_type" == "mysql" {
+    class { 'bacula::director::db': }
+  } else {
+    $db_id = 3
+  }
+  
 
 }
