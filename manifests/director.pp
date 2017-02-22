@@ -6,9 +6,10 @@ class bacula::director (
   $dirport               = $::bacula::dirport,
   $workingDirectory      = $::bacula::workingDirectory,
   $pidDirectory          = $::bacula::pidDirectory,
-  $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,) {
+  $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,
+  $db_package            = $::bacula::db_package,) {
   if "$db_type" == "mysql" {
-    $db_id = 1
+    package { $db_package: ensure => 'present', }
   } else {
     $db_id = 3
   }
