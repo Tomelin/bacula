@@ -8,10 +8,7 @@ class bacula::director (
   $pidDirectory          = $::bacula::pidDirectory,
   $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,
   $db_package            = $::bacula::db_package,) {
-
-
   /**
-   *
    * /usr/libexec/bacula/grant_mysql_privileges
    * /usr/libexec/bacula/create_mysql_database -u root
    * /usr/libexec/bacula/make_mysql_tables -u bacula
@@ -143,7 +140,7 @@ class bacula::director (
 
   class { 'bacula::director::pool': }
   
-    if "$db_type" == "mysql" {
+  if "$db_type" == "mysql" {
     class { 'bacula::director::db': }
   } else {
     $db_id = 3
