@@ -15,12 +15,10 @@ class bacula::director::db ($db_package = $::bacula::director::db_package,) inhe
     require => Class['::mysql::server'],
   }
 
-    exec { 'Create_mysql_database_bacula':
+  exec { 'Create_mysql_database_bacula':
     path    => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
     command => "/usr/libexec/bacula/create_mysql_database -u root -p${::passwordclient}",
     require => Exec['Grant_mysql_privileges_bacula'],
   }
-
 }
-
 
