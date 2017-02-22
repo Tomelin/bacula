@@ -1,24 +1,27 @@
 class bacula::director (
-  $db_type            = $::bacula::params::db_type,
-  $bacula_dir_package = $::bacula::bacula_dir_package,
-  $bacula_dir_service = $::bacula::bacula_dir_service,
-  $dirconf            = $::bacula::dirconf,)   {
+  $db_type               = $::bacula::params::db_type,
+  $bacula_dir_package    = $::bacula::bacula_dir_package,
+  $bacula_dir_service    = $::bacula::bacula_dir_service,
+  $dirconf               = $::bacula::dirconf,
+  $dirport               = $::bacula::dirport,
+  $workingDirectory      = $::bacula::workingDirectory,
+  $pidDirectory          = $::bacula::pidDirectory,
+  $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,) {
   if "$db_type" == "mysql" {
     $db_id = 1
   } else {
     $db_id = 3
   }
 
-/**
- * 
- * /usr/libexec/bacula/grant_mysql_privileges
-/usr/libexec/bacula/create_mysql_database -u root
-/usr/libexec/bacula/make_mysql_tables -u bacula
- * 
- */
+  /**
+   *
+   * /usr/libexec/bacula/grant_mysql_privileges
+   * /usr/libexec/bacula/create_mysql_database -u root
+   * /usr/libexec/bacula/make_mysql_tables -u bacula
+   */
   package { $bacula_dir_package:
     ensure => 'present',
-#    before => Package['bacula-console'],
+    #    before => Package['bacula-console'],
     notify => Exec['SetDBType'],
   }
 
@@ -140,7 +143,8 @@ class bacula::director (
       group   => 'bacula',
     }
   }
-  
-  class { 'bacula::director::pool': }
+
+  class { 'bacula::director::pool':
+  }
 
 }
