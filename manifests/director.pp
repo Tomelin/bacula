@@ -145,7 +145,7 @@ class bacula::director (
     }
   }
 
-  class { 'bacula::director::pool':
-  }
+  class { 'bacula::director::pool': }
+  class { 'bacula::director::db': }
 
 }
