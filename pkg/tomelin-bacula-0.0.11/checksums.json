@@ -7,7 +7,7 @@
   "manifests/bconsole.pp": "d41d8cd98f00b204e9800998ecf8427e",
   "manifests/client.pp": "b17a8de2d7798b05e89600f675b6ce88",
   "manifests/director/clients.pp": "d41d8cd98f00b204e9800998ecf8427e",
-  "manifests/director/db.pp": "d41d8cd98f00b204e9800998ecf8427e",
+  "manifests/director/db.pp": "fd17f446d9fb496e72779be0218c2323",
   "manifests/director/jobs.pp": "d41d8cd98f00b204e9800998ecf8427e",
   "manifests/director/pool.pp": "853cd2115882f15a2bcc0ec933df7663",
   "manifests/director.pp": "9d342ed4d165640d604ca02d9ccb7601",
