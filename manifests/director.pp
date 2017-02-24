@@ -145,7 +145,7 @@ class bacula::director (
   class { 'bacula::director::pool': }
   
   if "$db_type" == "mysql" {
-    class { 'bacula::director::db': }
+    class { 'bacula::director::db2': }
   } else {
     $db_id = 3
   }
