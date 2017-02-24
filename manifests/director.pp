@@ -13,6 +13,10 @@ class bacula::director (
    * /usr/libexec/bacula/create_mysql_database -u root
    * /usr/libexec/bacula/make_mysql_tables -u bacula
    */
+   
+   
+   
+   
   package { $bacula_dir_package:
     ensure => 'present',
     #    before => Package['bacula-console'],
