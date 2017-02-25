@@ -30,8 +30,6 @@ class bacula::director (
     notify      => Service[$bacula_dir_service],
   }
 
-  # Install package
-  # package { 'bacula-console': ensure => 'present', }
 
   # start server
   service { $bacula_dir_service:
@@ -50,17 +48,6 @@ class bacula::director (
     content => template('bacula/bacula-dir.conf.erb'),
     require => Package[$bacula_dir_package],
   }
-
-
-  /**
-   * # Create file bconsole.conf
-   * file { "$dirconf/bconsole.conf":
-   *  ensure  => 'file',
-   *  owner   => 'bacula',
-   *  group   => 'bacula',
-   *  content => template('bacula/bconsole.conf.erb'),
-   *}
-   */
 
   # Create directory  /bacula to save backup in file
   file { "$::bacula::dirBackupFile":
@@ -143,8 +130,8 @@ class bacula::director (
     }
   }
 
-  class { 'bacula::director::pool':
-  }
+  class { 'bacula::director::pool': }
+  
 
   if "$db_type" == "mysql" {
     class { 'bacula::director::db2': }
