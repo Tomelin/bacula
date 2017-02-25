@@ -7,16 +7,16 @@ class bacula::director (
   $workingDirectory      = $::bacula::workingDirectory,
   $pidDirectory          = $::bacula::pidDirectory,
   $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,
-  $db_package            = $::bacula::db_package,) {
+  $db_package            = $::bacula::db_package,
+  $bacula_dir            = $::bacula::bacula_dir,
+  $sdport                = $::bacula::sdport,) {
   /**
    * /usr/libexec/bacula/grant_mysql_privileges
    * /usr/libexec/bacula/create_mysql_database -u root
    * /usr/libexec/bacula/make_mysql_tables -u bacula
    */
-   
-   
-   
-   
+
+
   package { $bacula_dir_package:
     ensure => 'present',
     #    before => Package['bacula-console'],
@@ -51,6 +51,7 @@ class bacula::director (
     require => Package[$bacula_dir_package],
   }
 
+
   /**
    * # Create file bconsole.conf
    * file { "$dirconf/bconsole.conf":
@@ -71,7 +72,7 @@ class bacula::director (
   }
 
   # Create directory /etc/bacula/clients to save client conf
-  file { "$dirconf/clients":
+  file { ["$dirconf/clients", "$dirconf/conf.d" ]:   
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
@@ -142,13 +143,13 @@ class bacula::director (
     }
   }
 
-  class { 'bacula::director::pool': }
-  
+  class { 'bacula::director::pool':
+  }
+
   if "$db_type" == "mysql" {
     class { 'bacula::director::db2': }
   } else {
     $db_id = 3
   }
-  
 
 }
