@@ -10,8 +10,7 @@ class bacula::director (
   $db_package            = $::bacula::db_package,
   $bacula_dir            = $::bacula::bacula_dir,
   $sdport                = $::bacula::sdport,
-  $db_id                = $::bacula::db_id,
-  ) {
+  $db_id                 = $::bacula::db_id,) {
   /**
    * /usr/libexec/bacula/grant_mysql_privileges
    * /usr/libexec/bacula/create_mysql_database -u root
@@ -19,15 +18,22 @@ class bacula::director (
    */
 
   if "$db_type" == "mysql" {
-    class { 'bacula::director::db2': 
-    }
+    class { 'bacula::director::db2': }
   } else {
     $db_id = 3
   }
+
   package { $bacula_dir_package:
     ensure => 'present',
     #    before => Package['bacula-console'],
     notify => Exec['SetDBType'],
+  }
+
+  file { "$workingDirectory":
+    ensure  => directory,
+    recurse => true,
+    owner   => 'bacula',
+    group   => 'bacula',
   }
 
   exec { 'SetDBType':
@@ -36,7 +42,6 @@ class bacula::director (
     refreshonly => true,
     notify      => Service[$bacula_dir_service],
   }
-
 
   # start server
   service { $bacula_dir_service:
@@ -66,7 +71,7 @@ class bacula::director (
   }
 
   # Create directory /etc/bacula/clients to save client conf
-  file { ["$dirconf/clients", "$dirconf/conf.d" ]:   
+  file { ["$dirconf/clients", "$dirconf/conf.d"]:
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
@@ -137,9 +142,7 @@ class bacula::director (
     }
   }
 
-  class { 'bacula::director::pool': }
-  
-
-
+  class { 'bacula::director::pool':
+  }
 
 }
