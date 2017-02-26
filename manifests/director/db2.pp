@@ -1,4 +1,11 @@
-class bacula::director::db2 ($db_package = $::bacula::director::db_package,) inherits bacula::director {
+class bacula::director::db2 (
+  
+  $db_package = $::bacula::director::db_package
+  
+  
+  
+  ,
+) inherits bacula::director {
   class { '::mysql::server':
     root_password           => "${::passwordclient}",
     remove_default_accounts => true,

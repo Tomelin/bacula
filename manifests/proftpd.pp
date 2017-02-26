@@ -7,7 +7,7 @@ class bacula::proftpd (
   $maxInstances      = '30',
   $timeoutStalled    = '300',
   $displayLogin      = 'welcome.msg',
-  $dirDisplayLogin   = "/var/ftp/$::displayLogin",
+  $dirDisplayLogin   = "/var/ftp/${displayLogin}",
   $displayFirstChdir = '.message',
   $dirFTP            = '/etc/bacula/clients',
   $loginFTP          = 'AllowAll',
@@ -31,7 +31,7 @@ class bacula::proftpd (
   }
 
   #file { "${dirDisplayLogin}":
-  file { "/var/ftp/welcome.msg":
+  file { "${dirDisplayLogin}":
     ensure  => 'file',
     owner   => 'ftp',
     group   => 'ftp',

@@ -9,14 +9,21 @@ class bacula::director (
   $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,
   $db_package            = $::bacula::db_package,
   $bacula_dir            = $::bacula::bacula_dir,
-  $sdport                = $::bacula::sdport,) {
+  $sdport                = $::bacula::sdport,
+  $db_id                = $::bacula::db_id,
+  ) {
   /**
    * /usr/libexec/bacula/grant_mysql_privileges
    * /usr/libexec/bacula/create_mysql_database -u root
    * /usr/libexec/bacula/make_mysql_tables -u bacula
    */
 
-
+  if "$db_type" == "mysql" {
+    class { 'bacula::director::db2': 
+    }
+  } else {
+    $db_id = 3
+  }
   package { $bacula_dir_package:
     ensure => 'present',
     #    before => Package['bacula-console'],
@@ -133,10 +140,6 @@ class bacula::director (
   class { 'bacula::director::pool': }
   
 
-  if "$db_type" == "mysql" {
-    class { 'bacula::director::db2': }
-  } else {
-    $db_id = 3
-  }
+
 
 }

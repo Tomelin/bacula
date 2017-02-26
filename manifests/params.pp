@@ -15,7 +15,7 @@ class bacula::params {
   $dirConfClients = "$dirconf/clients"
   $dirBaculaTMP = "/tmp/bacula"
   $portFTP = '2121'
-   
+  $db_id = 1
   
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
