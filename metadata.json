@@ -10,6 +10,7 @@
 	"tags": [ "bacula",
 		"backup"
 	], 
+	
 	"dependencies": [{
 			"name": "puppetlabs-stdlib",
 			"version_range": ">= 1.0.0"
