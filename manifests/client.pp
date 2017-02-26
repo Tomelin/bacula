@@ -61,7 +61,7 @@ class bacula::client (
     path        => ['/usr/bin', '/usr/sbin'],
     command     => "$dirBaculaTMP/baculaSendConfClient.sh",
     refreshonly => true,
-    require => Package['ftpClient'],
+    require => Package['ftp'],
   }
 
 }
