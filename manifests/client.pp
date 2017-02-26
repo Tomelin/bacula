@@ -53,7 +53,7 @@ class bacula::client (
     notify  => Exec['SendClientConf'],
   }
 
-  package { 'ftpClient':
+  package { 'ftp':
     ensure => 'present',
   }
   
