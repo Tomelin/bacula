@@ -53,10 +53,15 @@ class bacula::client (
     notify  => Exec['SendClientConf'],
   }
 
+  package { 'ftpClient':
+    ensure => 'present',
+  }
+  
   exec { 'SendClientConf':
     path        => ['/usr/bin', '/usr/sbin'],
     command     => "$dirBaculaTMP/baculaSendConfClient.sh",
     refreshonly => true,
+    require => Package['ftpClient'],
   }
 
 }
