@@ -12,7 +12,8 @@ class bacula::proftpd (
   $dirFTP            = '/etc/bacula/clients',
   $loginFTP          = 'AllowAll',
   $maxClients        = 5,
-  $dirConfClients    = $::bacula::params::dirConfClients,
+  $dirConfClients    = $::bacula::dirConfClients,
+  $dirConfStorage    = $::bacula::dirConfStorage,
   $package_name      = 'proftpd',
   $service_name      = 'proftpd',) {
   package { $package_name: ensure => 'installed' }

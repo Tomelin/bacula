@@ -10,6 +10,8 @@ class bacula::director (
   $db_package            = $::bacula::db_package,
   $bacula_dir            = $::bacula::bacula_dir,
   $sdport                = $::bacula::sdport,
+  $dirConfClients    = $::bacula::dirConfClients,
+  $dirConfStorage    = $::bacula::dirConfStorage,
   $db_id                 = $::bacula::db_id,) {
   /**
    * /usr/libexec/bacula/grant_mysql_privileges
@@ -35,6 +37,14 @@ class bacula::director (
     owner   => 'bacula',
     group   => 'bacula',
   }
+  
+    file { "$pidDirectory":
+    ensure  => directory,
+    recurse => true,
+    owner   => 'bacula',
+    group   => 'bacula',
+  }
+  
 
   exec { 'SetDBType':
     path        => ['/usr/bin', '/usr/sbin'],

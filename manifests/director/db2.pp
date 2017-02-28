@@ -2,8 +2,6 @@ class bacula::director::db2 (
   
   $db_package = $::bacula::director::db_package
   
-  
-  
   ,
 ) inherits bacula::director {
   class { '::mysql::server':
@@ -16,13 +14,13 @@ class bacula::director::db2 (
     }
   }
 
-/**
+
   exec { 'Grant_mysql_privileges_bacula':
     path    => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
     command => '/usr/libexec/bacula/grant_mysql_privileges',
     require => Class['::mysql::server'],
   }
- */
+
     exec { 'Create_mysql_database_bacula':
     path    => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
     command => "/usr/libexec/bacula/create_mysql_database -u root -p${::passwordclient}",

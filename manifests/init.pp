@@ -58,6 +58,8 @@ class bacula (
   $bacula_dir            = $::bacula::params::bacula_dir,
   $ftp_package           = $::bacula::params::ftp_package,
   $dirBaculaTMP          = $::bacula::params::dirBaculaTMP,
+  $dirConfClients        = $::bacula::params::dirConfClients,
+  $dirConfStorage        = $::bacula::params::dirConfStorage,
   $portFTP               = $::bacula::params::portFTP,
   $is_directorFTP        = $::bacula::params::is_directorFTP,
   $dirport               = $::bacula::params::dirport,
@@ -69,6 +71,10 @@ class bacula (
     if $is_directorFTP == true {
       class { 'bacula::proftpd': }
     }
+  }
+
+  if $is_storage == true {
+    class { 'bacula::storage': }
   }
 
   if $is_client == true {

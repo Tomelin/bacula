@@ -135,10 +135,10 @@ Storage {
   Name = File1
   Address = <%= @ipaddress %> 
   SDPort = <%= @sdport %>   
-  Password = "MWMxMzRmODZlMWIxZGZkODZiNmJhMWUyY"
+  Password = "M2U1ZGYyOGIyYWVhZmRjOGE0N2FlM2"
   Device = FileStorage
   Media Type = File1
-  Maximum Concurrent Jobs = 10
+  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
 }
 
 
@@ -184,7 +184,10 @@ Console {
   CommandACL = status, .status
 }
 
+
 #INCLUDE CLIENTS
+#<%= @dirConfClients %>>
+
 @|"sh -c 'for f in /etc/bacula/clients/*.conf ; do echo @${f} ; done'"
 
 #INCLUDE JOBS
@@ -192,4 +195,11 @@ Console {
 
 #INCLUDE POOL
 @|"sh -c 'for f in /etc/bacula/pool/*.conf ; do echo @${f} ; done'"
+
+
+#INCLUDE STORAGE
+#<%= @dirConfStorage %>>
+#@|"sh -c 'for f in /etc/bacula/storage/*.conf ; do echo @${f} ; done'"
+
+
 #@|"sh -c 'for f in /etc/bacula/conf.d/*.conf ; do echo @${f} ; done'"

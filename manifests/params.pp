@@ -2,7 +2,7 @@ class bacula::params {
   # Conf default
   $dirconf = "/etc/bacula"
   $workingDirectory = "/var/spool/bacula"
-  $pidDirectory = "/var/run"
+  $pidDirectory = "/var/run/bacula"
   $maximumConcurrentJobs = '30'
   $typebackup = 'file'
   $dirBackupFile = '/bacula'
@@ -13,6 +13,7 @@ class bacula::params {
   $is_directorFTP = true
   $db_type = 'mysql'
   $dirConfClients = "$dirconf/clients"
+  $dirConfStorage = "$dirconf/storage"
   $dirBaculaTMP = "/tmp/bacula"
   $portFTP = '2121'
   $db_id = 1
