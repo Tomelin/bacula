@@ -13,11 +13,7 @@ class bacula::director (
   $dirConfClients    = $::bacula::dirConfClients,
   $dirConfStorage    = $::bacula::dirConfStorage,
   $db_id                 = $::bacula::db_id,) {
-  /**
-   * /usr/libexec/bacula/grant_mysql_privileges
-   * /usr/libexec/bacula/create_mysql_database -u root
-   * /usr/libexec/bacula/make_mysql_tables -u bacula
-   */
+
 
   if "$db_type" == "mysql" {
     class { 'bacula::director::db2': }
@@ -81,7 +77,7 @@ class bacula::director (
   }
 
   # Create directory /etc/bacula/clients to save client conf
-  file { ["$dirconf/clients", "$dirconf/conf.d"]:
+  file { ["$dirconf/clients", "$dirconf/conf.d", "$dirconf/storage"]:
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',

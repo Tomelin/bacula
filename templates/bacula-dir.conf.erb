@@ -188,7 +188,7 @@ Console {
 #INCLUDE CLIENTS
 #<%= @dirConfClients %>>
 
-@|"sh -c 'for f in /etc/bacula/clients/*.conf ; do echo @${f} ; done'"
+@|"sh -c 'for f in <%= @dirConfClients %>>/*.conf ; do echo @${f} ; done'"
 
 #INCLUDE JOBS
 @|"sh -c 'for f in /etc/bacula/jobs/*.conf ; do echo @${f} ; done'"
@@ -199,7 +199,7 @@ Console {
 
 #INCLUDE STORAGE
 #<%= @dirConfStorage %>>
-#@|"sh -c 'for f in /etc/bacula/storage/*.conf ; do echo @${f} ; done'"
+#@|"sh -c 'for f in <%= @dirConfStorage %>>/*.conf ; do echo @${f} ; done'"
 
 
 #@|"sh -c 'for f in /etc/bacula/conf.d/*.conf ; do echo @${f} ; done'"

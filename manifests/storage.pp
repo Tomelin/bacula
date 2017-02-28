@@ -9,7 +9,7 @@ class bacula::storage (
   $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,
   $db_package            = $::bacula::db_package,
   $bacula_dir            = $::bacula::bacula_dir,
-  
+  $dirconf               = $::bacula::dirconf,
   $dirBaculaTMP          = $::bacula::dirBaculaTMP,
   $db_id                 = $::bacula::db_id,) {
 
