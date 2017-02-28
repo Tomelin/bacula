@@ -1,5 +1,5 @@
 Client {
-  Name = bacula2-fd
+  Name = bacula-fd
   Address = localhost
   FDPort = 9102
   Catalog = MyCatalog
@@ -7,4 +7,33 @@ Client {
   File Retention = 30 days            # 30 days
   Job Retention = 6 months            # six months
   AutoPrune = yes                     # Prune expired Jobs/Files
+}
+
+# This file is maintained by Puppet.
+# DO NOT EDIT
+
+Director {
+  Name = "<%= @bacula_dir %>"
+  Password = "<%= @password_fd %>"
+}
+#
+#
+#Director {
+#  Name = "<%= @bacula_mon %>"
+#  Password = "<%= @password_mon %>"
+#  Monitor = yes
+#}
+#
+#
+FileDaemon {                          # this is me
+  Name = "<%= @hostname %>"
+  FDport = <%= @fdport %>                  # where we listen for the director
+  WorkingDirectory = "<%= @workingDirectory %>" 
+  Pid Directory = "<%= @pidDirectory %>"
+  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
+  
+}
+Messages {
+  Name = Standard
+  director = "<%= @bacula_dir %>" = all, !skipped, !restored
 }

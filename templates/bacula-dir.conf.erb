@@ -18,6 +18,36 @@ Director {                            # define myself
 
 # List of files to be backed up
 FileSet {
+  Name = "Full Set"
+  Include {
+    Options {
+      signature = MD5
+      compression = GZIP
+    }
+    File = /etc
+    #File = /usr/sbin
+  }
+
+#
+# If you backup the root directory, the following two excluded
+#   files can be useful
+#
+  Exclude {
+    File = /var/spool/bacula
+    File = /var/lib/bacula
+    File = /bacula
+    File = /tmp
+    File = /dev
+    File = /proc
+    File = /tmp
+    File = /sys
+    File = /.journal
+    File = /.fsck
+  }
+}
+
+# List of files to be backed up
+FileSet {
   Name = "Full2 Set"
   Include {
     Options {
@@ -71,25 +101,6 @@ Schedule {
   Name = "Mensal"
   Run = Full 1st sat at 8:00
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
