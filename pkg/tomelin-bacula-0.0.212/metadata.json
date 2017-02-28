@@ -1,0 +1,45 @@
+{
+  "name": "tomelin-bacula",
+  "version": "0.0.212",
+  "author": "tomelin",
+  "summary": "This module puppet for bacula backup",
+  "license": "Apache-2.0",
+  "source": "https://github.com/Tomelin/tomelin-bacula.git",
+  "project_page": "https://github.com/Tomelin/tomelin-bacula",
+  "issues_url": "https://github.com/Tomelin/tomelin-bacula/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib"},
+    {"name":"puppetlabs/mysql"},
+    {"name":"puppetlabs/sqlite"}
+  ],
+  "data_provider": null,
+  "tags": [
+    "bacula",
+    "backup"
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.0.0 < 5.0.0"
+    }
+  ],
+  "description": "This module puppet for bacula backup"
+}

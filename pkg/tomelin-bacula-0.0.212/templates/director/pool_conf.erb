@@ -1,0 +1,49 @@
+
+
+
+
+
+Pool {
+  Name = Default
+  Pool Type = Backup
+  Recycle = yes
+  AutoPrune = yes
+  Volume Retention = 365 days
+  Maximum Volume Bytes = 50G
+  Maximum Volumes = 100 
+}
+Pool {
+  Name = PoolMensal
+  Pool Type = Backup
+  Recycle = yes 
+  AutoPrune = yes
+  Volume Retention = 365 days 
+  Maximum Volume Bytes = 1G 
+  Maximum Volumes = 100 
+  Label Format = "Local-"
+}
+Pool {
+  Name = PoolDiario
+  Pool Type = Backup
+  Recycle = yes 
+  AutoPrune = yes
+  Volume Retention = 30 days 
+  Maximum Volume Bytes = 1G 
+  Maximum Volumes = 100 
+  Label Format = "Local-"
+}
+ 
+Pool {
+  Name = File
+  Pool Type = Backup
+  Recycle = yes 
+  AutoPrune = yes
+  Volume Retention = 365 days 
+  Maximum Volume Bytes = 50G 
+  Maximum Volumes = 100 
+  Label Format = "Local-"
+}
+Pool {
+  Name = Scratch
+  Pool Type = Backup
+}
