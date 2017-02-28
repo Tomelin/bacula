@@ -41,6 +41,7 @@ class bacula (
   $bacula_sd_package     = $::bacula::params::bacula_sd_package,
   $bacula_fd_package     = $::bacula::params::bacula_fd_package,
   $bacula_fd_service     = $::bacula::params::bacula_fd_service,
+  $bacula_sd_service     = $::bacula::params::bacula_sd_service,
   $bconsole_package      = $::bacula::params::bconsole_package,
   $dirconf               = $::bacula::params::dirconf,
   $fdport                = $::bacula::params::fdport,

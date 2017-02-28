@@ -3,7 +3,7 @@ class bacula::storage (
   $bacula_sd_package    = $::bacula::bacula_sd_package,
   $bacula_sd_service    = $::bacula::bacula_sd_service,
   $sdconf               = $::bacula::dirconf,
-  $sdport               = $::bacula::dirport,
+  $sdport               = $::bacula::sdport,
   $workingDirectory      = $::bacula::workingDirectory,
   $pidDirectory          = $::bacula::pidDirectory,
   $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,

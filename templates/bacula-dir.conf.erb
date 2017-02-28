@@ -103,11 +103,6 @@ Schedule {
 }
 
 
-
-
-
-
-
 # This is the backup of the catalog
 FileSet {
   Name = "Catalog"
@@ -153,7 +148,7 @@ Catalog {
 Messages {
   Name = Standard
 
-  mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: %t %e of %c %l\" %r"
+  mailcommand = "/usr/sbin/bsmtp -h localhost -f \ \(Bacula\) \<%r\>\ -s \Bacula: %t %e of %c %l\ %r"
   operatorcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: Intervention needed for %j\" %r"
   mail = root@localhost = all, !skipped
   operator = root@localhost = mount
@@ -186,20 +181,20 @@ Console {
 
 
 #INCLUDE CLIENTS
-#<%= @dirConfClients %>>
+#<%= @dirConfClients %>
 
-@|"sh -c 'for f in <%= @dirConfClients %>>/*.conf ; do echo @${f} ; done'"
+#@|"sh -c 'for f in <%= @dirConfClients %>/*.conf ; do echo @${f} ; done'"
 
 #INCLUDE JOBS
-@|"sh -c 'for f in /etc/bacula/jobs/*.conf ; do echo @${f} ; done'"
+#@|"sh -c 'for f in /etc/bacula/jobs/*.conf ; do echo @${f} ; done'"
 
 #INCLUDE POOL
-@|"sh -c 'for f in /etc/bacula/pool/*.conf ; do echo @${f} ; done'"
+#@|"sh -c 'for f in /etc/bacula/pool/*.conf ; do echo @${f} ; done'"
 
 
 #INCLUDE STORAGE
-#<%= @dirConfStorage %>>
-#@|"sh -c 'for f in <%= @dirConfStorage %>>/*.conf ; do echo @${f} ; done'"
+#<%= @dirConfStorage %>
+#@|"sh -c 'for f in <%= @dirConfStorage %>/*.conf ; do echo @${f} ; done'"
 
 
 #@|"sh -c 'for f in /etc/bacula/conf.d/*.conf ; do echo @${f} ; done'"

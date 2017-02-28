@@ -37,7 +37,8 @@ class bacula::params {
         '7'     : {
           $bacula_dir_package = 'bacula-director'
           $bacula_dir_service = 'bacula-dir'
-          $bacula_sd_package = 'bbacula-storage'
+          $bacula_sd_package = 'bacula-storage'
+          $bacula_sd_service = 'bacula-sd'
           $bacula_fd_package = 'bacula-client'
           $bacula_fd_service = 'bacula-fd'
           $bconsole_package = 'bacula-console'
