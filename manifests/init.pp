@@ -65,7 +65,9 @@ class bacula (
   $is_directorFTP        = $::bacula::params::is_directorFTP,
   $dirport               = $::bacula::params::dirport,
   $db_package            = $::bacula::params::db_package,
-  $db_id                 = $::bacula::params::db_id,) inherits bacula::params {
+  $db_id                 = $::bacula::params::db_id,
+  $heartbeatInterval = $::bacula::params::heartbeatInterval,
+  ) inherits bacula::params {
   if $is_director == true {
     class { 'bacula::director': }
 
