@@ -12,17 +12,16 @@ class bacula::params {
   $is_console = false
   $is_directorFTP = true
   $db_type = 'mysql'
-  $dirConfClients = "$dirconf/clients"
-  $dirConfStorage = "$dirconf/storage"
+  $dirConfClients = "${dirconf}/clients"
+  $dirConfStorage = "${dirconf}/storage"
   $dirBaculaTMP = "/tmp/bacula"
   $portFTP = '2121'
   $db_id = 1
   
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
-  $password_fd = "${::passwordclient}"
-  $dirconf = "/etc/bacula"
-  $workingDirectory = "/var/spool/bacula"
+  $password_fd = "${::passwordclient}"  
+  
   $pidDirectory = "/var/run/bacula"
   $maximumConcurrentJobs = '30'
   $dirBaculaTMP = "/tmp/bacula"
