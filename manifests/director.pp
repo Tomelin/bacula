@@ -26,19 +26,6 @@ class bacula::director (
     notify => Exec['SetDBType'],
   }
 
-  file { "$workingDirectory":
-    ensure  => directory,
-    recurse => true,
-    owner   => 'bacula',
-    group   => 'bacula',
-  }
-
-  file { "$pidDirectory":
-    ensure  => directory,
-    recurse => true,
-    owner   => 'bacula',
-    group   => 'bacula',
-  }
 
   exec { 'SetDBType':
     path        => ['/usr/bin', '/usr/sbin'],

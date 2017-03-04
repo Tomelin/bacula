@@ -68,7 +68,7 @@ class bacula (
   $db_id                 = $::bacula::params::db_id,
   $heartbeatInterval     = $::bacula::params::heartbeatInterval,) inherits bacula::params {
     
-    $is_storage = true
+  Class {'bacula::default': }
     
   if $is_director == true {
     class { 'bacula::director': }

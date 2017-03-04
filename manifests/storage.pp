@@ -18,22 +18,6 @@ class bacula::storage (
   package { $bacula_sd_package:
     ensure => 'present',
   }
-
-#workdir
-  file { "$workingDirectory":
-    ensure  => directory,
-    recurse => true,
-    owner   => 'bacula',
-    group   => 'bacula',
-  }
-  
-      file { "$pidDirectory":
-    ensure  => directory,
-    recurse => true,
-    owner   => 'bacula',
-    group   => 'bacula',
-  }
-
  
   # start server
   service { $bacula_sd_service:
@@ -54,12 +38,6 @@ class bacula::storage (
     notify => Service[$bacula_sd_service],
   }
 
-#File temporary para enviar via ftp para o server 
-  file { "$dirBaculaTMP":
-    ensure => 'directory',
-    owner  => 'bacula',
-    group  => 'bacula',
-  }
   
     file { "$dirBaculaTMP/${::hostname}.conf":
     ensure  => 'file',
@@ -79,10 +57,7 @@ class bacula::storage (
     notify  => Exec['SendClientConf'],
   }
   
-    package { 'ftp':
-    ensure => 'present',
-  }
-  
+
   exec { 'SendConf':
     path        => ['/usr/bin', '/usr/sbin'],
     command     => "$dirBaculaTMP/baculaSendConf.sh",
