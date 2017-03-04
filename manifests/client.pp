@@ -33,6 +33,7 @@ class bacula::client (
   package { $bacula_fd_package: ensure => 'present' }
 
 
+
   service { $bacula_fd_service:
     ensure     => 'running',
     enable     => true,
