@@ -10,11 +10,10 @@ class bacula::director (
   $db_package            = $::bacula::db_package,
   $bacula_dir            = $::bacula::bacula_dir,
   $sdport                = $::bacula::sdport,
-  $dirConfClients    = $::bacula::dirConfClients,
-  $dirConfStorage    = $::bacula::dirConfStorage,
-  $db_id                 = $::bacula::db_id,) {
-
-
+  $dirConfClients        = $::bacula::dirConfClients,
+  $dirConfStorage        = $::bacula::dirConfStorage,
+  $db_id                 = $::bacula::db_id,
+  $heartbeatInterval     = $::bacula::heartbeatInterval,) {
   if "$db_type" == "mysql" {
     class { 'bacula::director::db2': }
   } else {
@@ -33,14 +32,13 @@ class bacula::director (
     owner   => 'bacula',
     group   => 'bacula',
   }
-  
-    file { "$pidDirectory":
+
+  file { "$pidDirectory":
     ensure  => directory,
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
   }
-  
 
   exec { 'SetDBType':
     path        => ['/usr/bin', '/usr/sbin'],
