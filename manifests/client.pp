@@ -11,31 +11,22 @@ class bacula::client (
   $is_storage = false
   $is_director = true
   $is_console = false
-  $is_directorFTP = true
-  $db_type = 'mysql'
+  $is_directorFTP = true  
   $dirConfClients = "$dirconf/clients"
   $dirConfStorage = "$dirconf/storage"
   $dirBaculaTMP = "/tmp/bacula"
   $portFTP = '2121'
-  $db_id = 1
+  
   
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
-  $password_fd = "${::passwordclient}"
-  $dirconf = "/etc/bacula"
-  $workingDirectory = "/var/spool/bacula"
-  $pidDirectory = "/var/run/bacula"
-  $maximumConcurrentJobs = '30'
-  $dirBaculaTMP = "/tmp/bacula"
-  $portFTP = '2121'
-  
+  $password_fd = "${::passwordclient}" 
 
   # Bacula director - bacula-dir.conf
   $dirport = "9101"
   $bacula_dir = "bacula-dir"
-  $heartbeatInterval = "120"
-  # Bacula director - bacula-sd.conf
-  $sdport = "9103",
+  
+  
   ) inherits bacula::params {
     
     
