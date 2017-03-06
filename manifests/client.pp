@@ -46,15 +46,19 @@ class bacula::client (
     group   => 'bacula',
     mode    => '0755',
     content => template('bacula/scripts/baculaSendConfClient.sh.erb'),
-    require => File["$dirBaculaTMP"],
+    require => File["$bacula::params::dirBaculaTMP"],
     notify  => Exec['SendClientConf'],
   }
+
+notify {"$bacula::params::dirBaculaTMP": }
+notify {"bacula::params::dirBaculaTMP": }
+
 
   exec { 'SendClientConf':
     path        => ['/usr/bin', '/usr/sbin'],
     command     => "$dirBaculaTMP/baculaSendConfClient.sh",
     refreshonly => true,
-    require     => Package['ftp'],
+    require     => Package["$bacula::params::ftp"],
   }
 
 }
