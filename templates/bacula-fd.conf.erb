@@ -25,7 +25,7 @@ FileSet {
       signature = <%= @signature %>
       compression = <%= @compression %>
     }
-    <% filesBackup.each do |files| -%>
+    <% excludeBackup.each do |files| -%>
 		File = <%= files %>
 	<% end -%>
     

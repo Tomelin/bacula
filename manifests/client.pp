@@ -11,14 +11,12 @@ class bacula::client (
   $password_fd           = "${::passwordclient}",
   $bacula_fd_package     = $::bacula::bacula_fd_package,
   $bacula_fd_service     = $::bacula::bacula_fd_service,
-  $dirserver            = $::bacula::dirserver,
+  $dirserver             = $::bacula::dirserver,
   $workingDirectory      = $::bacula::workingDirectory,
-  $filesBackup      = ['/'],
-  $excludeBackup      = ['/dev','/proc','/tmp'],
-  $signature = $::bacula::params::signature,
-  $compression = $::bacula::params::compression,
-  
-  ) {
+  $filesBackup           = ["/"],
+  $excludeBackup         = ["/dev", "/proc", "/tmp"],
+  $signature             = $::bacula::params::signature,
+  $compression           = $::bacula::params::compression,) {
   package { $bacula_fd_package: ensure => 'present' }
 
   service { $bacula_fd_service:
