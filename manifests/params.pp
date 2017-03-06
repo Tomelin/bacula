@@ -6,10 +6,10 @@ class bacula::params {
   $maximumConcurrentJobs = '30'
   $typebackup = 'file'
   $dirBackupFile = '/bacula'
-  $is_client = false
-  $is_storage = false
+  $is_client = true
+  $is_storage = true
   $is_director = true
-  $is_console = false
+  $is_console = true
   $is_directorFTP = true
   $db_type = 'mysql'
   $dirConfClients = "${dirconf}/clients"
