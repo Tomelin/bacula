@@ -1,26 +1,15 @@
 Storage {                             # definition of myself
-  Name = bacula-sd
+  Name = ${::fqdn}
   SDPort = 9103                  # Director's port
   WorkingDirectory = "/var/spool/bacula"
   Pid Directory = "/var/run"
   Maximum Concurrent Jobs = 20
-  
 }
 
-#
 Director {
   Name = bacula-dir
-  Password = "M2UwNThhOGUxY2EyNDdkYTB"
+  Password = "<=% @passwordclient =>"
 }
-
-#
-Director {
-  Name = bacula-mon
-  Password = "@@MON_SD_PASSWORD@@"
-  Monitor = yes
-}
-
-#
 
 Device {
   Name = FileStorage
@@ -33,39 +22,6 @@ Device {
   AlwaysOpen = no;
 }
 
-#
-Autochanger {
-  Name = FileChgr2
-  Device = FileChgr2-Dev1, FileChgr2-Dev2
-  Changer Command = ""
-  Changer Device = /dev/null
-}
-
-Device {
-  Name = FileChgr2-Dev1
-  Media Type = File2
-  Archive Device = /tmp
-  LabelMedia = yes;                   # lets Bacula label unlabeled media
-  Random Access = Yes;
-  AutomaticMount = yes;               # when device opened, read it
-  RemovableMedia = no;
-  AlwaysOpen = no;
-  Maximum Concurrent Jobs = 5
-}
-
-Device {
-  Name = FileChgr2-Dev2
-  Media Type = File2
-  Archive Device = /tmp
-  LabelMedia = yes;                   # lets Bacula label unlabeled media
-  Random Access = Yes;
-  AutomaticMount = yes;               # when device opened, read it
-  RemovableMedia = no;
-  AlwaysOpen = no;
-  Maximum Concurrent Jobs = 5
-}
-
-#
 Messages {
   Name = Standard
   director = bacula-dir = all
