@@ -17,9 +17,42 @@ FileDaemon {                          # this is me
 
 }
 
+# List of files to be backed up
+FileSet {
+  Name = "<%= @hostname %>"
+  Include {
+    Options {
+      signature = <%= @signature %>
+      compression = <%= @compression %>
+    }
+    <% filesBackup.each do |files| -%>
+		File = <%= files %>
+	<% end -%>
+    
+   # File = /etc
+    #File = /var/www
+  }
+
+  Exclude {
+    File = /var/spool/bacula
+    File = /var/lib/bacula
+    File = /bacula
+    File = /tmp
+    File = /dev
+    File = /proc
+    File = /tmp
+    File = /sys
+    File = /.journal
+    File = /.fsck
+  }
+}
+
 # Send all messages except skipped files back to Director
 Messages {
   Name = Standard
   mail = rafael@tomelin.eti.br = all, !skipped
   director = bacula-dir = all, !skipped, !restored
 }
+
+
+

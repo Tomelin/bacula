@@ -12,7 +12,13 @@ class bacula::client (
   $bacula_fd_package     = $::bacula::bacula_fd_package,
   $bacula_fd_service     = $::bacula::bacula_fd_service,
   $dirserver            = $::bacula::dirserver,
-  $workingDirectory      = $::bacula::workingDirectory,) {
+  $workingDirectory      = $::bacula::workingDirectory,
+  $filesBackup      = ['/'],
+  $excludeBackup      = ['/dev','/proc','/tmp'],
+  $signature = $::bacula::params::signature,
+  $compression = $::bacula::params::compression,
+  
+  ) {
   package { $bacula_fd_package: ensure => 'present' }
 
   service { $bacula_fd_service:
@@ -50,15 +56,11 @@ class bacula::client (
     notify  => Exec['SendClientConf'],
   }
 
-notify {"$bacula::params::dirBaculaTMP": }
-notify {"bacula::params::dirBaculaTMP": }
-
-
   exec { 'SendClientConf':
     path        => ['/usr/bin', '/usr/sbin'],
     command     => "$dirBaculaTMP/baculaSendConfClient.sh",
     refreshonly => true,
-    require     => Package["$bacula::params::ftp"],
+    require     => Package["ftp"],
   }
 
 }

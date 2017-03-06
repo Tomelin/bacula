@@ -17,11 +17,13 @@ class bacula::params {
   $dirBaculaTMP = "/tmp/bacula"
   $portFTP = '2121'
   $db_id = 1
-  $emails = ["root@localhost","rafael@tomelin.eti.br"]
-  
+  $emails = ["root@localhost", "rafael@tomelin.eti.br"]
+  $signature = "MD5"
+  $compression = "GZIP"
+
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
-  $password_fd = "${::passwordclient}"  
+  $password_fd = "${::passwordclient}"
 
   # Bacula director - bacula-dir.conf
   $dirport = "9101"
@@ -29,8 +31,7 @@ class bacula::params {
   $heartbeatInterval = "120"
   # Bacula director - bacula-sd.conf
   $sdport = "9103"
-  
-  
+
   # Different path and package definitions
   case "${::operatingsystem}" {
     'CentOS' : {
@@ -62,8 +63,8 @@ class bacula::params {
       notice("\"${module_name}\" provides no config directory and package default values for OS family \"${::osfamily}\"")
     }
   }
-  
-  #directorys default the bacula
+
+  # directorys default the bacula
   file { "${dirBaculaTMP}":
     ensure => directory,
     owner  => 'bacula',
