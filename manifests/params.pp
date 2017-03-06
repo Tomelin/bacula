@@ -63,8 +63,8 @@ class bacula::params {
   }
   
   #directorys default the bacula
-  file { "$dirBaculaTMP":
-    ensure => 'directory',
+  file { "${dirBaculaTMP}":
+    ensure => directory,
     owner  => 'bacula',
     group  => 'bacula',
   }
@@ -72,14 +72,14 @@ class bacula::params {
   package { 'ftp': ensure => 'present', }
 
   # workdir
-  file { "$workingDirectory":
+  file { "${workingDirectory}":
     ensure  => directory,
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
   }
 
-  file { "$pidDirectory":
+  file { "${pidDirectory}":
     ensure  => directory,
     recurse => true,
     owner   => 'bacula',

@@ -24,7 +24,7 @@ class bacula::director::db2 (
     exec { 'Create_mysql_database_bacula':
     path    => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
     command => "/usr/libexec/bacula/create_mysql_database -u root -p${::passwordclient}",
-    require => Class['::mysql::server'],
+    require => Exec['Grant_mysql_privileges_bacula'],
    
   }
 
