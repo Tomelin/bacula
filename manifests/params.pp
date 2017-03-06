@@ -17,6 +17,7 @@ class bacula::params {
   $dirBaculaTMP = "/tmp/bacula"
   $portFTP = '2121'
   $db_id = 1
+  $emails = ["root@localhost","rafael@tomelin.eti.br"]
   
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
