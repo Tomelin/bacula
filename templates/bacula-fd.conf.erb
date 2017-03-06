@@ -1,29 +1,48 @@
 # This file is maintained by Puppet.
 # DO NOT EDIT
 
+#
+# Default  Bacula File Daemon Configuration file
+#
+#  For Bacula release 7.0.5 (28 July 2014) -- redhat Enterprise release
+#
+# There is not much to change here except perhaps the
+# File daemon Name to
+#
+
+#
+# List Directors who are permitted to contact this File daemon
+#
 Director {
-  Name = "<%= @bacula_dir %>"
-  Password = "<%= @passwordclient %>"
- 
+  Name = bacula-dir
+  Password = "M2UwNThhOGUxY2EyNDdkYTB"
 }
+
 #
+# Restricted Director, used by tray-monitor to get the
+#   status of the file daemon
 #
-#Director {
-#  Name = "<%= @bacula_mon %>"
-#  Password = "<%= @password_mon %>"
-#  Monitor = yes
-#}
+Director {
+  Name = bacula-mon
+  Password = "@@MON_FD_PASSWORD@@"
+  Monitor = yes
+}
+
 #
+# "Global" File daemon configuration specifications
 #
 FileDaemon {                          # this is me
-  Name = "<%= @hostname %>"
-  FDport = <%= @fdport %>                  # where we listen for the director
-  WorkingDirectory = "<%= @workingDirectory %>" 
-  Pid Directory = "<%= @pidDirectory %>"
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
-  
+  Name = bacula-fd
+  FDport = 9102                  # where we listen for the director
+  WorkingDirectory = /var/spool/bacula
+  Pid Directory = /var/run
+  Maximum Concurrent Jobs = 20
+# Plugin Directory = /usr/lib64/bacula
 }
+
+# Send all messages except skipped files back to Director
 Messages {
   Name = Standard
-  director = "<%= @bacula_dir %>" = all, !skipped, !restored
+  mail = rafael@tomelin.eti.br = all, !skipped
+  director = bacula-dir = all, !skipped, !restored
 }

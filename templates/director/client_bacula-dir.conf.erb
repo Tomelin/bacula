@@ -1,28 +1,52 @@
 # This file is maintained by Puppet.
 # DO NOT EDIT
+Client {
+  Name = bacula-fd
+  Address = localhost
+  FDPort = 9102
+  Catalog = MyCatalog
+  Password = "M2UwNThhOGUxY2EyNDdkYTB"          # password for FileDaemon
+  File Retention = 60 days            # 60 days
+  Job Retention = 6 months            # six months
+  AutoPrune = yes                     # Prune expired Jobs/Files
+}
 
-Director {
-  Name = "<%= @bacula_dir %>"
-  Password = "<%= @passwordclient %>"
+# Client (File Services) to backup
+Client {
+  Name = srvweb
+  Address = 192.168.110.3
+  FDPort = 9102
+  Catalog = MyCatalog
+  Password = "web"
+  File Retention = 60 days            # 60 days
+  Job Retention = 6 months            # six months
+#  FileSet = "srvweb"
+  AutoPrune = yes                     # Prune expired Jobs/Files
 }
-#
-#
-#Director {
-#  Name = "<%= @bacula_mon %>"
-#  Password = "<%= @password_mon %>"
-#  Monitor = yes
-#}
-#
-#
-FileDaemon {                          # this is me
-  Name = "<%= @hostname %>"
-  FDport = <%= @fdport %>                  # where we listen for the director
-  WorkingDirectory = "<%= @workingDirectory %>" 
-  Pid Directory = "<%= @pidDirectory %>"
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
-  
+
+FileSet {
+  Name = "srvweb"
+  Include {
+    Options {
+      signature = MD5
+      compression = GZIP
+    }
+
+    File = /etc
+    File = /var/www
+  }
+
+  Exclude {
+    File = /var/spool/bacula
+    File = /var/lib/bacula
+    File = /bacula
+    File = /tmp
+    File = /dev
+    File = /proc
+    File = /tmp
+    File = /sys
+    File = /.journal
+    File = /.fsck
+  }
 }
-Messages {
-  Name = Standard
-  director = "<%= @bacula_dir %>" = all, !skipped, !restored
-}
+

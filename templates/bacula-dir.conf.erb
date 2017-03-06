@@ -1,30 +1,29 @@
 # This file is maintained by Puppet.
 # DO NOT EDIT
-
-Director { 
-  Name = "<%= @hostname %>"
-  DIRport = <%= @dirport %>                 # where we listen for UA connections
+Director {                            # define myself
+  Name = bacula-dir
+  DIRport = 9101                # where we listen for UA connections
   QueryFile = "/etc/bacula/query.sql"
-  WorkingDirectory = "<%= @workingDirectory %>" 
-  PidDirectory = "<%= @pidDirectory %>"
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
-  Password = "<%= @passwordclient %>"         # Console password
+  WorkingDirectory = "/var/spool/bacula"
+  PidDirectory = "/var/run"
+  Maximum Concurrent Jobs = 20
+  Password = "M2UwNThhOGUxY2EyNDdkYTB"         # Console password
   Messages = Daemon
-  DirAddress = <%= @ipaddress %>
-  Heartbeat Interval = <%= @heartbeatInterval %>
-  Description = "Sistema de backup gerenciado via puppet"
+  #DirAddress = 127.0.0.1 
 }
 
 # List of files to be backed up
 FileSet {
-  Name = "LinuxDefault"
+  Name = "Full Set"
   Include {
     Options {
       signature = MD5
       compression = GZIP
     }
-    File = /
+    File = /etc
+    File = /var/www
   }
+
   Exclude {
     File = /var/spool/bacula
     File = /var/lib/bacula
@@ -69,20 +68,18 @@ FileSet {
 # Definition of file Virtual Autochanger device
 Storage {
   Name = File1
-  Password = "<%= @passwordclient %>"         # Console password
-  Address = <%= @ipaddress %>
-  SDPort = <%= @sdport %>   
+  Address = 192.168.110.6            # N.B. Use a fully qualified name here
+  SDPort = 9103
   Password = "M2UwNThhOGUxY2EyNDdkYTB"
   Device = FileStorage
   Media Type = File1
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>        # run up to 10 jobs a the same time
+  Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
 }
 
 # Generic catalog service
 Catalog {
   Name = MyCatalog
-  #dbname = "bacula"; dbuser = "bacula"; dbpassword = "NTI4ZTlmYzEyY2FmNWFjZTg3N2ZjNG"
-  dbname = "bacula"; dbuser = "bacula"; dbpassword = "<%= @passwordclient %>"
+  dbname = "bacula"; dbuser = "bacula"; dbpassword = "teste123"
 }
 
 # Reasonable message delivery -- send most everything to email address
