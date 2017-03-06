@@ -11,7 +11,8 @@ class bacula::client (
   $password_fd           = "${::passwordclient}",
   $bacula_fd_package     = $::bacula::bacula_fd_package,
   $bacula_fd_service     = $::bacula::bacula_fd_service,
-  $bacula_dir            = "bacula-dir",) inherits bacula::params {
+  $bacula_dir            = "bacula-dir",
+  $workingDirectory      = $::bacula::workingDirectory,) {
   package { $bacula_fd_package: ensure => 'present' }
 
   service { $bacula_fd_service:
