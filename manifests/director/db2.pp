@@ -17,7 +17,7 @@ class bacula::director::db2 (
 
   exec { 'Grant_mysql_privileges_bacula':
     path    => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
-    command => '/usr/libexec/bacula/grant_mysql_privileges',
+    command => "/usr/libexec/bacula/grant_mysql_privileges -u root -p${::passwordclient}",
     require => Class['::mysql::server'],
   }
 
