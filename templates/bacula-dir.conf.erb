@@ -68,9 +68,9 @@ FileSet {
 # Definition of file Virtual Autochanger device
 Storage {
   Name = File1
-  Address = 192.168.110.6            # N.B. Use a fully qualified name here
+  Address = <%= @networking.ip %>            # N.B. Use a fully qualified name here
   SDPort = 9103
-  Password = "M2UwNThhOGUxY2EyNDdkYTB"
+  Password = "<%= @passwordclient %>"
   Device = FileStorage
   Media Type = File1
   Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
