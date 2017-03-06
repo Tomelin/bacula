@@ -6,7 +6,7 @@ class bacula::params {
   $maximumConcurrentJobs = '30'
   $typebackup = 'file'
   $dirBackupFile = '/bacula'
-  $is_client = true
+  $is_client = false
   $is_storage = false
   $is_director = true
   $is_console = false
@@ -21,12 +21,6 @@ class bacula::params {
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
   $password_fd = "${::passwordclient}"  
-  
-  $pidDirectory = "/var/run/bacula"
-  $maximumConcurrentJobs = '30'
-  $dirBaculaTMP = "/tmp/bacula"
-  $portFTP = '2121'
-  
 
   # Bacula director - bacula-dir.conf
   $dirport = "9101"

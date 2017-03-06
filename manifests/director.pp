@@ -14,6 +14,7 @@ class bacula::director (
   $dirConfStorage        = $::bacula::dirConfStorage,
   $db_id                 = $::bacula::db_id,
   $heartbeatInterval     = $::bacula::heartbeatInterval,) {
+    
   if "$db_type" == "mysql" {
     class { 'bacula::director::db2': }
   } else {
@@ -25,7 +26,6 @@ class bacula::director (
     #    before => Package['bacula-console'],
     notify => Exec['SetDBType'],
   }
-
 
   exec { 'SetDBType':
     path        => ['/usr/bin', '/usr/sbin'],
