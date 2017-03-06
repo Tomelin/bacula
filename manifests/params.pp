@@ -67,6 +67,30 @@ class bacula::params {
       notice("\"${module_name}\" provides no config directory and package default values for OS family \"${::osfamily}\"")
     }
   }
+  
+  #directorys default the bacula
+  file { "$dirBaculaTMP":
+    ensure => 'directory',
+    owner  => 'bacula',
+    group  => 'bacula',
+  }
+
+  package { 'ftp': ensure => 'present', }
+
+  # workdir
+  file { "$workingDirectory":
+    ensure  => directory,
+    recurse => true,
+    owner   => 'bacula',
+    group   => 'bacula',
+  }
+
+  file { "$pidDirectory":
+    ensure  => directory,
+    recurse => true,
+    owner   => 'bacula',
+    group   => 'bacula',
+  }
 
 }
 
