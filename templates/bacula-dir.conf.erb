@@ -2,14 +2,14 @@
 # DO NOT EDIT
 Director {                            # define myself
   Name = bacula-dir
-  DIRport = 9101                # where we listen for UA connections
+  DIRport = <%= @dirport %>                # where we listen for UA connections
   QueryFile = "/etc/bacula/query.sql"
-  WorkingDirectory = "/var/spool/bacula"
-  PidDirectory = "/var/run"
-  Maximum Concurrent Jobs = 20
-  Password = "M2UwNThhOGUxY2EyNDdkYTB"         # Console password
+  WorkingDirectory = "<%= @workingDirectory %>"
+  PidDirectory = "<%= @pidDirectory %>"
+  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
+  Password = "<%= @passwordclient %>"         # Console password
   Messages = Daemon
-  #DirAddress = 127.0.0.1 
+  #DirAddress = <%= @networking['ip'] %>            # N.B. Use a fully qualified name here 
 }
 
 # List of files to be backed up
@@ -68,7 +68,7 @@ FileSet {
 # Definition of file Virtual Autochanger device
 Storage {
   Name = File1
-  Address = <%= @networking[ip] %>            # N.B. Use a fully qualified name here
+  Address = <%= @networking['ip'] %>            # N.B. Use a fully qualified name here
   SDPort = 9103
   Password = "<%= @passwordclient %>"
   Device = FileStorage
