@@ -68,7 +68,7 @@ FileSet {
 # Definition of file Virtual Autochanger device
 Storage {
   Name = File1
-  Address = <%= @networking.ip %>            # N.B. Use a fully qualified name here
+  Address = <%= @networking[ip] %>            # N.B. Use a fully qualified name here
   SDPort = 9103
   Password = "<%= @passwordclient %>"
   Device = FileStorage
