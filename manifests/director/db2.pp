@@ -17,7 +17,7 @@ class bacula::director::db2 ($db_package = $::bacula::director::db_package,) inh
     grant    => ['ALL'],
     require  => Class['::mysql::server'],
     notify => Exec['Grant_mysql_privileges_bacula'],
-    }
+   
   }
 
   exec { 'Grant_mysql_privileges_bacula':
