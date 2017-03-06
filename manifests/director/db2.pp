@@ -1,6 +1,7 @@
 class bacula::director::db2 ($db_package = $::bacula::director::db_package,) inherits bacula::director {
   class { '::mysql::server':
     root_password           => "${::passwordclient}",
+    create_root_my_cnf      => true,
     remove_default_accounts => true,
     override_options        => {
       'mysqld' => {
@@ -9,6 +10,14 @@ class bacula::director::db2 ($db_package = $::bacula::director::db_package,) inh
     }
   }
 
+
+  mysql::db { 'bacula':
+    user     => 'bacula',
+    password => "${::passwordclient}",
+    host     => 'localhost',
+    grant    => ['ALL'],
+    require => Class['::mysql::server'],
+  }
 
   exec { 'Grant_mysql_privileges_bacula':
     path    => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
