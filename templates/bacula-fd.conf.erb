@@ -25,9 +25,12 @@ FileSet {
       signature = <%= @signature %>
       compression = <%= @compression %>
     }
-    <% excludeBackup.each do |files| -%>
-		File = <%= files %>
-	<% end -%>
+    
+    <% [@excludeBackup].flatten.each do |filesexclude| -%>
+bindcmdaddress <%= filesexclude %>
+<% end -%>
+    
+
     
    # File = /etc
    
