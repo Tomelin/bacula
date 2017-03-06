@@ -24,7 +24,7 @@ class bacula::params {
 
   # Bacula director - bacula-dir.conf
   $dirport = "9101"
-  $bacula_dir = "bacula-dir"
+  $dirserver = "bacula-dir"
   $heartbeatInterval = "120"
   # Bacula director - bacula-sd.conf
   $sdport = "9103"

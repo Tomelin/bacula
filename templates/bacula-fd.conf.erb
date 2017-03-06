@@ -1,42 +1,19 @@
 # This file is maintained by Puppet.
 # DO NOT EDIT
 
-#
-# Default  Bacula File Daemon Configuration file
-#
-#  For Bacula release 7.0.5 (28 July 2014) -- redhat Enterprise release
-#
-# There is not much to change here except perhaps the
-# File daemon Name to
-#
-
-#
-# List Directors who are permitted to contact this File daemon
-#
 Director {
-  Name = bacula-dir
-  Password = "M2UwNThhOGUxY2EyNDdkYTB"
-}
-
-#
-# Restricted Director, used by tray-monitor to get the
-#   status of the file daemon
-#
-Director {
-  Name = bacula-mon
-  Password = "@@MON_FD_PASSWORD@@"
-  Monitor = yes
+  Name = <%= @dirserver %>
+  Password = "<%= @passwordclient %>"
 }
 
 #
 # "Global" File daemon configuration specifications
-#
 FileDaemon {                          # this is me
-  Name = bacula-fd
-  FDport = 9102                  # where we listen for the director
-  WorkingDirectory = /var/spool/bacula
-  Pid Directory = /var/run
-  Maximum Concurrent Jobs = 20
+  Name = <%= @fqdn %>
+  FDport = <%= @fdport %>                  # where we listen for the director
+  WorkingDirectory = "<%= @workingDirectory %>"
+  PidDirectory = "<%= @pidDirectory %>"
+  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
 # Plugin Directory = /usr/lib64/bacula
 }
 

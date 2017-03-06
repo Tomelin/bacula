@@ -1,7 +1,7 @@
 # This file is maintained by Puppet.
 # DO NOT EDIT
 Director {                            # define myself
-  Name = bacula-dir
+  Name = <%= @dirserver %>
   DIRport = <%= @dirport %>                # where we listen for UA connections
   QueryFile = "/etc/bacula/query.sql"
   WorkingDirectory = "<%= @workingDirectory %>"
@@ -79,8 +79,7 @@ Storage {
 # Generic catalog service
 Catalog {
   Name = MyCatalog
-  #dbname = "bacula"; dbuser = "bacula"; dbpassword = "teste123"
-  dbname = "bacula"; dbuser = "bacula"; dbpassword = "Nzk0Mzk3ODUyOWIyOTI4ZTUyOWUyNT"
+  dbname = "bacula"; dbuser = "bacula"; dbpassword = "<%= @passwordclient %>"
 }
 
 # Reasonable message delivery -- send most everything to email address
@@ -141,7 +140,6 @@ Pool {
 
 #
 # Restricted console used by tray-monitor to get the status of the director
-#
 Console {
   Name = bacula-mon
   Password = "@@MON_DIR_PASSWORD@@"

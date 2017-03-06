@@ -8,7 +8,7 @@ class bacula::director (
   $pidDirectory          = $::bacula::pidDirectory,
   $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,
   $db_package            = $::bacula::db_package,
-  $bacula_dir            = $::bacula::bacula_dir,
+  $dirserver            = $::bacula::bacula_dir,
   $sdport                = $::bacula::sdport,
   $dirConfClients        = $::bacula::dirConfClients,
   $dirConfStorage        = $::bacula::dirConfStorage,
