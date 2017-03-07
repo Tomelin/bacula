@@ -17,12 +17,22 @@ class bacula::storage (
   # Package bacula-sd
   package { $bacula_sd_package: ensure => 'present', }
 
-  File { ["${dirBackupFile}", "${dirRestoreFile}"]:
-    ensure  => directory,
-    owner   => 'bacula',
-    group   => 'bacula',
-    recurse => true,
-  }
+  
+    # Create directory  /bacula to save backup in file
+  if $::bacula::typebackup == 'file' {
+    file { "$::bacula::dirBackupFile/backup":
+      ensure  => 'directory',
+      recurse => true,
+      owner   => 'bacula',
+      group   => 'bacula',
+    }
+
+    file { "$::bacula::dirBackupFile/restore":
+      ensure  => 'directory',
+      recurse => true,
+      owner   => 'bacula',
+      group   => 'bacula',
+    }
 
   # start server
   service { $bacula_sd_service:

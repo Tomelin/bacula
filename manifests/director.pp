@@ -52,6 +52,7 @@ class bacula::director (
     require => Package[$bacula_dir_package],
   }
 
+/**
   # Create directory  /bacula to save backup in file
   file { "$::bacula::dirBackupFile":
     ensure  => 'directory',
@@ -60,7 +61,7 @@ class bacula::director (
     group   => 'bacula',
     require => Package[$bacula_dir_package],
   }
-
+ */
   # Create directory /etc/bacula/clients to save client conf
   file { ["$dirconf/clients", "$dirconf/conf.d", "$dirconf/storage"]:
     ensure  => 'directory',
@@ -116,6 +117,7 @@ class bacula::director (
     require => File["$dirconf/pool"],
   }
 
+/**
   # Create directory  /bacula to save backup in file
   if $::bacula::typebackup == 'file' {
     file { "$::bacula::dirBackupFile/backup":
@@ -131,6 +133,8 @@ class bacula::director (
       owner   => 'bacula',
       group   => 'bacula',
     }
+    *  */
+    
   }
 
   class { 'bacula::director::pool':
