@@ -26,28 +26,17 @@ FileSet {
       compression = <%= @compression %>
     }
     
-    <% [@excludeBackup].flatten.each do |filesexclude| -%>
-bindcmdaddress <%= filesexclude %>
-<% end -%>
+    <% [@filesBackup].flatten.each do |filesinclude| -%>
+		File = <%= filesinclude %>
+	<% end -%>
     
-
-    
-   # File = /etc
-   
-   #File = /var/www
   }
 
   Exclude {
-    File = /var/spool/bacula
-    File = /var/lib/bacula
-    File = /bacula
-    File = /tmp
-    File = /dev
-    File = /proc
-    File = /tmp
-    File = /sys
-    File = /.journal
-    File = /.fsck
+   <% [@excludeBackup].flatten.each do |filesexclude| -%>
+		File = <%= filesexclude %>
+	<% end -%>
+
   }
 }
 
