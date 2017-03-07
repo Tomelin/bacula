@@ -82,7 +82,7 @@ class bacula::params {
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-    mode => '6750',
+    mode => '6744',
   }
 
   file { "${pidDirectory}":
@@ -90,6 +90,7 @@ class bacula::params {
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
+    mode => '6744',
   }
 
   file { "$dirRestoreFile":
