@@ -103,7 +103,7 @@ class bacula (
   if $is_storage == true {
     class { 'bacula::storage': }
     
-      if $firewall == true && $is_director == false {
+      if ( $firewall == true ) and ( $is_director == false ) {
 	      firewalld_service { 'Open port bacula server in the public zone':
 	        ensure  => present,
 	        zone    => 'public',
