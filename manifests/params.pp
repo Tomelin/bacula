@@ -82,6 +82,7 @@ class bacula::params {
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
+    mode => '6750',
   }
 
   file { "${pidDirectory}":
