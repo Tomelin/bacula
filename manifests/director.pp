@@ -133,10 +133,10 @@ class bacula::director (
       owner   => 'bacula',
       group   => 'bacula',
     }
-    *  */
+  
     
   }
-
+  *  */
   class { 'bacula::director::pool':
   }
 

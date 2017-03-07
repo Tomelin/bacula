@@ -26,7 +26,7 @@ class bacula::storage (
       owner   => 'bacula',
       group   => 'bacula',
     }
-
+  }
     file { "$::bacula::dirBackupFile/restore":
       ensure  => 'directory',
       recurse => true,
