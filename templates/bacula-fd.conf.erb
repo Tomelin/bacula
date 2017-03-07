@@ -17,28 +17,6 @@ FileDaemon {                          # this is me
 
 }
 
-# List of files to be backed up
-FileSet {
-  Name = "<%= @hostname %>"
-  Include {
-    Options {
-      signature = <%= @signature %>
-      compression = <%= @compression %>
-    }
-    
-    <% [@filesBackup].flatten.each do |filesinclude| -%>
-		File = <%= filesinclude %>
-	<% end -%>
-    
-  }
-
-  Exclude {
-   <% [@excludeBackup].flatten.each do |filesexclude| -%>
-		File = <%= filesexclude %>
-	<% end -%>
-
-  }
-}
 
 # Send all messages except skipped files back to Director
 Messages {
