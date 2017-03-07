@@ -5,7 +5,7 @@ class bacula::client (
   $maximumConcurrentJobs = '30',
   $dirConfClients        = "${dirconf}/clients",
   $dirBaculaTMP          = "/tmp/bacula",
-  $portFTP               = '2121',
+  $portFTP               = $::bacula::portFTP,
   # Bacula client - bacula-fd.conf
   $fdport                = "9102",
   $password_fd           = "${::passwordclient}",

@@ -47,7 +47,7 @@ class bacula::params {
           $bacula_fd_package = 'bacula-client'
           $bacula_fd_service = 'bacula-fd'
           $bconsole_package = 'bacula-console'
-          $ftp_package = 'vsftpd'
+          
           $db_package = 'mariadb-server'
 
         }

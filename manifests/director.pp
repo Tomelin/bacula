@@ -14,7 +14,9 @@ class bacula::director (
   $dirConfStorage        = $::bacula::dirConfStorage,
   $db_id                 = $::bacula::db_id,
   $heartbeatInterval     = $::bacula::heartbeatInterval,
-  $signature             = $::bacula::signature,) {
+  $signature             = $::bacula::signature,)
+  
+   {
   if "$db_type" == "mysql" {
     class { 'bacula::director::db2': require => Package[$bacula_dir_package] }
   } else {
@@ -52,16 +54,6 @@ class bacula::director (
     require => Package[$bacula_dir_package],
   }
 
-/**
-  # Create directory  /bacula to save backup in file
-  file { "$::bacula::dirBackupFile":
-    ensure  => 'directory',
-    recurse => true,
-    owner   => 'bacula',
-    group   => 'bacula',
-    require => Package[$bacula_dir_package],
-  }
- */
   # Create directory /etc/bacula/clients to save client conf
   file { ["$dirconf/clients", "$dirconf/conf.d", "$dirconf/storage"]:
     ensure  => 'directory',

@@ -72,6 +72,9 @@ class bacula (
   $firewall             = $::bacula::params::firewall,
   
   ) inherits bacula::params {
+    
+    
+    
   if $is_director == true {
     class { 'bacula::director': }
     
@@ -87,10 +90,11 @@ class bacula (
       
       
        if $firewall == true {
-		      firewalld_service { 'Open port FTP is a protocol used for remote file transfer':
+		      firewalld_port { 'Open port FTP is a protocol used for remote file transfer':
 		        ensure  => present,
 		        zone    => 'public',
-		        service => 'ftp',
+		        port => "$portFTP",
+		          protocol => 'tcp',
 		      }
       }
     }

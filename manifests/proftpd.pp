@@ -1,7 +1,7 @@
 class bacula::proftpd (
   $serverName        = 'ProFTPD Anonymous Server',
   $serverType        = 'standalone',
-  $portFTP           = $::bacula::params::portFTP,
+  $portFTP           = $::bacula::portFTP,
   $user              = 'ftp',
   $group             = 'ftp',
   $maxInstances      = '30',
