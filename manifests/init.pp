@@ -58,7 +58,6 @@ class bacula (
   $is_console            = $::bacula::params::is_console,
   $password_fd           = $::bacula::params::password_fd,
   $dirserver             = $::bacula::params::dirserver,
-  $ftp_package           = $::bacula::params::ftp_package,
   $dirBaculaTMP          = $::bacula::params::dirBaculaTMP,
   $dirConfClients        = $::bacula::params::dirConfClients,
   $dirConfStorage        = $::bacula::params::dirConfStorage,
