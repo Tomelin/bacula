@@ -21,6 +21,12 @@
 		},{
 			"name": "puppetlabs/sqlite",
 			"version_range": ">= 0.0.1"
+		},{
+			"name": "puppet/selinux",
+			"version_range": ">= 0.8.0"
+		},{
+			"name": "crayfishx/firewalld",
+			"version_range": ">= 3.0.0"
 		}
 	],
 	"data_provider": null,

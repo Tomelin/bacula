@@ -8,10 +8,10 @@ class bacula::params {
   $dirBackupFile = '/bacula/backup'
   $dirRestoreFile = '/bacula/restore'
   $is_client = true
-  $is_storage = true
-  $is_director = true
-  $is_console = true
-  $is_directorFTP = true
+  $is_storage = false
+  $is_director = false
+  $is_console = false
+  $is_directorFTP = false
   $db_type = 'mysql'
   $dirConfClients = "${dirconf}/clients"
   $dirConfStorage = "${dirconf}/storage"
@@ -21,6 +21,8 @@ class bacula::params {
   $emails = ["root@localhost", "rafael@tomelin.eti.br"]
   $signature = "MD5"
   $compression = "GZIP"
+  $firewall = true
+  
 
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
@@ -84,6 +86,13 @@ class bacula::params {
 
   file { "${pidDirectory}":
     ensure  => directory,
+    recurse => true,
+    owner   => 'bacula',
+    group   => 'bacula',
+  }
+
+  file { "$dirRestoreFile":
+    ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
