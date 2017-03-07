@@ -66,7 +66,10 @@ class bacula (
   $dirport               = $::bacula::params::dirport,
   $db_package            = $::bacula::params::db_package,
   $db_id                 = $::bacula::params::db_id,
-  $heartbeatInterval     = $::bacula::params::heartbeatInterval,) inherits bacula::params {
+  $heartbeatInterval     = $::bacula::params::heartbeatInterval,
+  $signature = $::bacula::params::signature,
+  
+  ) inherits bacula::params {
     
   
     

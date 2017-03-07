@@ -8,17 +8,15 @@ class bacula::director (
   $pidDirectory          = $::bacula::pidDirectory,
   $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,
   $db_package            = $::bacula::db_package,
-  $dirserver            = $::bacula::dirserver,
+  $dirserver             = $::bacula::dirserver,
   $sdport                = $::bacula::sdport,
   $dirConfClients        = $::bacula::dirConfClients,
   $dirConfStorage        = $::bacula::dirConfStorage,
   $db_id                 = $::bacula::db_id,
-  $heartbeatInterval     = $::bacula::heartbeatInterval,) {
-    
+  $heartbeatInterval     = $::bacula::heartbeatInterval,
+  $signature             = $::bacula::signature,) {
   if "$db_type" == "mysql" {
-    class { 'bacula::director::db2': 
-      require => Package[ $bacula_dir_package ]
-    }
+    class { 'bacula::director::db2': require => Package[$bacula_dir_package] }
   } else {
     $db_id = 3
   }
