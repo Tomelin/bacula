@@ -51,12 +51,13 @@ class bacula (
   $maximumConcurrentJobs = $::bacula::params::maximumConcurrentJobs,
   $typebackup            = $::bacula::params::typebackup,
   $dirBackupFile         = $::bacula::params::dirBackupFile,
+  $dirRestoreFile        = $::bacula::params::dirRestoreFile,
   $is_client             = $::bacula::params::is_client,
   $is_storage            = $::bacula::params::is_storage,
   $is_director           = $::bacula::params::is_director,
   $is_console            = $::bacula::params::is_console,
   $password_fd           = $::bacula::params::password_fd,
-  $dirserver            = $::bacula::params::dirserver,
+  $dirserver             = $::bacula::params::dirserver,
   $ftp_package           = $::bacula::params::ftp_package,
   $dirBaculaTMP          = $::bacula::params::dirBaculaTMP,
   $dirConfClients        = $::bacula::params::dirConfClients,
@@ -67,12 +68,7 @@ class bacula (
   $db_package            = $::bacula::params::db_package,
   $db_id                 = $::bacula::params::db_id,
   $heartbeatInterval     = $::bacula::params::heartbeatInterval,
-  $signature = $::bacula::params::signature,
-  
-  ) inherits bacula::params {
-    
-  
-    
+  $signature             = $::bacula::params::signature,) inherits bacula::params {
   if $is_director == true {
     class { 'bacula::director': }
 
