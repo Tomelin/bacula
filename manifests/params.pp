@@ -27,7 +27,7 @@ class bacula::params {
 
   # Bacula client - bacula-fd.conf
   $fdport = '9102'
-  $password_fd = ${::passwordclient}
+  $password_fd = "${::passwordclient}"
 
   # Bacula director - bacula-dir.conf
   $dirport = '9101'
