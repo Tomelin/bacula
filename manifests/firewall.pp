@@ -3,11 +3,7 @@ class bacula::firewall (
   $is_client   = $::bacula::is_client,
   $is_storage  = $::bacula::is_storage,
   $is_director = $::bacula::is_director,
-  $is_console  = $::bacula::is_console,
-  $portftp  = $::bacula::portftp
-  $is_directorftp = $::bacula::is_directorftp,
-  
-  ) {
+  $is_console  = $::bacula::is_console,) {
   if $firewall == true {
     # If teh bacula server
 
@@ -18,12 +14,12 @@ class bacula::firewall (
         service => 'bacula-server',
       }
 
-      if $is_directorftp == true {
+      if $is_director_ftp == true {
         if $firewall == true {
           firewalld_port { 'Open port FTP is a protocol used for remote file transfer':
             ensure   => present,
             zone     => 'public',
-            port     => "$portftp",
+            port     => "$port_ftp",
             protocol => 'tcp',
           }
         }

@@ -4,9 +4,9 @@ Director {                            # define myself
   Name = <%= @dirserver %>
   DIRport = <%= @dirport %>                # where we listen for UA connections
   QueryFile = "/etc/bacula/query.sql"
-  WorkingDirectory = "<%= @workingDirectory %>"
-  PidDirectory = "<%= @pidDirectory %>"
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
+  WorkingDirectory = "<%= @working_directory %>"
+  PidDirectory = "<%= @pid_directory %>"
+  Maximum Concurrent Jobs = <%= @maximum_concurrent_jobs %>
   Password = "<%= @passwordclient %>"         # Console password
   Messages = Daemon
   #DirAddress = <%= @networking['ip'] %>            # N.B. Use a fully qualified name here 

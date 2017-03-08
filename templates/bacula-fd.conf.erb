@@ -11,9 +11,9 @@ Director {
 FileDaemon {                          # this is me
   Name = <%= @fqdn %>
   FDport = <%= @fdport %>                  # where we listen for the director
-  WorkingDirectory = "<%= @workingDirectory %>"
-  PidDirectory = "<%= @pidDirectory %>"
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
+  WorkingDirectory = "<%= @working_directory %>"
+  PidDirectory = "<%= @pid_directory %>"
+  Maximum Concurrent Jobs = <%= @maximum_concurrent_jobs %>
 
 }
 

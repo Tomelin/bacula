@@ -1,22 +1,22 @@
-ServerName                      <%= @serverName %>
-ServerType                      <%= @serverType %>
-Port                            <%= @portFTP %>
+ServerName                      <%= @server_name %>
+ServerType                      <%= @server_type %>
+Port                            <%= @port_ftp %>
 
 #User                           <%= @user %>
 #Group                          <%= @group %>
 
-MaxInstances                    <%= @maxInstances %>
+MaxInstances                    <%= @max_instances %>
 
-TimeoutStalled                  <%= @timeoutStalled %>
+TimeoutStalled                  <%= @timeout_stalled %>
 
-DisplayLogin                    <%= @displayLogin %>
-#DisplayFirstChdir              <%= @displayFirstChdir %>
+DisplayLogin                    <%= @display_login %>
+#DisplayFirstChdir              <%= @display_first_chdir %>
 
-<Anonymous <%= @dirConfClients %>>
+<Anonymous <%= @dir_conf_clients %>>
 
   # Allow logins if they are disabled above.
   <Limit LOGIN>
-    <%= @loginFTP %>
+    <%= @login_ftp %>
   </Limit>
 
   # Maximum clients with message

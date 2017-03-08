@@ -4,16 +4,16 @@ class bacula::director (
   $bacula_dir_service    = $::bacula::bacula_dir_service,
   $dirconf               = $::bacula::dirconf,
   $dirport               = $::bacula::dirport,
-  $workingdirectory      = $::bacula::workingdirectory,
-  $piddirectory          = $::bacula::piddirectory,
-  $maximumconcurrentjobs = $::bacula::maximumconcurrentjobs,
+  $working_directory      = $::bacula::working_directory,
+  $pid_directory          = $::bacula::pid_directory,
+  $maximum_concurrent_jobs = $::bacula::maximum_concurrent_jobs,
   $db_package            = $::bacula::db_package,
   $dirserver             = $::bacula::dirserver,
   $sdport                = $::bacula::sdport,
-  $dirconfclients        = $::bacula::dirconfclients,
-  $dirconfstorage        = $::bacula::dirconfstorage,
+  $dir_conf_clients        = $::bacula::dir_conf_clients,
+  $dir_conf_storage        = $::bacula::dir_conf_storage,
   $db_id                 = $::bacula::db_id,
-  $heartbeat_interval     = $::bacula::heartbeat_interval,
+  $heartbeatInterval     = $::bacula::heartbeatInterval,
   $signature             = $::bacula::signature,)
   
    {
@@ -109,6 +109,26 @@ class bacula::director (
     require => File["$dirconf/pool"],
   }
 
+/**
+  # Create directory  /bacula to save backup in file
+  if $::bacula::typebackup == 'file' {
+    file { "$::bacula::dir_backup_file/backup":
+      ensure  => 'directory',
+      recurse => true,
+      owner   => 'bacula',
+      group   => 'bacula',
+    }
+
+    file { "$::bacula::dir_backup_file/restore":
+      ensure  => 'directory',
+      recurse => true,
+      owner   => 'bacula',
+      group   => 'bacula',
+    }
+  
+    
+  }
+  *  */
   class { 'bacula::director::pool':
   }
 

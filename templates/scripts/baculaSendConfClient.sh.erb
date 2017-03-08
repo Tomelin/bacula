@@ -2,7 +2,7 @@
 # This file is maintained by Puppet.
 # DO NOT EDIT
 
-cd <%= @dirBaculaTMP %>
+cd <%= @dir_bacula_tmp %>
 #$1 is the file name
 #usage:this_script <filename>
 HOST=<%= @dirserver %>
@@ -11,7 +11,7 @@ PASSWD="pass"
 FILE="client_<%= @hostname %>.conf"
 REMOTEPATH='/'
 
-ftp -Apn $HOST <%= @portFTP %> <<END_SCRIPT
+ftp -Apn $HOST <%= @port_ftp %> <<END_SCRIPT
 quote USER $USER
 quote PASS $PASSWD
 cd $REMOTEPATH

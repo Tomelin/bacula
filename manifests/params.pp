@@ -1,22 +1,22 @@
 class bacula::params {
   # Conf default
   $dirconf = "/etc/bacula"
-  $workingdirectory = "/var/spool/bacula"
-  $piddirectory = "/var/run/bacula"
-  $maximumdoncurrentdobs = '30'
+  $working_directory = "/var/spool/bacula"
+  $pid_directory = "/var/run/bacula"
+  $maximum_concurrent_jobs = '30'
   $typebackup = 'file'
-  $dirbackupfile = '/bacula/backup'
-  $dirrestorefile = '/bacula/restore'
+  $dir_backup_file = '/bacula/backup'
+  $dir_restore_file = '/bacula/restore'
   $is_client = true
   $is_storage = false
   $is_director = false
   $is_console = false
-  $is_directorftp = false
+  $is_director_ftp = false
   $db_type = 'mysql'
-  $dirconfclients = "${dirconf}/clients"
-  $dirconfstorage = "${dirconf}/storage"
-  $dirbaculatmp = "/tmp/bacula"
-  $portftp = '2121'
+  $dir_conf_clients = "${dirconf}/clients"
+  $dir_conf_storage = "${dirconf}/storage"
+  $dir_bacula_tmp = "/tmp/bacula"
+  $port_ftp = '2121'
   $db_id = 1
   $emails = ["root@localhost", "rafael@tomelin.eti.br"]
   $signature = "MD5"
@@ -33,7 +33,7 @@ class bacula::params {
   # Bacula director - bacula-dir.conf
   $dirport = "9101"
   $dirserver = "bacula-dir"
-  $heartbeat_interval = "120"
+  $heartbeatInterval = "120"
   # Bacula director - bacula-sd.conf
   $sdport = "9103"
 
@@ -68,7 +68,7 @@ class bacula::params {
   }
 
   # directorys default the bacula
-  file { "${dirBaculatmp}":
+  file { "${dir_bacula_tmp}":
     ensure => directory,
     owner  => 'bacula',
     group  => 'bacula',
@@ -77,7 +77,7 @@ class bacula::params {
   package { 'ftp': ensure => 'present', }
 
   # workdir
-  file { "${workingdirectory}":
+  file { "${working_directory}":
     ensure  => directory,
     recurse => true,
     owner   => 'bacula',
@@ -85,7 +85,7 @@ class bacula::params {
     mode    => '6744',
   }
 
-  file { "${piddirectory}":
+  file { "${pid_directory}":
     ensure  => directory,
     recurse => true,
     owner   => 'bacula',
@@ -93,7 +93,7 @@ class bacula::params {
     mode    => '6744',
   }
 
-  file { "$dirrestorefile":
+  file { "$dir_restore_file":
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',

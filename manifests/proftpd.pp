@@ -1,19 +1,19 @@
 class bacula::proftpd (
-  $servername        = 'ProFTPD Anonymous Server',
-  $servertype        = 'standalone',
-  $portftp           = $::bacula::portftp,
+  $server_name        = 'ProFTPD Anonymous Server',
+  $server_type        = 'standalone',
+  $port_ftp           = $::bacula::port_ftp,
   $user              = 'ftp',
   $group             = 'ftp',
-  $maxinstances      = '30',
-  $timeoutstalled    = '300',
-  $displaylogin      = 'welcome.msg',
-  $dirdisplaylogin   = "/var/ftp/${displaylogin}",
-  $displayfirstchdir = '.message',
-  $dirftp            = '/etc/bacula/clients',
-  $loginftp          = 'AllowAll',
-  $maxclients        = 5,
-  $dirconfclients    = $::bacula::dirconfclients,
-  $dirconfstorage    = $::bacula::dirconfstorage,
+  $max_instances      = '30',
+  $timeout_stalled    = '300',
+  $display_login      = 'welcome.msg',
+  $dir_display_login   = "/var/ftp/${display_login}",
+  $display_first_chdir = '.message',
+  $dir_ftp            = '/etc/bacula/clients',
+  $login_ftp          = 'AllowAll',
+  $max_clients        = 5,
+  $dir_conf_clients    = $::bacula::dir_conf_clients,
+  $dir_conf_storage    = $::bacula::dir_conf_storage,
   $package_name      = 'proftpd',
   $service_name      = 'proftpd',) {
   package { $package_name: ensure => 'installed' }
@@ -31,7 +31,8 @@ class bacula::proftpd (
     notify  => Service[$service_name],
   }
 
-  file { "${dirdisplaylogin}":
+  #file { "${dir_display_login}":
+  file { "${dir_display_login}":
     ensure  => 'file',
     owner   => 'ftp',
     group   => 'ftp',

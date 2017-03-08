@@ -1,20 +1,20 @@
 class bacula::client (
   # Conf default
   $dirconf               = "/etc/bacula",
-  $piddirectory          = "/var/run/bacula",
-  $maximumconcurrentjobs = '30',
-  $dirconfclients        = "${dirconf}/clients",
-  $dirbaculatmp          = "/tmp/bacula",
-  $portftp               = $::bacula::portftp,
+  $pid_directory          = "/var/run/bacula",
+  $maximum_concurrent_jobs = '30',
+  $dir_conf_clients        = "${dirconf}/clients",
+  $dir_bacula_tmp          = "/tmp/bacula",
+  $port_ftp               = $::bacula::port_ftp,
   # Bacula client - bacula-fd.conf
   $fdport                = "9102",
   $password_fd           = "${::passwordclient}",
   $bacula_fd_package     = $::bacula::bacula_fd_package,
   $bacula_fd_service     = $::bacula::bacula_fd_service,
   $dirserver             = $::bacula::dirserver,
-  $workingdirectory      = $::bacula::workingdirectory,
-  $filesbackup           = ["/"],
-  $excludebackup         = ["/dev", "/proc", "/tmp","/.journal","/.fsck","/var/spool/bacula","/var/lib/bacula"],
+  $working_directory      = $::bacula::working_directory,
+  $filesBackup           = ["/"],
+  $excludeBackup         = ["/dev", "/proc", "/tmp","/.journal","/.fsck","/var/spool/bacula","/var/lib/bacula"],
   
   $signature             = $::bacula::params::signature,
   $compression           = $::bacula::params::compression,) {
@@ -37,27 +37,27 @@ class bacula::client (
     notify  => Service[$bacula_fd_service]
   }
 
-  file { "$dirbaculatmp/client_${::hostname}.conf":
+  file { "$dir_bacula_tmp/client_${::hostname}.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/client_conf.erb'),
-    require => File["$dirbaculatmp"],
+    require => File["$dir_bacula_tmp"],
   }
 
-  file { "$dirbaculatmp/baculaSendConfClient.sh":
+  file { "$dir_bacula_tmp/baculaSendConfClient.sh":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     mode    => '0755',
     content => template('bacula/scripts/baculaSendConfClient.sh.erb'),
-    require => File["$dirbaculatmp"],
+    require => File["$dir_bacula_tmp"],
     notify  => Exec['SendClientConf'],
   }
 
   exec { 'SendClientConf':
     path        => ['/usr/bin', '/usr/sbin'],
-    command     => "$dirbaculatmp/baculaSendConfClient.sh",
+    command     => "$dir_bacula_tmp/baculaSendConfClient.sh",
     refreshonly => true,
     require     => Package["ftp"],
   }

@@ -1,9 +1,9 @@
 Storage {                             # definition of myself
   Name = <%= @fqdn %>
   SDPort = <%= @sdport %>                  # Director's port
-  WorkingDirectory = "<%= @workingDirectory %>"
-  PidDirectory = "<%= @pidDirectory %>"
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
+  WorkingDirectory = "<%= @working_directory %>"
+  PidDirectory = "<%= @pid_directory %>"
+  Maximum Concurrent Jobs = <%= @maximum_concurrent_jobs %>
 }
 
 Director {
@@ -14,7 +14,7 @@ Director {
 Device {
   Name = FileStorage
   Media Type = File1
-  Archive Device = <%= @dirBackupFile %>
+  Archive Device = <%= @dir_backup_file %>
   LabelMedia = yes;                   # lets Bacula label unlabeled media
   Random Access = Yes;
   AutomaticMount = yes;               # when device opened, read it
