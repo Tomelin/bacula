@@ -1,23 +1,23 @@
+# Class define variables the module bacula-dir - server bacula
+# You should feel free to expand on this and document any parameters etc
 class bacula::director (
-  $db_type               = $::bacula::params::db_type,
-  $bacula_dir_package    = $::bacula::bacula_dir_package,
-  $bacula_dir_service    = $::bacula::bacula_dir_service,
-  $dirconf               = $::bacula::dirconf,
-  $dirport               = $::bacula::dirport,
-  $working_directory      = $::bacula::working_directory,
-  $pid_directory          = $::bacula::pid_directory,
+  $db_type                 = $::bacula::params::db_type,
+  $bacula_dir_package      = $::bacula::bacula_dir_package,
+  $bacula_dir_service      = $::bacula::bacula_dir_service,
+  $dirconf                 = $::bacula::dirconf,
+  $dirport                 = $::bacula::dirport,
+  $working_directory       = $::bacula::working_directory,
+  $pid_directory           = $::bacula::pid_directory,
   $maximum_concurrent_jobs = $::bacula::maximum_concurrent_jobs,
-  $db_package            = $::bacula::db_package,
-  $dirserver             = $::bacula::dirserver,
-  $sdport                = $::bacula::sdport,
+  $db_package              = $::bacula::db_package,
+  $dirserver               = $::bacula::dirserver,
+  $sdport                  = $::bacula::sdport,
   $dir_conf_clients        = $::bacula::dir_conf_clients,
   $dir_conf_storage        = $::bacula::dir_conf_storage,
-  $db_id                 = $::bacula::db_id,
-  $heartbeatInterval     = $::bacula::heartbeatInterval,
-  $signature             = $::bacula::signature,)
-  
-   {
-  if "$db_type" == "mysql" {
+  $db_id                   = $::bacula::db_id,
+  $heartbeatInterval       = $::bacula::heartbeatInterval,
+  $signature               = $::bacula::signature,) {
+  if "$db_type" == 'mysql' {
     class { 'bacula::director::db2': require => Package[$bacula_dir_package] }
   } else {
     $db_id = 3
@@ -25,7 +25,6 @@ class bacula::director (
 
   package { $bacula_dir_package:
     ensure => 'present',
-    #    before => Package['bacula-console'],
     notify => Exec['SetDBType'],
   }
 
@@ -36,7 +35,6 @@ class bacula::director (
     notify      => Service[$bacula_dir_service],
   }
 
-  # start server
   service { $bacula_dir_service:
     ensure     => 'running',
     enable     => true,
@@ -45,7 +43,6 @@ class bacula::director (
     require    => Package[$bacula_dir_package],
   }
 
-  # Create file bacula-dir.conf
   file { "$dirconf/bacula-dir.conf":
     ensure  => 'file',
     owner   => 'bacula',
@@ -109,26 +106,6 @@ class bacula::director (
     require => File["$dirconf/pool"],
   }
 
-/**
-  # Create directory  /bacula to save backup in file
-  if $::bacula::typebackup == 'file' {
-    file { "$::bacula::dir_backup_file/backup":
-      ensure  => 'directory',
-      recurse => true,
-      owner   => 'bacula',
-      group   => 'bacula',
-    }
-
-    file { "$::bacula::dir_backup_file/restore":
-      ensure  => 'directory',
-      recurse => true,
-      owner   => 'bacula',
-      group   => 'bacula',
-    }
-  
-    
-  }
-  *  */
   class { 'bacula::director::pool':
   }
 
