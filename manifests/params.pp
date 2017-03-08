@@ -37,9 +37,9 @@ class bacula::params {
   $sdport = '9103'
 
   # Different path and package definitions
-  case ${::operatingsystem} {
+  case "${::operatingsystem}" {
     'CentOS' : {
-      case ${::operatingsystemmajrelease} {
+      case "${::operatingsystemmajrelease}" {
         '7'     : {
           $bacula_dir_package = 'bacula-director'
           $bacula_dir_service = 'bacula-dir'
