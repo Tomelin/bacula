@@ -27,7 +27,7 @@ class bacula::params {
 
   # Bacula client - bacula-fd.conf
   $fdport = '9102'
-  $password_fd = "${::passwordclient}"
+  $password_fd = ${::passwordclient}
 
   # Bacula director - bacula-dir.conf
   $dirport = '9101'
@@ -37,9 +37,9 @@ class bacula::params {
   $sdport = '9103'
 
   # Different path and package definitions
-  case "${::operatingsystem}" {
+  case ${::operatingsystem} {
     'CentOS' : {
-      case "${::operatingsystemmajrelease}" {
+      case ${::operatingsystemmajrelease} {
         '7'     : {
           $bacula_dir_package = 'bacula-director'
           $bacula_dir_service = 'bacula-dir'
@@ -67,7 +67,7 @@ class bacula::params {
   }
 
   # directorys default the bacula
-  file { "${dir_bacula_tmp}":
+  file { ${dir_bacula_tmp}:
     ensure => directory,
     owner  => 'bacula',
     group  => 'bacula',
@@ -76,7 +76,7 @@ class bacula::params {
   package { 'ftp': ensure => 'present', }
 
   # workdir
-  file { "${working_directory}":
+  file { ${working_directory}:
     ensure  => directory,
     recurse => true,
     owner   => 'bacula',
@@ -84,7 +84,7 @@ class bacula::params {
     mode    => '6744',
   }
 
-  file { "${pid_directory}":
+  file { ${pid_directory}:
     ensure  => directory,
     recurse => true,
     owner   => 'bacula',
@@ -92,7 +92,7 @@ class bacula::params {
     mode    => '6744',
   }
 
-  file { "${dir_restore_file}":
+  file { ${dir_restore_file}:
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
