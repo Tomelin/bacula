@@ -68,61 +68,30 @@ class bacula (
   $db_id                 = $::bacula::params::db_id,
   $heartbeatInterval     = $::bacula::params::heartbeatInterval,
   $signature             = $::bacula::params::signature,
-  $firewall              = $::bacula::params::firewall,
-  
-  ) inherits bacula::params {
+  $firewall              = $::bacula::params::firewall,) inherits bacula::params {
   if $is_director == true {
     class { 'bacula::director': }
-
-    if $firewall == true {
-      
-      class { 'bacula::firewall': }
-      firewalld_service { 'Open port bacula server in the public zone':
-        ensure  => present,
-        zone    => 'public',
-        service => 'bacula-server',
-      }
-    }
 
     if $is_directorFTP == true {
       class { 'bacula::proftpd': }
 
-      
-      if $firewall == true {
-        firewalld_port { 'Open port FTP is a protocol used for remote file transfer':
-          ensure   => present,
-          zone     => 'public',
-          port     => "$portFTP",
-          protocol => 'tcp',
-        }
-      }
     }
   }
 
   if $is_storage == true {
     class { 'bacula::storage': }
 
-    if ($firewall == true) and ($is_director == false) {
-      firewalld_service { 'Open port bacula server in the public zone':
-        ensure  => present,
-        zone    => 'public',
-        service => 'bacula-server',
-      }
-    }
   }
 
   if $is_client == true {
     class { 'bacula::client': }
-class { 'bacula::firewall': }
-    if $firewall == true {
-      firewalld_service { 'Open port bacula client in the public zone':
-        ensure  => present,
-        zone    => 'public',
-        service => 'bacula-client',
-      }
 
-    }
+  }
 
+  class { 'bacula::firewall':
+  }
+
+  class { 'bacula::selinux':
   }
 
 }
