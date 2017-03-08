@@ -1,8 +1,10 @@
+# Class define variables the module bacula
+# You should feel free to expand on this and document any parameters etc
 class bacula::params {
   # Conf default
-  $dirconf = "/etc/bacula"
-  $working_directory = "/var/spool/bacula"
-  $pid_directory = "/var/run/bacula"
+  $dirconf = '/etc/bacula'
+  $working_directory = '/var/spool/bacula'
+  $pid_directory = '/var/run/bacula'
   $maximum_concurrent_jobs = '30'
   $typebackup = 'file'
   $dir_backup_file = '/bacula/backup'
@@ -15,27 +17,24 @@ class bacula::params {
   $db_type = 'mysql'
   $dir_conf_clients = "${dirconf}/clients"
   $dir_conf_storage = "${dirconf}/storage"
-  $dir_bacula_tmp = "/tmp/bacula"
+  $dir_bacula_tmp = '/tmp/bacula'
   $port_ftp = '2121'
   $db_id = 1
-  $emails = ["root@localhost", "rafael@tomelin.eti.br"]
-  $signature = "MD5"
-  $compression = "GZIP"
+  $emails = ['root@localhost', 'rafael@tomelin.eti.br']
+  $signature = 'MD5'
+  $compression = 'GZIP'
   $firewall = true
-  
 
-
-  
   # Bacula client - bacula-fd.conf
-  $fdport = "9102"
+  $fdport = '9102'
   $password_fd = "${::passwordclient}"
 
   # Bacula director - bacula-dir.conf
-  $dirport = "9101"
-  $dirserver = "bacula-dir"
-  $heartbeatInterval = "120"
+  $dirport = '9101'
+  $dirserver = 'bacula-dir'
+  $heartbeatInterval = '120'
   # Bacula director - bacula-sd.conf
-  $sdport = "9103"
+  $sdport = '9103'
 
   # Different path and package definitions
   case "${::operatingsystem}" {
@@ -52,7 +51,7 @@ class bacula::params {
           $db_package = 'mariadb-server'
         }
         default : {
-          notice("\"${module_name}\" provides no config directory and package default values for OS version release \"${::operatingsystemmajrelease}\""
+          notice("\"${module_name}\" provides no config directory and package for OS version release \"${::operatingsystemmajrelease}\""
           )
         }
       }
@@ -93,7 +92,7 @@ class bacula::params {
     mode    => '6744',
   }
 
-  file { "$dir_restore_file":
+  file { "${dir_restore_file}":
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
