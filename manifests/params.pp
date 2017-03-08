@@ -24,14 +24,7 @@ class bacula::params {
   $firewall = true
   
 
-  if $::facts['os']['selinux']['enabled']  == true {
-    file {'/tmp/selinuxok':
-      ensure => present,
-    }
-    $selinuxConf = true
-  }else{
-    $selinuxConf = false
-  }
+
   
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
