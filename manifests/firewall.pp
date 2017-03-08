@@ -6,7 +6,7 @@ class bacula::firewall (
   $is_console  = $::bacula::is_console,) {
   if $firewall == true {
     # If teh bacula server
-    
+
     if $is_director == true {
       firewalld_service { 'Open port bacula server in the public zone':
         ensure  => present,
@@ -28,9 +28,11 @@ class bacula::firewall (
       # If teh bacula client
     } elsif $is_client == true {
       firewalld_service { 'Open port bacula server in the public zone':
-        ensure  => present,
-        zone    => 'public',
-        service => 'bacula-client',
+        ensure         => present,
+        zone           => 'public',
+        service        => 'bacula-client',
+        service_ensure => true,
+        service_enable => true,
       }
     }
   }
