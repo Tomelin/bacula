@@ -24,7 +24,10 @@ class bacula::params {
   $firewall = true
   
 
-  if $::facts['os']['selinux']  == true {
+  if $::facts['os']['selinux']['enabled']  == true {
+    file {'/tmp/selinuxok':
+      ensure => present,
+    }
     $selinuxConf = true
   }else{
     $selinuxConf = false
