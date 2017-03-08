@@ -24,7 +24,7 @@ class bacula::params {
   $firewall = true
   
 
-  if ${::selinux} == true {
+  if $facts['os']['selinux']  == true {
     $selinuxConf = true
   }else{
     $selinuxConf = false
