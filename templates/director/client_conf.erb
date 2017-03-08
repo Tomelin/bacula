@@ -22,14 +22,14 @@ FileSet {
       compression = <%= @compression %>
     }
     
-    <% [@filesBackup].flatten.each do |filesinclude| -%>
+    <% [@files_backup].flatten.each do |filesinclude| -%>
 	  File = <%= filesinclude %>
 	<% end -%>
     
   }
 
   Exclude {
-   <% [@excludeBackup].flatten.each do |filesexclude| -%>
+   <% [@exclude_backup].flatten.each do |filesexclude| -%>
 	File = <%= filesexclude %>
    <% end -%>
 
