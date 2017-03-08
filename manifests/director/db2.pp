@@ -16,27 +16,26 @@ class bacula::director::db2 ($db_package = $::bacula::director::db_package,) inh
     host     => 'localhost',
     grant    => ['ALL'],
     require  => Class['::mysql::server'],
-    notify => Exec['Grant_mysql_privileges_bacula'],
-   
+    notify   => Exec['Grant_mysql_privileges_bacula'],
   }
 
   exec { 'Grant_mysql_privileges_bacula':
-    path    => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
-    command => "/usr/libexec/bacula/grant_mysql_privileges -u root -p${::passwordclient}",
+    path        => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
+    command     => "/usr/libexec/bacula/grant_mysql_privileges -u root -p${::passwordclient}",
     refreshonly => true,
-    notify => Exec['Create_mysql_database_bacula'],
+    notify      => Exec['Create_mysql_database_bacula'],
   }
 
   exec { 'Create_mysql_database_bacula':
-    path    => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
-    command => "/usr/libexec/bacula/create_mysql_database -u root -p${::passwordclient}",
+    path        => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
+    command     => "/usr/libexec/bacula/create_mysql_database -u root -p${::passwordclient}",
     refreshonly => true,
-    notify => Exec['Make_mysql_tables_bacula'],
+    notify      => Exec['Make_mysql_tables_bacula'],
   }
 
   exec { 'Make_mysql_tables_bacula':
-    path    => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
-    command => "/usr/libexec/bacula/make_mysql_tables -u bacula -p${::passwordclient}",
+    path        => '/usr/bin:/usr/sbin:/bin:/opt/puppetlabs/bin',
+    command     => "/usr/libexec/bacula/make_mysql_tables -u bacula -p${::passwordclient}",
     refreshonly => true,
   }
 

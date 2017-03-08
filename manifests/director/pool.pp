@@ -23,25 +23,6 @@ class bacula::director::pool (
     }
 
     ]) {
-      
-      /**
-  $pools.each |$name, $pool| {
-    notify { $pool: }
-#    file { "/etc/bacula/pool/pool_$pool['name'].conf":
-#      ensure  => 'file',
-#      owner   => 'bacula',
-#      group   => 'bacula',
-#      content => template('bacula/director/pool_conf.erb')
-#    }
-  }
-   */
-  
-  /*
-  $teste = $pools[0]['name']
-
-  file { "/etc/bacula/pool/pool_$teste.conf":
-  *  */
-  
   file { "/etc/bacula/pool/pool.conf":
     ensure  => 'file',
     owner   => 'bacula',
@@ -62,21 +43,5 @@ class bacula::director::pool (
       kernel_msgmnb => 6,
     }
   }
-  
-  #tenmplate
-  /**
-<% pools.each do |pool| -%>
-Pool {
-  Name = "<%= pool['name'] %>"
-  Pool Type = "<%= pool['poolType'] %>"
-  Recycle = <%= pool['recycle'] %>
-  AutoPrune = <%= pool['autoPrune'] %>
-  Volume Retention = <%= pool['volumeRetention'] %>
-  Maximum Volume Bytes = <%= pool['maximumVolumeBytes'] %> 
-  Maximum Volumes = <%= pool['maximumVolumes'] %>
-  Label Format = "<%= pool['labelFormat'] %>"
-}
-<% end -%>
-**/
 
 }
