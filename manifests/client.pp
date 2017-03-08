@@ -34,8 +34,8 @@ class bacula::client (
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/bacula-fd.conf.erb'),
-    require => Package["${bacula_fd_package}"],
-    notify  => Service["${bacula_fd_service}"]
+    require => Package[$bacula_fd_package],
+    notify  => Service[$bacula_fd_service]
   }
 
   file { "${dir_bacula_tmp}/client_${::hostname}.conf":
@@ -43,7 +43,7 @@ class bacula::client (
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/client_conf.erb'),
-    require => File["${dir_bacula_tmp}"],
+    require => File[$dir_bacula_tmp],
   }
 
   file { "${dir_bacula_tmp}/baculaSendConfClient.sh":
@@ -52,7 +52,7 @@ class bacula::client (
     group   => 'bacula',
     mode    => '0755',
     content => template('bacula/scripts/baculaSendConfClient.sh.erb'),
-    require => File["${dir_bacula_tmp}"],
+    require => File[$dir_bacula_tmp],
     notify  => Exec['SendClientConf'],
   }
 
