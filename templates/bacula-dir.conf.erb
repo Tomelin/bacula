@@ -3,18 +3,18 @@
 Director {                            # define myself
   Name = <%= @dirserver %>
   DIRport = <%= @dirport %>                # where we listen for UA connections
-  QueryFile = "/etc/bacula/query.sql"
-  WorkingDirectory = "<%= @working_directory %>"
-  PidDirectory = "<%= @pid_directory %>"
+  QueryFile = '/etc/bacula/query.sql'
+  WorkingDirectory = '<%= @working_directory %>'
+  PidDirectory = '<%= @pid_directory %>'
   Maximum Concurrent Jobs = <%= @maximum_concurrent_jobs %>
-  Password = "<%= @passwordclient %>"         # Console password
+  Password = '<%= @passwordclient %>'         # Console password
   Messages = Daemon
   #DirAddress = <%= @networking['ip'] %>            # N.B. Use a fully qualified name here 
 }
 
 # List of files to be backed up
 FileSet {
-  Name = "Full Set"
+  Name = 'Full Set'
   Include {
     Options {
       signature = MD5
@@ -40,7 +40,7 @@ FileSet {
 
 #
 Schedule {
-  Name = "WeeklyCycle"
+  Name = 'WeeklyCycle'
   Run = Full 1st sun at 23:05
   Run = Differential 2nd-5th sun at 23:05
   Run = Incremental mon-sat at 23:05
@@ -48,18 +48,18 @@ Schedule {
 
 # This schedule does the catalog. It starts after the WeeklyCycle
 Schedule {
-  Name = "WeeklyCycleAfterBackup"
+  Name = 'WeeklyCycleAfterBackup'
   Run = Full sun-sat at 23:10
 }
 
 # This is the backup of the catalog
 FileSet {
-  Name = "Catalog"
+  Name = 'Catalog'
   Include {
     Options {
       signature = <%= @signature %>
     }
-    File = "/var/spool/bacula/bacula.sql"
+    File = '/var/spool/bacula/bacula.sql'
   }
 }
 
@@ -70,7 +70,7 @@ Storage {
   Name = File1
   Address = <%= @networking['ip'] %>            # N.B. Use a fully qualified name here
   SDPort = 9103
-  Password = "<%= @passwordclient %>"
+  Password = '<%= @passwordclient %>'
   Device = FileStorage
   Media Type = File1
   Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
@@ -79,7 +79,7 @@ Storage {
 # Generic catalog service
 Catalog {
   Name = MyCatalog
-  dbname = "bacula"; dbuser = "bacula"; dbpassword = "<%= @passwordclient %>"
+  dbname = 'bacula'; dbuser = 'bacula'; dbpassword = '<%= @passwordclient %>'
 }
 
 # Reasonable message delivery -- send most everything to email address
@@ -128,7 +128,7 @@ Pool {
   Volume Retention = 365 days         # one year
   Maximum Volume Bytes = 10G          # Limit Volume size to something reasonable
   Maximum Volumes = 100               # Limit number of Volumes in Pool
-  Label Format = "Local-"               # Auto label
+  Label Format = 'Local-'               # Auto label
 }
 
 
@@ -142,7 +142,7 @@ Pool {
 # Restricted console used by tray-monitor to get the status of the director
 Console {
   Name = bacula-mon
-  Password = "@@MON_DIR_PASSWORD@@"
+  Password = '@@MON_DIR_PASSWORD@@'
   CommandACL = status, .status
 }
 

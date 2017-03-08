@@ -25,7 +25,7 @@ class bacula::director::pool (
     }
 
     ]) {
-  file { "/etc/bacula/pool/pool.conf":
+  file { '/etc/bacula/pool/pool.conf':
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
