@@ -1,3 +1,5 @@
+# Class define variables the module bacula - create pool default
+# You should feel free to expand on this and document any parameters etc
 class bacula::director::pool (
   $pools = [
     {
