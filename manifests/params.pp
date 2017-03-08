@@ -22,8 +22,12 @@ class bacula::params {
   $signature = "MD5"
   $compression = "GZIP"
   $firewall = true
-  
+  $selinux = false
 
+  if ${::selinux} == true {
+    $selinux = true
+  }
+  
   # Bacula client - bacula-fd.conf
   $fdport = "9102"
   $password_fd = "${::passwordclient}"
@@ -47,9 +51,7 @@ class bacula::params {
           $bacula_fd_package = 'bacula-client'
           $bacula_fd_service = 'bacula-fd'
           $bconsole_package = 'bacula-console'
-          
           $db_package = 'mariadb-server'
-
         }
         default : {
           notice("\"${module_name}\" provides no config directory and package default values for OS version release \"${::operatingsystemmajrelease}\""
@@ -82,7 +84,7 @@ class bacula::params {
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-    mode => '6744',
+    mode    => '6744',
   }
 
   file { "${pidDirectory}":
@@ -90,7 +92,7 @@ class bacula::params {
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-    mode => '6744',
+    mode    => '6744',
   }
 
   file { "$dirRestoreFile":
