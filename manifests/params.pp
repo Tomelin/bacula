@@ -22,10 +22,12 @@ class bacula::params {
   $signature = "MD5"
   $compression = "GZIP"
   $firewall = true
-  $selinux = false
+  
 
   if ${::selinux} == true {
-    $selinux = true
+    $selinuxConf = true
+  }else{
+    $selinuxConf = false
   }
   
   # Bacula client - bacula-fd.conf
