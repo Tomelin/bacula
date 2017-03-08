@@ -68,11 +68,15 @@ class bacula (
   $db_id                 = $::bacula::params::db_id,
   $heartbeatInterval     = $::bacula::params::heartbeatInterval,
   $signature             = $::bacula::params::signature,
-  $firewall              = $::bacula::params::firewall,) inherits bacula::params {
+  $firewall              = $::bacula::params::firewall,
+  
+  ) inherits bacula::params {
   if $is_director == true {
     class { 'bacula::director': }
 
     if $firewall == true {
+      
+      class { 'bacula::firewall': }
       firewalld_service { 'Open port bacula server in the public zone':
         ensure  => present,
         zone    => 'public',
