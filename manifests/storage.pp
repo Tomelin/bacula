@@ -4,30 +4,30 @@ class bacula::storage (
   $bacula_sd_service     = $::bacula::bacula_sd_service,
   $sdconf                = $::bacula::dirconf,
   $sdport                = $::bacula::sdport,
-  $workingDirectory      = $::bacula::workingDirectory,
-  $pidDirectory          = $::bacula::pidDirectory,
-  $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,
+  $workingdirectory      = $::bacula::workingdirectory,
+  $piddirectory          = $::bacula::piddirectory,
+  $maximumconcurrentjobs = $::bacula::maximumconcurrentjobs,
   $db_package            = $::bacula::db_package,
   $dirserver             = $::bacula::dirserver,
   $dirconf               = $::bacula::dirconf,
-  $dirBaculaTMP          = $::bacula::dirBaculaTMP,
+  $dirbaculatmp          = $::bacula::dirbaculatmp,
   $db_id                 = $::bacula::db_id,
-  $dirBackupFile         = $::bacula::dirBackupFile,
-  $dirRestoreFile        = $::bacula::dirRestoreFile,) {
+  $dirbackupfile         = $::bacula::dirbackupfile,
+  $dirrestorefile        = $::bacula::dirrestorefile,) {
   # Package bacula-sd
   package { $bacula_sd_package: ensure => 'present', }
 
   
     # Create directory  /bacula to save backup in file
   if $::bacula::typebackup == 'file' {
-    file { "$::bacula::dirBackupFile/backup":
+    file { "$::bacula::dirbackupfile/backup":
       ensure  => 'directory',
       recurse => true,
       owner   => 'bacula',
       group   => 'bacula',
     }
   }
-    file { "$::bacula::dirBackupFile/restore":
+    file { "${dirbackupfile}/restore":
       ensure  => 'directory',
       recurse => true,
       owner   => 'bacula',
@@ -53,27 +53,27 @@ class bacula::storage (
     notify  => Service[$bacula_sd_service],
   }
 
-  file { "$dirBaculaTMP/${::hostname}.conf":
+  file { "$dirbaculatmp/${::hostname}.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/storage_conf.erb'),
-    require => File["$dirBaculaTMP"],
+    require => File["$dirbaculatmp"],
   }
 
-  file { "$dirBaculaTMP/baculaSendConf.sh":
+  file { "$dirbaculatmp/baculaSendConf.sh":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     mode    => '0755',
     content => template('bacula/scripts/baculaSendConf.sh.erb'),
-    require => File["$dirBaculaTMP"],
+    require => File["$dirbaculatmp"],
     notify  => Exec['SendClientConf'],
   }
 
   exec { 'SendConf':
     path        => ['/usr/bin', '/usr/sbin'],
-    command     => "$dirBaculaTMP/baculaSendConf.sh",
+    command     => "$dirbaculatmp/baculaSendConf.sh",
     refreshonly => true,
     require     => Package['ftp'],
   }

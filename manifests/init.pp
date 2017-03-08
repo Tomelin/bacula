@@ -46,33 +46,33 @@ class bacula (
   $dirconf               = $::bacula::params::dirconf,
   $fdport                = $::bacula::params::fdport,
   $sdport                = $::bacula::params::sdport,
-  $workingDirectory      = $::bacula::params::workingDirectory,
-  $pidDirectory          = $::bacula::params::pidDirectory,
-  $maximumConcurrentJobs = $::bacula::params::maximumConcurrentJobs,
+  $workingdirectory      = $::bacula::params::workingdirectory,
+  $piddirectory          = $::bacula::params::piddirectory,
+  $maximumconcurrentjobs = $::bacula::params::maximumdoncurrentjobs,
   $typebackup            = $::bacula::params::typebackup,
-  $dirBackupFile         = $::bacula::params::dirBackupFile,
-  $dirRestoreFile        = $::bacula::params::dirRestoreFile,
+  $dirbackupfile         = $::bacula::params::dirbackupfile,
+  $dirrestorefile        = $::bacula::params::dirrestorefile,
   $is_client             = $::bacula::params::is_client,
   $is_storage            = $::bacula::params::is_storage,
   $is_director           = $::bacula::params::is_director,
   $is_console            = $::bacula::params::is_console,
   $password_fd           = $::bacula::params::password_fd,
   $dirserver             = $::bacula::params::dirserver,
-  $dirBaculaTMP          = $::bacula::params::dirBaculaTMP,
-  $dirConfClients        = $::bacula::params::dirConfClients,
-  $dirConfStorage        = $::bacula::params::dirConfStorage,
-  $portFTP               = $::bacula::params::portFTP,
-  $is_directorFTP        = $::bacula::params::is_directorFTP,
+  $dirbaculatmp          = $::bacula::params::dirBaculatmp,
+  $dirconfclients        = $::bacula::params::dirconfclients,
+  $dirconfstorage        = $::bacula::params::dirconfctorage,
+  $portftp               = $::bacula::params::portftp,
+  $is_directorftp        = $::bacula::params::is_directorftp,
   $dirport               = $::bacula::params::dirport,
   $db_package            = $::bacula::params::db_package,
   $db_id                 = $::bacula::params::db_id,
-  $heartbeatInterval     = $::bacula::params::heartbeatInterval,
+  $heartbeat_interval     = $::bacula::params::heartbeat_interval,
   $signature             = $::bacula::params::signature,
   $firewall              = $::bacula::params::firewall,) inherits bacula::params {
   if $is_director == true {
     class { 'bacula::director': }
 
-    if $is_directorFTP == true {
+    if $is_directorftp == true {
       class { 'bacula::proftpd': }
 
     }
