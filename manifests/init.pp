@@ -87,7 +87,7 @@ class bacula (
     if $is_directorFTP == true {
       class { 'bacula::proftpd': }
 
-      class { 'bacula::firewall': }
+      
       if $firewall == true {
         firewalld_port { 'Open port FTP is a protocol used for remote file transfer':
           ensure   => present,
@@ -113,7 +113,7 @@ class bacula (
 
   if $is_client == true {
     class { 'bacula::client': }
-
+class { 'bacula::firewall': }
     if $firewall == true {
       firewalld_service { 'Open port bacula client in the public zone':
         ensure  => present,
