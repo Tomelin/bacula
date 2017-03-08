@@ -10,7 +10,7 @@ class bacula::client (
   $port_ftp                = $::bacula::port_ftp,
   # Bacula client - bacula-fd.conf
   $fdport                  = '9102',
-  $password_fd             = "${::passwordclient}",
+  $password_fd             = ${::passwordclient},
   $bacula_fd_package       = $::bacula::bacula_fd_package,
   $bacula_fd_service       = $::bacula::bacula_fd_service,
   $dirserver               = $::bacula::dirserver,
