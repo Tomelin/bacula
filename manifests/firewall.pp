@@ -31,7 +31,6 @@ class bacula::firewall (
         ensure         => present,
         zone           => 'public',
         service        => 'bacula-client',
-        service_ensure => 'running',
         service_enable => true,
       }
     }
