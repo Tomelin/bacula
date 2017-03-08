@@ -5,12 +5,12 @@ class bacula::client (
   $dirconf                 = '/etc/bacula',
   $pid_directory           = '/var/run/bacula',
   $maximum_concurrent_jobs = '30',
-  $dir_conf_clients        = '${dirconf}/clients',
+  $dir_conf_clients        = "${dirconf}/clients",
   $dir_bacula_tmp          = '/tmp/bacula',
   $port_ftp                = $::bacula::port_ftp,
   # Bacula client - bacula-fd.conf
   $fdport                  = '9102',
-  $password_fd             = ${::passwordclient},
+  $password_fd             = "${::passwordclient}",
   $bacula_fd_package       = $::bacula::bacula_fd_package,
   $bacula_fd_service       = $::bacula::bacula_fd_service,
   $dirserver               = $::bacula::dirserver,
@@ -29,36 +29,36 @@ class bacula::client (
     require    => Package[$bacula_fd_package],
   }
 
-  file { "$dirconf/bacula-fd.conf":
+  file { "${dirconf}/bacula-fd.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/bacula-fd.conf.erb'),
-    require => Package[$bacula_fd_package],
-    notify  => Service[$bacula_fd_service]
+    require => Package["${bacula_fd_package}"],
+    notify  => Service["${bacula_fd_service}"]
   }
 
-  file { "$dir_bacula_tmp/client_${::hostname}.conf":
+  file { "${dir_bacula_tmp}/client_${::hostname}.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/client_conf.erb'),
-    require => File["$dir_bacula_tmp"],
+    require => File["${dir_bacula_tmp}"],
   }
 
-  file { "$dir_bacula_tmp/baculaSendConfClient.sh":
+  file { "${dir_bacula_tmp}/baculaSendConfClient.sh":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     mode    => '0755',
     content => template('bacula/scripts/baculaSendConfClient.sh.erb'),
-    require => File["$dir_bacula_tmp"],
+    require => File["${dir_bacula_tmp}"],
     notify  => Exec['SendClientConf'],
   }
 
   exec { 'SendClientConf':
     path        => ['/usr/bin', '/usr/sbin'],
-    command     => "$dir_bacula_tmp/baculaSendConfClient.sh",
+    command     => "${dir_bacula_tmp}/baculaSendConfClient.sh",
     refreshonly => true,
     require     => Package['ftp'],
   }
