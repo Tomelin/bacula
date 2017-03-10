@@ -11,7 +11,7 @@ class bacula::firewall (
       firewalld_service { 'Open port bacula server in the public zone':
         ensure  => present,
         zone    => 'public',
-        service => 'bacula-server',
+        service => 'bacula',
       }
 
       if $is_director_ftp == true {
