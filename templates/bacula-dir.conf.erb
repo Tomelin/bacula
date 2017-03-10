@@ -14,7 +14,7 @@ Director {                            # define myself
 
 # List of files to be backed up
 FileSet {
-  Name = 'Full Set'
+  Name = "Full Set"
   Include {
     Options {
       signature = MD5
@@ -40,7 +40,7 @@ FileSet {
 
 #
 Schedule {
-  Name = 'WeeklyCycle'
+  Name = "WeeklyCycle"
   Run = Full 1st sun at 23:05
   Run = Differential 2nd-5th sun at 23:05
   Run = Incremental mon-sat at 23:05
@@ -48,18 +48,18 @@ Schedule {
 
 # This schedule does the catalog. It starts after the WeeklyCycle
 Schedule {
-  Name = 'WeeklyCycleAfterBackup'
+  Name = "WeeklyCycleAfterBackup"
   Run = Full sun-sat at 23:10
 }
 
 # This is the backup of the catalog
 FileSet {
-  Name = 'Catalog'
+  Name = "Catalog"
   Include {
     Options {
       signature = <%= @signature %>
     }
-    File = '/var/spool/bacula/bacula.sql'
+    File = "/var/spool/bacula/bacula.sql"
   }
 }
 
@@ -79,7 +79,7 @@ Storage {
 # Generic catalog service
 Catalog {
   Name = MyCatalog
-  dbname = 'bacula'; dbuser = 'bacula'; dbpassword = '<%= @passwordclient %>'
+  dbname = "bacula"; dbuser = "bacula"; dbpassword = "<%= @passwordclient %>"
 }
 
 # Reasonable message delivery -- send most everything to email address
@@ -128,7 +128,7 @@ Pool {
   Volume Retention = 365 days         # one year
   Maximum Volume Bytes = 10G          # Limit Volume size to something reasonable
   Maximum Volumes = 100               # Limit number of Volumes in Pool
-  Label Format = 'Local-'               # Auto label
+  Label Format = "Local-"               # Auto label
 }
 
 

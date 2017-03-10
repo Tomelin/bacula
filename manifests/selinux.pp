@@ -10,9 +10,15 @@ class bacula::selinux (
   $dir_restore_file   = $::bacula::dir_restore_file,
   $dir_bacula_tmp     = $::bacula::dir_bacula_tmp,
   $port_ftp          = '2121') {
+  
+  
   if $::os['selinux']['enabled'] == true {
-    notify {'selinux ativado':}
+    notify {'selinux ativado': }
   }else{
-    notify {'selinux ativado':}
+    notify {'selinux ativado': }
   }
+  
+  
+  
+  
 }
