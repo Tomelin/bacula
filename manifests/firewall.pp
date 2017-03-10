@@ -4,7 +4,8 @@ class bacula::firewall (
   $is_storage      = $::bacula::is_storage,
   $is_director     = $::bacula::is_director,
   $is_console      = $::bacula::is_console,
-  $is_director_ftp = $::bacula::is_director_ftp,) {
+  $is_director_ftp = $::bacula::is_director_ftp,
+  $port_ftp        = $::bacula::port_ftp,) {
   notify { 'regras de firewalllll': }
 
   if $firewall == true {
