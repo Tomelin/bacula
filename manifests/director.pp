@@ -23,7 +23,7 @@ class bacula::director (
     $db_id = 3
   }
 
-  package { ${bacula_dir_package}:
+  package { "${bacula_dir_package}":
     ensure => 'present',
     notify => Exec['SetDBType'],
   }
@@ -35,7 +35,7 @@ class bacula::director (
     notify      => Service[$bacula_dir_service],
   }
 
-  service { ${bacula_dir_service}:
+  service { $bacula_dir_service:
     ensure     => 'running',
     enable     => true,
     hasrestart => true,
