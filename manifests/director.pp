@@ -15,7 +15,7 @@ class bacula::director (
   $dir_conf_clients        = $::bacula::dir_conf_clients,
   $dir_conf_storage        = $::bacula::dir_conf_storage,
   $db_id                   = $::bacula::db_id,
-  $heartbeatInterval       = $::bacula::heartbeatInterval,
+  $heartbeat_interval       = $::bacula::heartbeat_interval,
   $signature               = $::bacula::signature,) {
   if "${db_type}" == 'mysql' {
     class { 'bacula::director::db2': require => Package[$bacula_dir_package] }
