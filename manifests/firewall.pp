@@ -1,19 +1,17 @@
 class bacula::firewall (
-  $firewall    = $::bacula::firewall,
-  $is_client   = $::bacula::is_client,
-  $is_storage  = $::bacula::is_storage,
-  $is_director = $::bacula::is_director,
-  $is_console  = $::bacula::is_console,) {
-    
-    
-    
-    notify {'regras de firewalllll': }
+  $firewall        = $::bacula::firewall,
+  $is_client       = $::bacula::is_client,
+  $is_storage      = $::bacula::is_storage,
+  $is_director     = $::bacula::is_director,
+  $is_console      = $::bacula::is_console,
+  $is_director_ftp = $::bacula::is_director_ftp,) {
+  notify { 'regras de firewalllll': }
+
   if $firewall == true {
-    
     class { 'firewalld': }
-    notify {'Firewall habilitado': }
-    
-    
+
+    notify { 'Firewall habilitado': }
+
     if $is_director == true {
       firewalld_service { 'Open port bacula server in the public zone':
         ensure  => present,
