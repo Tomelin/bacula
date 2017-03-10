@@ -4,9 +4,13 @@ class bacula::firewall (
   $is_storage  = $::bacula::is_storage,
   $is_director = $::bacula::is_director,
   $is_console  = $::bacula::is_console,) {
+    
+    notify {'regras de firewalllll': }
   if $firewall == true {
-    # If teh bacula server
-
+    
+    notify {'Firewall habilitado': }
+    
+    
     if $is_director == true {
       firewalld_service { 'Open port bacula server in the public zone':
         ensure  => present,
@@ -28,9 +32,9 @@ class bacula::firewall (
       # If teh bacula client
     } elsif $is_client == true {
       firewalld_service { 'Open port bacula server in the public zone':
-        ensure         => present,
-        zone           => 'public',
-        service        => 'bacula-client',
+        ensure  => present,
+        zone    => 'public',
+        service => 'bacula-client',
       }
     }
   }
