@@ -3,13 +3,13 @@
 Director {                            # define myself
   Name = <%= @dirserver %>
   DIRport = <%= @dirport %>                # where we listen for UA connections
-  QueryFile = '/etc/bacula/query.sql'
-  WorkingDirectory = '<%= @working_directory %>'
-  PidDirectory = '<%= @pid_directory %>'
+  QueryFile = "/etc/bacula/query.sql"
+  WorkingDirectory = "<%= @working_directory %>"
+  PidDirectory = "<%= @pid_directory %>"
   Maximum Concurrent Jobs = <%= @maximum_concurrent_jobs %>
-  Password = '<%= @passwordclient %>'         # Console password
+  Password = "<%= @passwordclient %>"         # Console password
   Messages = Daemon
-  #DirAddress = <%= @networking['ip'] %>            # N.B. Use a fully qualified name here 
+  #DirAddress = <%= @networking["ip"] %>            # N.B. Use a fully qualified name here 
 }
 
 # List of files to be backed up
@@ -68,9 +68,9 @@ FileSet {
 # Definition of file Virtual Autochanger device
 Storage {
   Name = File1
-  Address = <%= @networking['ip'] %>            # N.B. Use a fully qualified name here
+  Address = <%= @networking["ip"] %>            # N.B. Use a fully qualified name here
   SDPort = 9103
-  Password = '<%= @passwordclient %>'
+  Password = "<%= @passwordclient %>"
   Device = FileStorage
   Media Type = File1
   Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
@@ -92,7 +92,7 @@ Messages {
   mail = rafael.tomelin@gmail.com = all, !skipped
   operator = rafael@tomelin.eti.br = mount
   console = all, !skipped, !saved
-  append = '/var/log/bacula/bacula.log' = all, !skipped
+  append = "/var/log/bacula/bacula.log" = all, !skipped
   catalog = all
 }
 
@@ -105,7 +105,7 @@ Messages {
   mail = root@localhost = all, !skipped
   mail = rafael@tomelin.eti.br = all, !skipped
   console = all, !skipped, !saved
-  append = '/var/log/bacula/bacula.log' = all, !skipped
+  append = "/var/log/bacula/bacula.log" = all, !skipped
 }
 
 # Default pool definition
@@ -142,12 +142,12 @@ Pool {
 # Restricted console used by tray-monitor to get the status of the director
 Console {
   Name = bacula-mon
-  Password = '@@MON_DIR_PASSWORD@@'
+  Password = "@@MON_DIR_PASSWORD@@"
   CommandACL = status, .status
 }
 
 #INCLUDE CLIENTS
-@|"sh -c 'for f in /etc/bacula/clients/*.conf ; do echo @${f} ; done'"
+@|"sh -c "for f in /etc/bacula/clients/*.conf ; do echo @${f} ; done""
 
 #INCLUDE JOBS
-@|"sh -c 'for f in /etc/bacula/jobs/*.conf ; do echo @${f} ; done'"
+@|"sh -c "for f in /etc/bacula/jobs/*.conf ; do echo @${f} ; done""

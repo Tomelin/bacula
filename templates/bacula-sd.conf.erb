@@ -1,14 +1,14 @@
 Storage {                             # definition of myself
   Name = <%= @fqdn %>
-  SDPort = <%= @sdport %>                  # Director's port
-  WorkingDirectory = '<%= @working_directory %>'
-  PidDirectory = '<%= @pid_directory %>'
+  SDPort = <%= @sdport %>                  # Director"s port
+  WorkingDirectory = "<%= @working_directory %>"
+  PidDirectory = "<%= @pid_directory %>"
   Maximum Concurrent Jobs = <%= @maximum_concurrent_jobs %>
 }
 
 Director {
   Name = <%= @dirserver %>
-  Password = '<%= @passwordclient %>'
+  Password = "<%= @passwordclient %>"
 }
 
 Device {
