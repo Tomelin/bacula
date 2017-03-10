@@ -9,7 +9,7 @@ class bacula::firewall (
   notify { 'regras de firewalllll': }
 
   if $firewall == true {
-    class { 'firewalld': }
+   # class { 'firewalld': }
 
     notify { 'Firewall habilitado': }
 
