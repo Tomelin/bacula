@@ -88,8 +88,6 @@ class bacula (
 
   }
 
-  include firewalld
-
   class { 'bacula::firewall': }
 
   class { 'bacula::selinux': }

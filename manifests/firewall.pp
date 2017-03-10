@@ -5,6 +5,8 @@ class bacula::firewall (
   $is_director = $::bacula::is_director,
   $is_console  = $::bacula::is_console,) {
     
+    class { 'firewalld': }
+    
     notify {'regras de firewalllll': }
   if $firewall == true {
     
