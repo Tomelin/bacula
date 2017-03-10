@@ -11,7 +11,7 @@ class bacula::selinux (
   $dir_bacula_tmp    = $::bacula::dir_bacula_tmp,
   $port_ftp          = '2121') {
   if $::os['selinux']['enabled'] == true {
-    notify { 'selinux ativado': }
+    
 
     selinux::fcontext { 'set-mysql-log-context':
       context  => 'bacula_store_t',
@@ -19,8 +19,5 @@ class bacula::selinux (
     # pathname => '/var/bacula(/.*)?',
     }
 
-  } else {
-    notify { 'selinux ativado': }
-  }
-
+  } 
 }

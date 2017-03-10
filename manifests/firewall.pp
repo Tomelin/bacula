@@ -6,13 +6,7 @@ class bacula::firewall (
   $is_console      = $::bacula::is_console,
   $is_director_ftp = $::bacula::is_director_ftp,
   $port_ftp        = $::bacula::port_ftp,) {
-  notify { 'regras de firewalllll': }
-
   if $firewall == true {
-   # class { 'firewalld': }
-
-    notify { 'Firewall habilitado': }
-
     if $is_director == true {
       firewalld_service { 'Open port bacula server in the public zone':
         ensure  => present,
