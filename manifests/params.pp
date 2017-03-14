@@ -7,8 +7,8 @@ class bacula::params {
   $pid_directory = '/var/run/bacula'
   $maximum_concurrent_jobs = '30'
   $typebackup = 'file'
-  $dir_backup_file = ['/bacula/','/bacula/backup/']
-  $dir_restore_file = ['/bacula/','/bacula/restore/']
+  $dir_backup_file = ['/bacula/', '/bacula/backup/']
+  $dir_restore_file = ['/bacula/', '/bacula/restore/']
   $is_client = true
   $is_storage = false
   $is_director = false
@@ -33,7 +33,7 @@ class bacula::params {
   $dirport = '9101'
   $dirserver = 'bacula-dir'
   $heartbeat_interval = '120'
-  #Bacula director - bacula-sd.conf
+  # Bacula director - bacula-sd.conf
   $sdport = '9103'
 
   # Different path and package definitions
