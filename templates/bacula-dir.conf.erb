@@ -88,9 +88,12 @@ Messages {
   Name = Standard
   mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: %t %e of %c %l\" %r"
   operatorcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: Intervention needed for %j\" %r"
-  mail = rafael@tomelin.eti.br = all, !skipped
-  mail = rafael.tomelin@gmail.com = all, !skipped
-  operator = rafael@tomelin.eti.br = mount
+  #mail = rafael@tomelin.eti.br = all, !skipped
+  #mail = rafael.tomelin@gmail.com = all, !skipped
+  <% [@emails].flatten.each do |email| -%>
+  mail = <%= email %> = all, !skipped
+  <% end -%>
+    
   console = all, !skipped, !saved
   append = "/var/log/bacula/bacula.log" = all, !skipped
   catalog = all
@@ -102,8 +105,11 @@ Messages {
 Messages {
   Name = Daemon
   mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula daemon message\" %r"
-  mail = root@localhost = all, !skipped
-  mail = rafael@tomelin.eti.br = all, !skipped
+  #mail = root@localhost = all, !skipped
+  #mail = rafael@tomelin.eti.br = all, !skipped
+  <% [@emails].flatten.each do |email| -%>
+  mail = <%= email %> = all, !skipped
+  <% end -%>
   console = all, !skipped, !saved
   append = "/var/log/bacula/bacula.log" = all, !skipped
 }

@@ -15,8 +15,9 @@ class bacula::director (
   $dir_conf_clients        = $::bacula::dir_conf_clients,
   $dir_conf_storage        = $::bacula::dir_conf_storage,
   $db_id                   = $::bacula::db_id,
-  $heartbeat_interval       = $::bacula::heartbeat_interval,
-  $signature               = $::bacula::signature,) {
+  $heartbeat_interval      = $::bacula::heartbeat_interval,
+  $signature               = $::bacula::signature,
+  $emails                  = $::bacula::emails,) {
   if "${db_type}" == 'mysql' {
     class { 'bacula::director::db2': require => Package[$bacula_dir_package] }
   } else {
@@ -108,6 +109,5 @@ class bacula::director (
 
   class { 'bacula::director::pool':
   }
-
 
 }
