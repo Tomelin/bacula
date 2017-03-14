@@ -11,7 +11,8 @@ class bacula::selinux (
   $dir_bacula_tmp    = $::bacula::dir_bacula_tmp,
   $port_ftp          = '2121') {
   if $::os['selinux']['enabled'] == true {
-    selinux::fcontext { 'bacula_dir_backup':
+    selinux::fcontext { 'bacut-agent
+la_dir_backup':
       context  => 'bacula_store_t',
       pathname => '/bacula(/.*)?',
     }
