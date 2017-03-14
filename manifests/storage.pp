@@ -27,12 +27,7 @@ class bacula::storage (
       group   => 'bacula',
     }
   }
-    file { $::bacula::dir_restore_file:
-      ensure  => 'directory',
-      recurse => true,
-      owner   => 'bacula',
-      group   => 'bacula',
-    }
+
 
   # start server
   service { $bacula_sd_service:
