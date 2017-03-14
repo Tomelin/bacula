@@ -51,6 +51,16 @@ class bacula::params {
           $bconsole_package = 'bacula-console'
           $db_package = 'mariadb-server'
         }
+                '6'     : {
+          $bacula_dir_package = 'bacula-director'
+          $bacula_dir_service = 'bacula-dir'
+          $bacula_sd_package = 'bacula-storage'
+          $bacula_sd_service = 'bacula-sd'
+          $bacula_fd_package = 'bacula-client'
+          $bacula_fd_service = 'bacula-fd'
+          $bconsole_package = 'bacula-console'
+          $db_package = 'mariadb-server'
+        }
         default : {
           notice("\"${module_name}\" provides no config directory and package for OS version release \"${::operatingsystemmajrelease}\""
           )
