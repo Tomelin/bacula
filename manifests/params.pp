@@ -7,8 +7,9 @@ class bacula::params {
   $pid_directory = '/var/run/bacula'
   $maximum_concurrent_jobs = '30'
   $typebackup = 'file'
-  $dir_backup_file = ['/bacula/backup/']
-  $dir_restore_file = ['/bacula/', '/bacula/restore/']
+  $dir_backup_file = '/bacula/backup/'
+  $dir_restore_file = '/bacula/restore/'
+  $dir_backup_default = '/bacula/'
   $is_client = true
   $is_storage = false
   $is_director = false
@@ -92,11 +93,19 @@ class bacula::params {
     mode    => '6744',
   }
 
+  file { $dir_backup_default:
+    ensure  => 'directory',
+    recurse => true,
+    owner   => 'bacula',
+    group   => 'bacula',
+  }
+
   file { $dir_restore_file:
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
+    require => File[$dir_backup_default],
   }
 
 }
