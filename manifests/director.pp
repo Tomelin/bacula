@@ -79,7 +79,7 @@ class bacula::director (
     require => Package[$bacula_dir_package],
   }
 
-  file { "${dirconf}/jobs/job_bacula-dir.conf":
+  file { "${dirconf}/jobs/job_default.conf":
     ensure  => 'file',
     recurse => true,
     owner   => 'bacula',
