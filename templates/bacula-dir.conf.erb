@@ -149,5 +149,8 @@ Console {
 #INCLUDE CLIENTS
 @|"sh -c 'for f in /etc/bacula/clients/*.conf ; do echo @${f} ; done'"
 
+#INCLUDE POOL
+@|"sh -c 'for f in /etc/bacula/pool/*.conf ; do echo @${f} ; done'"
+
 #INCLUDE JOBS
 @|"sh -c 'for f in /etc/bacula/jobs/*.conf ; do echo @${f} ; done'"
