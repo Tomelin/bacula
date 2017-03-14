@@ -7,7 +7,7 @@ class bacula::params {
   $pid_directory = '/var/run/bacula'
   $maximum_concurrent_jobs = '30'
   $typebackup = 'file'
-  $dir_backup_file = ['/bacula/', '/bacula/backup/']
+  $dir_backup_file = ['/bacula/backup/']
   $dir_restore_file = ['/bacula/', '/bacula/restore/']
   $is_client = true
   $is_storage = false
