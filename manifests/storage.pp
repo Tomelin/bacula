@@ -20,14 +20,14 @@ class bacula::storage (
   
     # Create directory  /bacula to save backup in file
   if $::bacula::typebackup == 'file' {
-    file { "$::bacula::dir_backup_file/backup":
+    file { $::bacula::dir_backup_file:
       ensure  => 'directory',
       recurse => true,
       owner   => 'bacula',
       group   => 'bacula',
     }
   }
-    file { "$::bacula::dir_backup_file/restore":
+    file { $::bacula::dir_restore_file:
       ensure  => 'directory',
       recurse => true,
       owner   => 'bacula',
