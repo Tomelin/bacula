@@ -102,7 +102,7 @@ class bacula::director (
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-    content => template('bacula/director/pool_bacula-dir.conf.erb'),
+    content => template('bacula/director/pool/pool_bacula-dir.conf.erb'),
     require => File["${dirconf}/pool"],
   }
 

@@ -29,14 +29,14 @@ class bacula::director::pool (
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
-    content => template('bacula/director/pool_conf.erb')
+    content => template('bacula/director/pool/pool_conf.erb')
   }
   
     file { '/etc/bacula/pool/pool_gfs.conf':
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
-    content => template('bacula/director/pool_gfs.conf.erb')
+    content => template('bacula/director/pool/pool_gfs.conf.erb')
   }
   
 
