@@ -36,7 +36,7 @@ class bacula::director::pool (
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
-    content => template('bacula/director/jobs.conf.erb')
+    content => template('bacula/director/pool_gfs.conf.erb')
   }
   
 
