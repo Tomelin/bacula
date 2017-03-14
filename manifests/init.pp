@@ -69,7 +69,8 @@ class bacula (
   $heartbeat_interval      = $::bacula::params::heartbeat_interval,
   $signature               = $::bacula::params::signature,
   $firewall                = $::bacula::params::firewall,
-  $compression             = $::bacula::params::compression,) inherits bacula::params {
+  $compression             = $::bacula::params::compression,
+  $emails                  = $::bacula::params::emails,) inherits bacula::params {
   if $is_director == true {
     class { 'bacula::director': }
 
