@@ -92,7 +92,7 @@ class bacula::params {
     mode    => '6744',
   }
 
-  file { "${dir_restore_file}":
+  file { $dir_restore_file:
     ensure  => 'directory',
     recurse => true,
     owner   => 'bacula',
