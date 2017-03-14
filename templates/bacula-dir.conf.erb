@@ -108,7 +108,7 @@ Messages {
 # Message delivery for daemon messages (no job).
 Messages {
   Name = Daemon
-  mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula daemon message\" %r"
+  mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \< %r \>\" -s \"Bacula daemon message\" %r"
   #mail = root@localhost = all, !skipped
   #mail = rafael@tomelin.eti.br = all, !skipped
   <% [@emails].flatten.each do |email| -%>
