@@ -68,7 +68,8 @@ class bacula (
   $db_id                   = $::bacula::params::db_id,
   $heartbeat_interval      = $::bacula::params::heartbeat_interval,
   $signature               = $::bacula::params::signature,
-  $firewall                = $::bacula::params::firewall,) inherits bacula::params {
+  $firewall                = $::bacula::params::firewall,
+  $compression             = $::bacula::params::compression,) inherits bacula::params {
   if $is_director == true {
     class { 'bacula::director': }
 
@@ -88,9 +89,11 @@ class bacula (
 
   }
 
-  class { 'bacula::firewall': }
+  class { 'bacula::firewall':
+  }
 
-  class { 'bacula::selinux': }
+  class { 'bacula::selinux':
+  }
 
 }
 
