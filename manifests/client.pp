@@ -18,10 +18,7 @@ class bacula::client (
   $files_backup            = ['/'],
   $exclude_backup          = ['/dev', '/proc', '/tmp', '/.journal', '/.fsck', '/var/spool/bacula', '/var/lib/bacula'],
   $signature               = $::bacula::params::signature,
-  
   $compression             = $::bacula::params::compression,) {
-    
-  
   package { "${bacula_fd_package}": ensure => 'present' }
 
   service { $bacula_fd_service:
