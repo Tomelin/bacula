@@ -21,8 +21,8 @@ class bacula::client (
   
   $compression             = $::bacula::params::compression,) {
     
-  notify { $bacula_fd_package: }
-  package { $bacula_fd_package: ensure => 'present' }
+  
+  package { "${bacula_fd_package}": ensure => 'present' }
 
   service { $bacula_fd_service:
     ensure     => 'running',
