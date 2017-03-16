@@ -86,11 +86,8 @@ Catalog {
 #  and to the console
 Messages {
   Name = Standard
-  #mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \< %r \>\" -s \"Bacula: %t %e of %c %l\" %r"
-  mailcommand = "/usr/sbin/bsmtp -h localhost -f bacula@<%= @domain -%> -s \"Bacula Notice (from Director %d)\" %r"
+  mailcommand = "/usr/sbin/bsmtp -h localhost -f bacula@<%= @domain -%> -s \" %d: %t %e of %c %l \" %r"
   operatorcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \< %r \>\" -s \"Bacula: Intervention needed for %j\" %r"
-  #mail = rafael@tomelin.eti.br = all, !skipped
-  #mail = rafael.tomelin@gmail.com = all, !skipped
   <% [@emails].flatten.each do |email| -%>
   mail = <%= email %> = all, !skipped
   <% end -%>
@@ -108,9 +105,7 @@ Messages {
 # Message delivery for daemon messages (no job).
 Messages {
   Name = Daemon
-  mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \< %r \>\" -s \"Bacula daemon message\" %r"
-  #mail = root@localhost = all, !skipped
-  #mail = rafael@tomelin.eti.br = all, !skipped
+  mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \< %r \>\" -s \"Bacula daemon message %d: %t %e of %c %l \" %r"
   <% [@emails].flatten.each do |email| -%>
   mail = <%= email %> = all, !skipped
   <% end -%>
@@ -118,35 +113,6 @@ Messages {
   append = "/var/log/bacula/bacula.log" = all, !skipped
 }
 
-# Default pool definition
-#Pool {
-#  Name = Default
-#  Pool Type = Backup
-#  Recycle = yes                       # Bacula can automatically recycle Volumes
-#  AutoPrune = yes                     # Prune expired volumes
-#  Volume Retention = 365 days         # one year
-#  Maximum Volume Bytes = 10G          # Limit Volume size to something reasonable
-#  Maximum Volumes = 100               # Limit number of Volumes in Pool
-#}
-
-# File Pool definition
-#Pool {
-#  Name = File
-#  Pool Type = Backup
-#  Recycle = yes                       # Bacula can automatically recycle Volumes
-#  AutoPrune = yes                     # Prune expired volumes
-#  Volume Retention = 365 days         # one year
-#  Maximum Volume Bytes = 10G          # Limit Volume size to something reasonable
-#  Maximum Volumes = 100               # Limit number of Volumes in Pool
-#  Label Format = "Local-"               # Auto label
-#}
-
-
-# Scratch pool definition
-#Pool {
-#  Name = Scratch
-#  Pool Type = Backup
-#}
 
 #
 # Restricted console used by tray-monitor to get the status of the director
