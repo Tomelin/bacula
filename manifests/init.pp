@@ -71,6 +71,11 @@ class bacula (
   $firewall                = $::bacula::params::firewall,
   $compression             = $::bacula::params::compression,
   $emails                  = $::bacula::params::emails,) inherits bacula::params {
+  if $is_client == true {
+    class { 'bacula::client': }
+
+  }
+
   if $is_director == true {
     class { 'bacula::director': }
 
@@ -85,17 +90,11 @@ class bacula (
 
   }
 
-  if $is_client == true {
-    class { 'bacula::client': }
-
-  }
-
   class { 'bacula::firewall':
   }
 
   class { 'bacula::selinux':
   }
-  
 
 }
 

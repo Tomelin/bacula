@@ -79,11 +79,11 @@ class bacula::params {
 
   # directorys default the bacula
   file { "${dir_bacula_tmp}":
-    ensure => directory,
-    owner  => 'bacula',
-    group  => 'bacula',
+    ensure  => directory,
+    owner   => 'bacula',
+    group   => 'bacula',
     require => Package["$::bacula::client::bacula_fd_package"],
-   # require => User['bacula'],
+  # require => User['bacula'],
   }
 
   package { 'ftp': ensure => 'present', }
@@ -95,6 +95,7 @@ class bacula::params {
     owner   => 'bacula',
     group   => 'bacula',
     mode    => '6744',
+    require => Package["$::bacula::client::bacula_fd_package"],
   }
 
   file { "${pid_directory}":
@@ -103,6 +104,7 @@ class bacula::params {
     owner   => 'bacula',
     group   => 'bacula',
     mode    => '6744',
+    require => Package["$::bacula::client::bacula_fd_package"],
   }
 
   file { $dir_backup_default:
@@ -110,7 +112,7 @@ class bacula::params {
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
-    require => User['bacula'],
+    require => Package["$::bacula::client::bacula_fd_package"],
   }
 
   file { $dir_restore_file:
