@@ -51,7 +51,7 @@ class bacula::params {
           $bconsole_package = 'bacula-console'
           $db_package = 'mariadb-server'
         }
-                '6'     : {
+        '6'     : {
           $bacula_dir_package = 'bacula-director'
           $bacula_dir_service = 'bacula-dir'
           $bacula_sd_package = 'bacula-storage'
@@ -82,6 +82,7 @@ class bacula::params {
     ensure => directory,
     owner  => 'bacula',
     group  => 'bacula',
+    require => User['bacula'],
   }
 
   package { 'ftp': ensure => 'present', }
@@ -108,6 +109,7 @@ class bacula::params {
     recurse => true,
     owner   => 'bacula',
     group   => 'bacula',
+    require => User['bacula'],
   }
 
   file { $dir_restore_file:
