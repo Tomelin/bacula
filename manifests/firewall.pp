@@ -7,30 +7,32 @@ class bacula::firewall (
   $is_director_ftp = $::bacula::is_director_ftp,
   $port_ftp        = $::bacula::port_ftp,) {
   if $firewall == true {
-    if $is_director == true {
-      firewalld_service { 'Open port bacula server in the public zone':
-        ensure  => present,
-        zone    => 'public',
-        service => 'bacula',
-      }
+    if $::os['release']['major'] == 7 {
+      if $is_director == true {
+        firewalld_service { 'Open port bacula server in the public zone':
+          ensure  => present,
+          zone    => 'public',
+          service => 'bacula',
+        }
 
-      if $is_director_ftp == true {
-        if $firewall == true {
-          firewalld_port { 'Open port FTP is a protocol used for remote file transfer':
-            ensure   => present,
-            zone     => 'public',
-            port     => "$port_ftp",
-            protocol => 'tcp',
+        if $is_director_ftp == true {
+          if $firewall == true {
+            firewalld_port { 'Open port FTP is a protocol used for remote file transfer':
+              ensure   => present,
+              zone     => 'public',
+              port     => "$port_ftp",
+              protocol => 'tcp',
+            }
           }
         }
-      }
 
-      # If teh bacula client
-    } elsif $is_client == true {
-      firewalld_service { 'Open port bacula server in the public zone':
-        ensure  => present,
-        zone    => 'public',
-        service => 'bacula-client',
+        # If teh bacula client
+      } elsif $is_client == true {
+        firewalld_service { 'Open port bacula server in the public zone':
+          ensure  => present,
+          zone    => 'public',
+          service => 'bacula-client',
+        }
       }
     }
   }

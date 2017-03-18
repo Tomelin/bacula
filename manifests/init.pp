@@ -70,6 +70,7 @@ class bacula (
   $signature               = $::bacula::params::signature,
   $firewall                = $::bacula::params::firewall,
   $compression             = $::bacula::params::compression,
+  $server_ftp              = $::bacula::params::server_ftp,
   $emails                  = $::bacula::params::emails,) inherits bacula::params {
   if $is_client == true {
     class { 'bacula::client': }

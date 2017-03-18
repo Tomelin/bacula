@@ -40,6 +40,12 @@ Pool {
   Label Format = "Monthly-"             # Auto label
 }
 
+# This schedule does the catalog. It starts after the WeeklyCycle
+Schedule {
+  Name = "WeeklyCycleAfterBackup"
+  Run = Full sun-sat at 23:10
+}
+
 #
 Schedule {
   Name = "AgendaGFS"

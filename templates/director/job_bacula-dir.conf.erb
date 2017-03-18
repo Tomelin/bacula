@@ -1,3 +1,4 @@
+#Servidor bacula
 Job {
   Name = "BackupCatalog"
   JobDefs = "DefaultJob"
@@ -5,16 +6,11 @@ Job {
   FileSet="Catalog"
   Client = "bacula-fd"
   Schedule = "WeeklyCycleAfterBackup"
-  # This creates an ASCII copy of the catalog
-  # Arguments to make_catalog_backup.pl are:
-  #  make_catalog_backup.pl <catalog-name>
   RunBeforeJob = "/usr/libexec/bacula/make_catalog_backup.pl MyCatalog"
-  # This deletes the copy of the catalog
   RunAfterJob  = "/usr/libexec/bacula/delete_catalog_backup"
   Write Bootstrap = "/var/spool/bacula/%n.bsr"
   Priority = 11                   # run after main backup
 }
-
 
 Job {
   Name = "BackupLocalFiles"
@@ -25,14 +21,13 @@ Job {
 JobDefs {
   Name = "DefaultJob"
   Type = Backup
-  Level = Incremental
+  #level = Incremental
   Client = bacula-fd
   FileSet = "linux"
-  Schedule = "AgendaGFS"
-  #Schedule = "WeeklyCycle"
+  Schedule = "AgendaGFS"  
   Storage = File1
   Messages = Standard
-  Pool = File
+  Pool = Monthly
   SpoolAttributes = yes
   Priority = 10
   Write Bootstrap = "/var/spool/bacula/%c.bsr"
@@ -45,7 +40,7 @@ Job {
   Client=bacula-fd
   FileSet="Full Set"
   Storage = File1
-  Pool = File
+  Pool = Monthly
   Messages = Standard
   Where = /bacula/restore
 }

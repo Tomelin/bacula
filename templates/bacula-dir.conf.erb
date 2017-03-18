@@ -20,8 +20,8 @@ FileSet {
       signature = MD5
       compression = GZIP
     }
-    File = /etc
-    File = /var/www
+    File = /
+    
   }
 
   Exclude {
@@ -38,19 +38,8 @@ FileSet {
   }
 }
 
-#
-Schedule {
-  Name = "WeeklyCycle"
-  Run = Full 1st sun at 23:05
-  Run = Differential 2nd-5th sun at 23:05
-  Run = Incremental mon-sat at 23:05
-}
+#Schedule configurado no arquivo pool
 
-# This schedule does the catalog. It starts after the WeeklyCycle
-Schedule {
-  Name = "WeeklyCycleAfterBackup"
-  Run = Full sun-sat at 23:10
-}
 
 # This is the backup of the catalog
 FileSet {

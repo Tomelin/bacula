@@ -20,6 +20,7 @@ class bacula::params {
   $dir_conf_storage = "${dirconf}/storage"
   $dir_bacula_tmp = '/tmp/bacula'
   $port_ftp = '2121'
+  $server_ftp = 'UNSET'
   $db_id = 1
   $emails = ['root@localhost', 'rafael@tomelin.eti.br']
   $signature = 'MD5'
