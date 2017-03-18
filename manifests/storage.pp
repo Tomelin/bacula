@@ -1,33 +1,33 @@
 class bacula::storage (
-  $db_type               = $::bacula::params::db_type,
-  $bacula_sd_package     = $::bacula::bacula_sd_package,
-  $bacula_sd_service     = $::bacula::bacula_sd_service,
-  $sdconf                = $::bacula::dirconf,
-  $sdport                = $::bacula::sdport,
-  $working_directory      = $::bacula::working_directory,
-  $pid_directory          = $::bacula::pid_directory,
+  $db_type                 = $::bacula::params::db_type,
+  $bacula_sd_package       = $::bacula::bacula_sd_package,
+  $bacula_sd_service       = $::bacula::bacula_sd_service,
+  $sdconf                  = $::bacula::dirconf,
+  $sdport                  = $::bacula::sdport,
+  $working_directory       = $::bacula::working_directory,
+  $pid_directory           = $::bacula::pid_directory,
   $maximum_concurrent_jobs = $::bacula::maximum_concurrent_jobs,
-  $db_package            = $::bacula::db_package,
-  $dirserver             = $::bacula::dirserver,
-  $dirconf               = $::bacula::dirconf,
+  $db_package              = $::bacula::db_package,
+  $dirserver               = $::bacula::dirserver,
+  $dirconf                 = $::bacula::dirconf,
   $dir_bacula_tmp          = $::bacula::dir_bacula_tmp,
-  $db_id                 = $::bacula::db_id,
+  $db_id                   = $::bacula::db_id,
   $dir_backup_file         = $::bacula::dir_backup_file,
   $dir_restore_file        = $::bacula::dir_restore_file,) {
   # Package bacula-sd
   package { $bacula_sd_package: ensure => 'present', }
 
-  
-    # Create directory  /bacula to save backup in file
+  # Create directory  /bacula to save backup in file
   if $::bacula::typebackup == 'file' {
     file { $::bacula::dir_backup_file:
       ensure  => 'directory',
       recurse => true,
+      force   => true,
       owner   => 'bacula',
       group   => 'bacula',
+      require => File[$::bacula::dir_backup_default],
     }
   }
-
 
   # start server
   service { $bacula_sd_service:

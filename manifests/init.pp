@@ -93,8 +93,8 @@ class bacula (
   class { 'bacula::firewall':
   }
 
-  class { 'bacula::selinux':
-  }
+  #class { 'bacula::selinux':
+  #}
 
 }
 
