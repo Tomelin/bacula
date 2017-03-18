@@ -3,6 +3,7 @@ Job {
   JobDefs = "DefaultJob"
   Level = Full
   FileSet="Catalog"
+  Client = "<%= @dirserver %>"
   Schedule = "WeeklyCycleAfterBackup"
   # This creates an ASCII copy of the catalog
   # Arguments to make_catalog_backup.pl are:
@@ -18,6 +19,7 @@ Job {
 Job {
   Name = "BackupLocalFiles"
   JobDefs = "DefaultJob"
+  Client = "bacula-fd"
 }
 
 JobDefs {
@@ -25,7 +27,7 @@ JobDefs {
   Type = Backup
   Level = Incremental
   Client = bacula-fd
-  FileSet = "Full Set"
+  FileSet = "Linux"
   Schedule = "AgendaGFS"
   #Schedule = "WeeklyCycle"
   Storage = File1
