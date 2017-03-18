@@ -95,6 +95,7 @@ class bacula (
 
   #class { 'bacula::selinux':
   #}
+  
 
 }
 
