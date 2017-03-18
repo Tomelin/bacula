@@ -32,10 +32,10 @@ class bacula::selinux (
       }
     }
 
-    exec { 'context_clients':
-      command => "semanage fcontext -a -t bacula_store_t ${dir_restore_file}(/.*)?",
+    exec { 'bacula_dir_restore':
+      command => "semanage fcontext -a -t bacula_store_t ${dir_restore_file}(.*)?",
       path    => '/usr/bin:/usr/sbin:/bin',
-      unless  => "ls -lZ ${dir_backup_default} | grep -v bacula_store_t",
+      unless  => "ls -lZ ${dir_backup_default} | grep  bacula_store_t",
     }
 
     #    semanage fcontext -a -t public_content_rw_t "/etc/bacula/clients(/.*)?"
