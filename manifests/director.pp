@@ -98,6 +98,7 @@ class bacula::director (
     require => Package[$bacula_dir_package],
   }
 
+/*
   file { "${dirconf}/pool/pool_bacula-dir.conf":
     ensure  => 'file',
     recurse => true,
@@ -106,7 +107,7 @@ class bacula::director (
     content => template('bacula/director/pool/pool_bacula-dir.conf.erb'),
     require => File["${dirconf}/pool"],
   }
-
+ */
   class { 'bacula::director::pool':
   }
 
