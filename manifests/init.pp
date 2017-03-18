@@ -90,8 +90,8 @@ class bacula (
 
   }
 
-  class { 'bacula::firewall':
-  }
+ # class { 'bacula::firewall':
+ # }
 
   #class { 'bacula::selinux':
   #}
