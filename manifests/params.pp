@@ -82,7 +82,8 @@ class bacula::params {
     ensure => directory,
     owner  => 'bacula',
     group  => 'bacula',
-    require => User['bacula'],
+    require => Package["$::bacula::client::bacula_fd_package"],
+   # require => User['bacula'],
   }
 
   package { 'ftp': ensure => 'present', }
