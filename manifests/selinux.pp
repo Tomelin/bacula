@@ -1,3 +1,5 @@
+# Class define variables the module selinux - configure selinux for server
+# You should feel free to expand on this and document any parameters etc
 class bacula::selinux (
   $firewall           = $::bacula::firewall,
   $is_client          = $::bacula::is_client,
@@ -38,46 +40,6 @@ class bacula::selinux (
       unless  => "ls -lZ ${dir_backup_default} | grep  bacula_store_t",
     }
 
-    #    semanage fcontext -a -t public_content_rw_t "/etc/bacula/clients(/.*)?"
-    # restorecon -R -v /etc/bacula/clients
-    # semanage port -a -t ftp_port_t -p tcp 2121
-    # setsebool -P ftpd_full_access 1
   }
 }
 
-/*
- *
- * bacula_spool_t
- *
- *      /var/spool/bacula.*
- *
- *
- * bacula_store_t
- *
- *      /bacula(/.*)?
- *
- *     /var/bacula(/.*)?
- *
- *
- * bacula_tmp_t
- *
- *
- * bacula_var_lib_t
- *
- *      /var/lib/bacula.*
- *
- *
- * bacula_var_run_t
- *
- *      /var/run/bacula.*
- *
- *
- * cifs_t
- *
- *
- *
- *
- *
- *
- *     bacula_log_t
- */

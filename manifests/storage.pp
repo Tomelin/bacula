@@ -1,3 +1,5 @@
+# Class define variables the module bacula-sd - server bacula storage
+# You should feel free to expand on this and document any parameters etc
 class bacula::storage (
   $db_type                 = $::bacula::params::db_type,
   $bacula_sd_package       = $::bacula::bacula_sd_package,
