@@ -21,13 +21,13 @@ class bacula::proftpd (
   package { $package_name: ensure => 'installed' }
 
   service { $service_name:
-    require   => Package[$package_name],
+    ensure    => 'running',    
     enable    => true,
-    ensure    => 'running',
     hasstatus => true,
+    require   => Package[$package_name],
   }
 
-  file { "/etc/proftpd.conf":
+  file { '/etc/proftpd.conf':
     require => Package[$package_name],
     content => template('bacula/proftpd/proftpd.conf.erb'),
     notify  => Service[$service_name],
