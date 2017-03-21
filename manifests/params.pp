@@ -27,6 +27,8 @@ class bacula::params {
   $compression = 'GZIP'
   $firewall = true
   $is_monitored = true
+  $zabbix_bash = '/var/spool/bacula/bacula-zabbix.bash'
+  $zabbix_conf = '/etc/bacula/bacula-zabbix.conf'
 
   # Bacula client - bacula-fd.conf
   $fdport = '9102'
