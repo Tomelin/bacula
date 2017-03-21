@@ -1,3 +1,5 @@
+# Class define variables the module firewall 
+# You should feel free to expand on this and document any parameters etc
 class bacula::firewall (
   $firewall        = $::bacula::firewall,
   $is_client       = $::bacula::is_client,
@@ -20,7 +22,7 @@ class bacula::firewall (
             firewalld_port { 'Open port FTP is a protocol used for remote file transfer':
               ensure   => present,
               zone     => 'public',
-              port     => "$port_ftp",
+              port     => $port_ftp,
               protocol => 'tcp',
             }
           }
