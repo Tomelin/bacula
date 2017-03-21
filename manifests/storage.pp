@@ -44,8 +44,8 @@ class bacula::storage (
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/bacula-sd.conf.erb'),
-    require => Package["${bacula_sd_package}"],
-    notify  => Service["${bacula_sd_service}"],
+    require => Package[$bacula_sd_package],
+    notify  => Service[$bacula_sd_service],
   }
 
   file { "${dir_bacula_tmp}/${::hostname}.conf":
@@ -53,7 +53,7 @@ class bacula::storage (
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/storage_conf.erb'),
-    require => File["${dir_bacula_tmp}"],
+    require => File[$dir_bacula_tmp],
   }
 
   file { "${dir_bacula_tmp}/baculaSendConf.sh":
@@ -62,7 +62,7 @@ class bacula::storage (
     group   => 'bacula',
     mode    => '0755',
     content => template('bacula/scripts/baculaSendConf.sh.erb'),
-    require => File["${dir_bacula_tmp}"],
+    require => File[$dir_bacula_tmp],
     notify  => Exec['SendClientConf'],
   }
 
