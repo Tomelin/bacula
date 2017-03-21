@@ -2,7 +2,7 @@
 # You should feel free to expand on this and document any parameters etc
 class bacula::director::db2 ($db_package = $::bacula::director::db_package,) inherits bacula::director {
   class { '::mysql::server':
-    root_password           => ${::passwordclient},
+    root_password           => "$::passwordclient",
     create_root_my_cnf      => true,
     remove_default_accounts => true,
     override_options        => {
