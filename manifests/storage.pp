@@ -54,7 +54,7 @@ class bacula::storage (
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
-    content => template('bacula/director/storage_conf.erb'),
+ #   content => template('bacula/director/storage_conf.erb'),
     require => File[$dir_bacula_tmp],
   }
 

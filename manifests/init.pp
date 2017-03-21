@@ -73,10 +73,10 @@ class bacula (
   $server_ftp              = $::bacula::params::server_ftp,
   $emails                  = $::bacula::params::emails,
   $is_monitored            = $::bacula::params::is_monitored,
-  $zabbix_bash             = $::bacula::params::zabbix_bash,
   $zabbix_conf             = $::bacula::params::zabbix_conf,
   $zabbix_server           = $::bacula::params::zabbix_server,
-  $zabbix_server_port      = $::bacula::params::zabbix_server_port,) inherits bacula::params {
+  $zabbix_server_port      = $::bacula::params::zabbix_server_port,
+  $zabbix_bash             = $::bacula::params::zabbix_bash,) inherits bacula::params {
   if $is_client == true {
     class { 'bacula::client': }
 

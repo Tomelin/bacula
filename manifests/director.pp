@@ -20,6 +20,9 @@ class bacula::director (
   $emails                  = $::bacula::emails,
   $is_monitored            = $::bacula::is_monitored,
   $zabbix_bash             = $::bacula::zabbix_bash,) {
+    
+    notify { $zabbix_bash: }
+    
   if $is_monitored == true {
     class { 'bacula::director::monitored': }
   }
