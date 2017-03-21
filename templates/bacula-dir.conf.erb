@@ -94,6 +94,10 @@ Messages {
 # Message delivery for daemon messages (no job).
 Messages {
   Name = Daemon
+   <% if @is_monitored == true -%>
+   mailcommand = "<%= zabbix_bash %> %i"
+	
+	<% end -%>
   mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \< %r \>\" -s \"Bacula daemon message %d: %t %e of %c %l \" %r"
   <% [@emails].flatten.each do |email| -%>
   mail = <%= email %> = all, !skipped

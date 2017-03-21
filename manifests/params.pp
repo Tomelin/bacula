@@ -26,6 +26,7 @@ class bacula::params {
   $signature = 'MD5'
   $compression = 'GZIP'
   $firewall = true
+  $is_monitored = true
 
   # Bacula client - bacula-fd.conf
   $fdport = '9102'

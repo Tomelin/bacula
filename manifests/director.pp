@@ -17,7 +17,14 @@ class bacula::director (
   $db_id                   = $::bacula::db_id,
   $heartbeat_interval      = $::bacula::heartbeat_interval,
   $signature               = $::bacula::signature,
-  $emails                  = $::bacula::emails,) {
+  $emails                  = $::bacula::emails,
+  $is_monitored            = $::bacula::is_monitored,
+  $zabbix_bash             = $::bacula::zabbix_bash,) {
+    
+  if "${is_monitored}" == true {
+    class { 'bacula::director::monitored': }
+  } 
+    
   if "${db_type}" == 'mysql' {
     class { 'bacula::director::db2': require => Package[$bacula_dir_package] }
   } else {
@@ -98,16 +105,16 @@ class bacula::director (
     require => Package[$bacula_dir_package],
   }
 
-/*
-  file { "${dirconf}/pool/pool_bacula-dir.conf":
-    ensure  => 'file',
-    recurse => true,
-    owner   => 'bacula',
-    group   => 'bacula',
-    content => template('bacula/director/pool/pool_bacula-dir.conf.erb'),
-    require => File["${dirconf}/pool"],
-  }
- */
+  /*
+   * file { "${dirconf}/pool/pool_bacula-dir.conf":
+   *  ensure  => 'file',
+   *  recurse => true,
+   *  owner   => 'bacula',
+   *  group   => 'bacula',
+   *  content => template('bacula/director/pool/pool_bacula-dir.conf.erb'),
+   *  require => File["${dirconf}/pool"],
+   *}
+   */
   class { 'bacula::director::pool':
   }
 
