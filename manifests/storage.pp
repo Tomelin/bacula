@@ -39,36 +39,36 @@ class bacula::storage (
   }
 
   # Create file bacula-sd.conf
-  file { "$dirconf/bacula-sd.conf":
+  file { "${dirconf}/bacula-sd.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/bacula-sd.conf.erb'),
-    require => Package[$bacula_sd_package],
-    notify  => Service[$bacula_sd_service],
+    require => Package["${bacula_sd_package}"],
+    notify  => Service["${bacula_sd_service}"],
   }
 
-  file { "$dir_bacula_tmp/${::hostname}.conf":
+  file { "${dir_bacula_tmp}/${::hostname}.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/storage_conf.erb'),
-    require => File["$dir_bacula_tmp"],
+    require => File["${dir_bacula_tmp}"],
   }
 
-  file { "$dir_bacula_tmp/baculaSendConf.sh":
+  file { "${dir_bacula_tmp}/baculaSendConf.sh":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     mode    => '0755',
     content => template('bacula/scripts/baculaSendConf.sh.erb'),
-    require => File["$dir_bacula_tmp"],
+    require => File["${dir_bacula_tmp}"],
     notify  => Exec['SendClientConf'],
   }
 
   exec { 'SendConf':
     path        => ['/usr/bin', '/usr/sbin'],
-    command     => "$dir_bacula_tmp/baculaSendConf.sh",
+    command     => "${dir_bacula_tmp}/baculaSendConf.sh",
     refreshonly => true,
     require     => Package['ftp'],
   }

@@ -36,7 +36,7 @@ OS/Puppet version it works with.
 
 [Bacula Server] is a widely used backup the servers windows, linux, MAC.... 
 This [Puppet module] simplifies the task of creating configurations to manage Bacula servers in your infrastructure. It can configure the jobs, pools, bacula storage e bacula clients in linux, also configured monitorament, selinux and firewall with firewalld.
-and manage a range of virtual host setups and provides a streamlined way to install and configure Apache modules.
+This module test in bacula version 7x.
 
 ## Setup
 
