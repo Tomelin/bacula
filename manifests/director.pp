@@ -20,17 +20,17 @@ class bacula::director (
   $emails                  = $::bacula::emails,
   $is_monitored            = $::bacula::is_monitored,
   $zabbix_bash             = $::bacula::zabbix_bash,) {
-  if "${is_monitored}" == true {
+  if $is_monitored == true {
     class { 'bacula::director::monitored': }
   }
 
-  if "${db_type}" == 'mysql' {
+  if "$db_type" == 'mysql' {
     class { 'bacula::director::db2': require => Package[$bacula_dir_package] }
   } else {
     $db_id = 3
   }
 
-  package { "${bacula_dir_package}":
+  package { $bacula_dir_package:
     ensure => 'present',
     notify => Exec['SetDBType'],
   }
