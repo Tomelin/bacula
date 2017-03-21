@@ -1,3 +1,5 @@
+# Class define variables the module ftp with proftpd - server ftp
+# You should feel free to expand on this and document any parameters etc
 class bacula::proftpd (
   $server_name        = 'ProFTPD Anonymous Server',
   $server_type        = 'standalone',
@@ -21,7 +23,7 @@ class bacula::proftpd (
   service { $service_name:
     require   => Package[$package_name],
     enable    => true,
-    ensure    => running,
+    ensure    => 'running',
     hasstatus => true,
   }
 
@@ -31,8 +33,7 @@ class bacula::proftpd (
     notify  => Service[$service_name],
   }
 
-  #file { "${dir_display_login}":
-  file { "${dir_display_login}":
+  file { $dir_display_login:
     ensure  => 'file',
     owner   => 'ftp',
     group   => 'ftp',
