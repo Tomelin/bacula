@@ -10,7 +10,7 @@ class bacula::client (
   $port_ftp                = $::bacula::port_ftp,
   # Bacula client - bacula-fd.conf
   $fdport                  = '9102',
-  $password_fd             = "${::passwordclient}",
+  $password_fd             = $::passwordclient,
   $bacula_fd_package       = $::bacula::bacula_fd_package,
   $bacula_fd_service       = $::bacula::bacula_fd_service,
   $dirserver               = $::bacula::dirserver,
@@ -20,7 +20,7 @@ class bacula::client (
   $signature               = $::bacula::signature,
   $compression             = $::bacula::compression,
   $server_ftp              = $::bacula::server_ftp,) {
-  package { "${bacula_fd_package}": ensure => 'present' }
+  package { $bacula_fd_package: ensure => 'present' }
 
   service { $bacula_fd_service:
     ensure     => 'running',

@@ -1,7 +1,7 @@
 # Class define variables the module bacula-dir for monitored the jobs
 # You should feel free to expand on this and document any parameters etc
 # Font config => https://github.com/germanodlf/bacula-zabbix
-class bbacula::director::monitored (
+class bacula::director::monitored (
   $zabbix_bash        = $::bacula::zabbix_bash,
   $zabbix_conf        = $::bacula::zabbix_conf,
   $zabbix_server      = $::bacula::zabbix_server,
