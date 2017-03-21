@@ -8,8 +8,9 @@ class bacula::director::monitored (
   $zabbix_server_port = $::bacula::zabbix_server_port,) {
   package { 'zabbix-sender': ensure => present, }
 
+  notify { $zabbix_conf: }
   file { $zabbix_conf:
-    ensure  => file,
+    ensure  => 'file',
     owner   => 'root',
     group   => 'bacula',
     mode    => '0640',
@@ -17,7 +18,7 @@ class bacula::director::monitored (
   }
 
   file { $zabbix_bash:
-    ensure  => file,
+    ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     mode    => '0700',
