@@ -16,7 +16,7 @@ class bacula::client (
   $dirserver               = $::bacula::dirserver,
   $working_directory       = $::bacula::working_directory,
   $files_backup            = ['/'],
-  $exclude_backup          = ['/dev', '/proc', '/tmp', '/.journal', '/.fsck', '/var/spool/bacula', '/var/lib/bacula'],
+  $exclude_backup          = ['/dev', '/sys', '/proc', '/tmp', '/.journal', '/.fsck', '/var/spool/bacula', '/var/lib/bacula'],
   $signature               = $::bacula::signature,
   $compression             = $::bacula::compression,
   $server_ftp              = $::bacula::server_ftp,) {
