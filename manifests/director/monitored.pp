@@ -4,8 +4,8 @@
 class bacula::monitored (
   $zabbix_bash = $::bacula::zabbix_bash, 
   $zabbix_conf = $::bacula::zabbix_conf,
-  $zabbix_server = "zabbix.${::domain}",
-  $zabbix_server_port = '10051',
+  $zabbix_server = $::bacula::zabbix_server,
+  $zabbix_server_port = $::bacula::zabbix_server_port,
   
 ) {
   package { 'zabbix-sender': ensure => present, }

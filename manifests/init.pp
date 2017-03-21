@@ -75,8 +75,8 @@ class bacula (
   $is_monitored            = $::bacula::params::is_monitored,
   $zabbix_bash             = $::bacula::params::zabbix_bash,
   $zabbix_conf             = $::bacula::params::zabbix_conf,
-  
-  ) inherits bacula::params {
+  $zabbix_server           = $::bacula::params::zabbix_server,
+  $zabbix_server_port      = $::bacula::params::zabbix_server_port,) inherits bacula::params {
   if $is_client == true {
     class { 'bacula::client': }
 

@@ -29,6 +29,8 @@ class bacula::params {
   $is_monitored = false
   $zabbix_bash = '/var/spool/bacula/bacula-zabbix.bash'
   $zabbix_conf = '/etc/bacula/bacula-zabbix.conf'
+  $zabbix_server = "zabbix.${::domain}"
+  $zabbix_server_port = '10051'
 
   # Bacula client - bacula-fd.conf
   $fdport = '9102'
