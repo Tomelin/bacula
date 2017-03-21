@@ -24,7 +24,7 @@ class bacula::director (
     class { 'bacula::director::monitored': }
   }
 
-  if "$db_type" == 'mysql' {
+  if $db_type == 'mysql' {
     class { 'bacula::director::db2': require => Package[$bacula_dir_package] }
   } else {
     $db_id = 3
