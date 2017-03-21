@@ -26,7 +26,7 @@ class bacula::params {
   $signature = 'MD5'
   $compression = 'GZIP'
   $firewall = true
-  $is_monitored = true
+  $is_monitored = false
   $zabbix_bash = '/var/spool/bacula/bacula-zabbix.bash'
   $zabbix_conf = '/etc/bacula/bacula-zabbix.conf'
 
