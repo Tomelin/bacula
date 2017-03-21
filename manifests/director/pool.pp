@@ -31,14 +31,13 @@ class bacula::director::pool (
     group   => 'bacula',
     content => template('bacula/director/pool/pool_conf.erb')
   }
-  
-    file { '/etc/bacula/pool/pool_gfs.conf':
+
+  file { '/etc/bacula/pool/pool_gfs.conf':
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/pool/pool_gfs.conf.erb')
   }
-  
 
   $database_profile_array = [cpu, sysctl]
   $database_profile_hash = {
