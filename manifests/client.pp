@@ -1,18 +1,26 @@
+# Class define variables the module bacula-fd - bacula client
+# You should feel free to expand on this and document any parameters etc
 class bacula::client (
-  $bacula_fd_package     = $::bacula::bacula_fd_package,
-  $bacula_fd_service     = $::bacula::bacula_fd_service,
-  $dirconf               = $::bacula::dirconf,
-  $password_fd           = $::bacula::password_fd,
-  $dirBaculaTMP          = $::bacula::dirBaculaTMP,
-  $portFTP               = $::bacula::portFTP,
-  $bacula_dir            = $::bacula::bacula_dir,
-  $fdport                = $::bacula::fdport,
-  $workingDirectory      = $::bacula::workingDirectory,
-  $pidDirectory          = $::bacula::pidDirectory,
-  $maximumConcurrentJobs = $::bacula::maximumConcurrentJobs,) {
+  # Conf default
+  $dirconf                 = '/etc/bacula',
+  $pid_directory           = '/var/run/bacula',
+  $maximum_concurrent_jobs = '30',
+  $dir_conf_clients        = "${dirconf}/clients",
+  $dir_bacula_tmp          = '/tmp/bacula',
+  $port_ftp                = $::bacula::port_ftp,
+  # Bacula client - bacula-fd.conf
+  $fdport                  = '9102',
+  $password_fd             = $::passwordclient,
+  $bacula_fd_package       = $::bacula::bacula_fd_package,
+  $bacula_fd_service       = $::bacula::bacula_fd_service,
+  $dirserver               = $::bacula::dirserver,
+  $working_directory       = $::bacula::working_directory,
+  $files_backup            = ['/'],
+  $exclude_backup          = ['/dev', '/sys', '/proc', '/tmp', '/.journal', '/.fsck', '/var/spool/bacula', '/var/lib/bacula'],
+  $signature               = $::bacula::signature,
+  $compression             = $::bacula::compression,
+  $server_ftp              = $::bacula::server_ftp,) {
   package { $bacula_fd_package: ensure => 'present' }
-
-
 
   service { $bacula_fd_service:
     ensure     => 'running',
@@ -22,7 +30,7 @@ class bacula::client (
     require    => Package[$bacula_fd_package],
   }
 
-  file { "$dirconf/bacula-fd.conf":
+  file { "${dirconf}/bacula-fd.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
@@ -31,39 +39,29 @@ class bacula::client (
     notify  => Service[$bacula_fd_service]
   }
 
-  file { "$dirBaculaTMP":
-    ensure => 'directory',
-    owner  => 'bacula',
-    group  => 'bacula',
-  }
-
-  file { "$dirBaculaTMP/client_${::hostname}.conf":
+  file { "${dir_bacula_tmp}/client_${::hostname}.conf":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     content => template('bacula/director/client_conf.erb'),
-    require => File["$dirBaculaTMP"],
+    require => File[$dir_bacula_tmp],
   }
 
-  file { "$dirBaculaTMP/baculaSendConfClient.sh":
+  file { "${dir_bacula_tmp}/baculaSendConfClient.sh":
     ensure  => 'file',
     owner   => 'bacula',
     group   => 'bacula',
     mode    => '0755',
     content => template('bacula/scripts/baculaSendConfClient.sh.erb'),
-    require => File["$dirBaculaTMP"],
+    require => File[$dir_bacula_tmp],
     notify  => Exec['SendClientConf'],
   }
 
-  package { 'ftp':
-    ensure => 'present',
-  }
-  
   exec { 'SendClientConf':
     path        => ['/usr/bin', '/usr/sbin'],
-    command     => "$dirBaculaTMP/baculaSendConfClient.sh",
+    command     => "${dir_bacula_tmp}/baculaSendConfClient.sh",
     refreshonly => true,
-    require => Package['ftp'],
+    require     => Package['ftp'],
   }
 
 }

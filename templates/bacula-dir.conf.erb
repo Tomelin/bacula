@@ -1,20 +1,16 @@
 # This file is maintained by Puppet.
 # DO NOT EDIT
-
-#
-# Default Bacula Director Configuration file
 Director {                            # define myself
-  Name = "<%= @hostname %>"
-  DIRport = <%= @dirport %>                 # where we listen for UA connections
+  Name = <%= @dirserver %>
+  DIRport = <%= @dirport %>                # where we listen for UA connections
   QueryFile = "/etc/bacula/query.sql"
-  WorkingDirectory = "<%= @workingDirectory %>" 
-  PidDirectory = "<%= @pidDirectory %>"
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
+  WorkingDirectory = "<%= @working_directory %>"
+  PidDirectory = "<%= @pid_directory %>"
+  Maximum Concurrent Jobs = <%= @maximum_concurrent_jobs %>
   Password = "<%= @passwordclient %>"         # Console password
   Messages = Daemon
-  DirAddress = <%= @ipaddress %>
+  #DirAddress = <%= @networking["ip"] %>            # N.B. Use a fully qualified name here 
 }
-
 
 # List of files to be backed up
 FileSet {
@@ -24,14 +20,10 @@ FileSet {
       signature = MD5
       compression = GZIP
     }
-    File = /etc
-    #File = /usr/sbin
+    File = /
+    
   }
 
-#
-# If you backup the root directory, the following two excluded
-#   files can be useful
-#
   Exclude {
     File = /var/spool/bacula
     File = /var/lib/bacula
@@ -46,61 +38,7 @@ FileSet {
   }
 }
 
-# List of files to be backed up
-FileSet {
-  Name = "Full2 Set"
-  Include {
-    Options {
-      signature = MD5
-      compression = GZIP
-    }
-    File = /etc
-    #File = /usr/sbin
-  }
-
-#
-# If you backup the root directory, the following two excluded
-#   files can be useful
-#
-  Exclude {
-    File = /var/spool/bacula
-    File = /var/lib/bacula
-    File = /bacula
-    File = /tmp
-    File = /dev
-    File = /proc
-    File = /tmp
-    File = /sys
-    File = /.journal
-    File = /.fsck
-  }
-}
-
-
-
-# Schedule temporary, waiting create class
-Schedule {
-  Name = "WeeklyCycle"
-  Run = Full 1st sun at 23:05
-  Run = Differential 2nd-5th sun at 23:05
-  Run = Incremental mon-sat at 23:05
-}
-
-# This schedule does the catalog. It starts after the WeeklyCycle
-Schedule {
-  Name = "WeeklyCycleAfterBackup"
-  Run = Full sun-sat at 23:10
-}
-
-Schedule { 
-  Name = "Diario"
-  Run = Full sun at 8:00
-  Run = Incremental mon-fri at 18:00
-}
-Schedule {
-  Name = "Mensal"
-  Run = Full 1st sat at 8:00
-}
+#Schedule configurado no arquivo pool
 
 
 # This is the backup of the catalog
@@ -108,34 +46,24 @@ FileSet {
   Name = "Catalog"
   Include {
     Options {
-      signature = MD5
+      signature = <%= @signature %>
     }
     File = "/var/spool/bacula/bacula.sql"
   }
 }
 
+#
+
 # Definition of file Virtual Autochanger device
 Storage {
-  Name = "<%= @bacula_dir %>"
-# Do not use "localhost" here
-  Address = <%= @ipaddress %>            # N.B. Use a fully qualified name here
-  SDPort = <%= @sdport %>   
-  Password = "M2UwNThhOGUxY2EyNDdkYTB"
-  Device = FileStorage
-  Media Type = File1
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>        # run up to 10 jobs a the same time
-}
-
-Storage {
   Name = File1
-  Address = <%= @ipaddress %> 
-  SDPort = <%= @sdport %>   
-  Password = "M2U1ZGYyOGIyYWVhZmRjOGE0N2FlM2"
+  Address = <%= @networking["ip"] %>            # N.B. Use a fully qualified name here
+  SDPort = 9103
+  Password = "<%= @passwordclient %>"
   Device = FileStorage
   Media Type = File1
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
+  Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
 }
-
 
 # Generic catalog service
 Catalog {
@@ -147,13 +75,19 @@ Catalog {
 #  and to the console
 Messages {
   Name = Standard
-
-  mailcommand = "/usr/sbin/bsmtp -h localhost -f \ \(Bacula\) \<%r\>\ -s \Bacula: %t %e of %c %l\ %r"
-  operatorcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: Intervention needed for %j\" %r"
-  mail = root@localhost = all, !skipped
-  operator = root@localhost = mount
+   <% if @is_monitored == true -%>
+   mailcommand = "<%= @zabbix_bash %> %i"
+   <% else %>
+   mailcommand = "/usr/sbin/bsmtp -h localhost -f bacula@<%= @domain -%> -s \" %d: %t %e of %c %l \" %r"
+   <% end -%>
+  <% [@emails].flatten.each do |email| -%>
+  mail = <%= email %> = all, !skipped
+  <% end -%>
+  
+  <% [@emails].flatten.each do |email| -%>
+  operator = <%= email %> = mount
+  <% end -%>
   console = all, !skipped, !saved
-
   append = "/var/log/bacula/bacula.log" = all, !skipped
   catalog = all
 }
@@ -163,8 +97,14 @@ Messages {
 # Message delivery for daemon messages (no job).
 Messages {
   Name = Daemon
-  mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula daemon message\" %r"
-  mail = root@localhost = all, !skipped
+   <% if @is_monitored == true -%>
+   mailcommand = "<%= @zabbix_bash %> %i"
+   <% else %>
+   mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \< %r \>\" -s \"Bacula daemon message %d: %t %e of %c %l \" %r"
+	<% end -%>
+  <% [@emails].flatten.each do |email| -%>
+  mail = <%= email %> = all, !skipped
+  <% end -%>
   console = all, !skipped, !saved
   append = "/var/log/bacula/bacula.log" = all, !skipped
 }
@@ -172,29 +112,17 @@ Messages {
 
 #
 # Restricted console used by tray-monitor to get the status of the director
-#
 Console {
   Name = bacula-mon
   Password = "@@MON_DIR_PASSWORD@@"
   CommandACL = status, .status
 }
 
-
 #INCLUDE CLIENTS
-#<%= @dirConfClients %>
-
-#@|"sh -c 'for f in <%= @dirConfClients %>/*.conf ; do echo @${f} ; done'"
-
-#INCLUDE JOBS
-#@|"sh -c 'for f in /etc/bacula/jobs/*.conf ; do echo @${f} ; done'"
+@|"sh -c 'for f in /etc/bacula/clients/*.conf ; do echo @${f} ; done'"
 
 #INCLUDE POOL
-#@|"sh -c 'for f in /etc/bacula/pool/*.conf ; do echo @${f} ; done'"
+@|"sh -c 'for f in /etc/bacula/pool/*.conf ; do echo @${f} ; done'"
 
-
-#INCLUDE STORAGE
-#<%= @dirConfStorage %>
-#@|"sh -c 'for f in <%= @dirConfStorage %>/*.conf ; do echo @${f} ; done'"
-
-
-#@|"sh -c 'for f in /etc/bacula/conf.d/*.conf ; do echo @${f} ; done'"
+#INCLUDE JOBS
+@|"sh -c 'for f in /etc/bacula/jobs/*.conf ; do echo @${f} ; done'"

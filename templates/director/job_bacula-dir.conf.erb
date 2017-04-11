@@ -1,45 +1,74 @@
+#Servidor bacula
+Job {
+  Name = "BackupCatalog"
+  JobDefs = "DefaultJob"
+  Level = Full
+  FileSet="Catalog"
+  Client = "bacula-fd"
+  Schedule = "WeeklyCycleAfterBackup"
+  RunBeforeJob = "/usr/libexec/bacula/make_catalog_backup.pl MyCatalog"
+  RunAfterJob  = "/usr/libexec/bacula/delete_catalog_backup"
+  Write Bootstrap = "/var/spool/bacula/%n.bsr"
+  Priority = 11                   # run after main backup
+}
+
+Job {
+  Name = "BackupLocalFiles"
+  JobDefs = "DefaultJob"
+  Client = "bacula-fd"
+}
 
 JobDefs {
-  Name = "DefaultJobDiario"
+  Name = "DefaultJob"
   Type = Backup
-  Level = Incremental
+  #level = Incremental
   Client = bacula-fd
-  FileSet = "Full Set"
-  Schedule = "Diario"
+  FileSet = "linux"
+  Schedule = "AgendaGFS"  
   Storage = File1
   Messages = Standard
-  Pool = PoolDiario
+  Pool = Monthly
   SpoolAttributes = yes
-  Priority = 10 #1 - 11
+  Priority = 10
   Write Bootstrap = "/var/spool/bacula/%c.bsr"
 }
-JobDefs {
-  Name = "DefaultJobMensal"
-  Type = Backup
-  Level = Incremental
-  Client = bacula-fd
-  FileSet = "Full Set"
-  Schedule = "Mensal"
-  Storage = File1
-  Messages = Standard
-  Pool = PoolMensal
-  SpoolAttributes = yes
-  Priority = 10 #1 - 11
-  Write Bootstrap = "/var/spool/bacula/%c.bsr"
-}
+
+
 Job {
   Name = "RestoreLocalFiles"
   Type = Restore
   Client=bacula-fd
   FileSet="Full Set"
   Storage = File1
-  Pool = File
+  Pool = Monthly
   Messages = Standard
   Where = /bacula/restore
 }
 
 
-Job {
-  Name = "BackupLocalFilesDiario"
-  JobDefs = "DefaultJobDiario"
+FileSet {
+  Name = "linux"
+  Include {
+    Options {
+      signature = MD5
+      compression = GZIP
+      Onefs = no
+    }
+
+          File = /
+
+  }
+
+  Exclude {
+        File = /dev
+        File = /sys
+        File = /proc
+        File = /tmp
+        File = /.journal
+        File = /.fsck
+        File = /var/spool/bacula
+        File = /var/lib/bacula
+
+  }
 }
+

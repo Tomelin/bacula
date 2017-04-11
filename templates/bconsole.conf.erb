@@ -1,9 +1,14 @@
 # This file is maintained by Puppet.
 # DO NOT EDIT
 
+#
+# Bacula User Agent (or Console) Configuration File
+#
+
 Director {
- Name = "<%= @bacula_dir %>"
- DIRport = <%= @dirport %>
- address = <%= @ipaddress %>
- Password = "M2UwNThhOGUxY2EyNDdkYTB"
+  Name = bacula-dir
+  DIRport = 9101
+  address = localhost
+  Password = 'M2UwNThhOGUxY2EyNDdkYTB'
 }
+

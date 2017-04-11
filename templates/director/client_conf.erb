@@ -1,14 +1,10 @@
 # This file is maintained by Puppet.
 # DO NOT EDIT
 
-Director {
-  Name = "bacula-dir"
-  Password = "Y2EyY2M2NjMzMjkyOWRkMWIzNDBkYj"
-}
-
-
+# Server backup = "<%= @dirserver %>"
+ 
 Client {
-  Name = "<%= @hostname %>"
+  Name = "<%= @fqdn %>"
   Address = "<%= @ipaddress %>"
   FDPort = <%= @fdport %>
   Catalog = MyCatalog
@@ -16,4 +12,30 @@ Client {
   File Retention = 30 days            # 30 days
   Job Retention = 6 months            # six months
   AutoPrune = yes                     # Prune expired Jobs/Files
+}
+
+
+
+# List of files to be backed up
+FileSet {
+  Name = "<%= @hostname %>"
+  Include {
+    Options {
+      signature = <%= @signature %>
+      compression = <%= @compression %>
+      Onefs = no
+    }
+    
+    <% [@files_backup].flatten.each do |filesinclude| -%>
+	  File = <%= filesinclude %>
+	<% end -%>
+    
+  }
+
+  Exclude {
+   <% [@exclude_backup].flatten.each do |filesexclude| -%>
+	File = <%= filesexclude %>
+   <% end -%>
+
+  }
 }

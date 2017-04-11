@@ -2,27 +2,28 @@
 # DO NOT EDIT
 
 Director {
-  Name = "<%= @bacula_dir %>"
-  Password = "<%= @password_fd %>"
+  Name = <%= @dirserver %>
+  Password = "<%= @passwordclient %>"
 }
+
 #
-#
-#Director {
-#  Name = "<%= @bacula_mon %>"
-#  Password = "<%= @password_mon %>"
-#  Monitor = yes
-#}
-#
-#
+# "Global" File daemon configuration specifications
 FileDaemon {                          # this is me
-  Name = "<%= @hostname %>"
+  Name = <%= @fqdn %>
   FDport = <%= @fdport %>                  # where we listen for the director
-  WorkingDirectory = "<%= @workingDirectory %>" 
-  Pid Directory = "<%= @pidDirectory %>"
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
-  
+  WorkingDirectory = '<%= @working_directory %>'
+  PidDirectory = '<%= @pid_directory %>'
+  Maximum Concurrent Jobs = <%= @maximum_concurrent_jobs %>
+
 }
+
+
+# Send all messages except skipped files back to Director
 Messages {
   Name = Standard
-  director = "<%= @bacula_dir %>" = all, !skipped, !restored
+  mail = rafael@tomelin.eti.br = all, !skipped
+  director = bacula-dir = all, !skipped, !restored
 }
+
+
+

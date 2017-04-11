@@ -1,0 +1,55 @@
+# This file is maintained by Puppet.
+# DO NOT EDIT
+# File Pool definition
+Pool {
+  Name = Weekly
+  Pool Type = Backup
+  Recycle = yes                       # Bacula can automatically recycle Volumes
+  AutoPrune = yes                     # Prune expired volumes
+  Volume Retention = 26 days         # one year
+  Volume Use Duration = 70 hours    
+  Maximum Volume Bytes = 10G          # Limit Volume size to something reasonable
+  Maximum Volumes = 100               # Limit number of Volumes in Pool
+  Label Format = "Weekly-"             # Auto label
+}
+
+
+# File Pool definition
+Pool {
+  Name = Daily
+  Pool Type = Backup
+  Recycle = yes                       # Bacula can automatically recycle Volumes
+  AutoPrune = yes                     # Prune expired volumes
+  Volume Retention = 6 days         # one year
+  Volume Use Duration = 23 hours    
+  Maximum Volume Bytes = 10G          # Limit Volume size to something reasonable
+  Maximum Volumes = 100               # Limit number of Volumes in Pool
+  Label Format = "Daily-"             # Auto label
+}
+
+# File Pool definition
+Pool {
+  Name = Monthly
+  Pool Type = Backup
+  Recycle = yes                       # Bacula can automatically recycle Volumes
+  AutoPrune = yes                     # Prune expired volumes
+  Volume Retention = 360 days         # one year
+  Volume Use Duration = 70 hours    
+  Maximum Volume Bytes = 10G          # Limit Volume size to something reasonable
+  Maximum Volumes = 100               # Limit number of Volumes in Pool
+  Label Format = "Monthly-"             # Auto label
+}
+
+# This schedule does the catalog. It starts after the WeeklyCycle
+Schedule {
+  Name = "WeeklyCycleAfterBackup"
+  Run = Full sun-sat at 23:10
+}
+
+#
+Schedule {
+  Name = "AgendaGFS"
+  Run = Level=Full Pool=Monthly 1st sat at 23:05
+  Run = Level=Differential Pool=Weekly 2nd-5th sat at 23:05
+  Run = Level=Incremental Pool=Daily sun-fri at 23:05
+}

@@ -1,38 +1,39 @@
+# Class define variables the module ftp with proftpd - server ftp
+# You should feel free to expand on this and document any parameters etc
 class bacula::proftpd (
-  $serverName        = 'ProFTPD Anonymous Server',
-  $serverType        = 'standalone',
-  $portFTP           = $::bacula::params::portFTP,
-  $user              = 'ftp',
-  $group             = 'ftp',
-  $maxInstances      = '30',
-  $timeoutStalled    = '300',
-  $displayLogin      = 'welcome.msg',
-  $dirDisplayLogin   = "/var/ftp/${displayLogin}",
-  $displayFirstChdir = '.message',
-  $dirFTP            = '/etc/bacula/clients',
-  $loginFTP          = 'AllowAll',
-  $maxClients        = 5,
-  $dirConfClients    = $::bacula::dirConfClients,
-  $dirConfStorage    = $::bacula::dirConfStorage,
-  $package_name      = 'proftpd',
-  $service_name      = 'proftpd',) {
+  $server_name         = 'ProFTPD Anonymous Server',
+  $server_type         = 'standalone',
+  $port_ftp            = $::bacula::port_ftp,
+  $user                = 'ftp',
+  $group               = 'ftp',
+  $max_instances       = '30',
+  $timeout_stalled     = '300',
+  $display_login       = 'welcome.msg',
+  $dir_display_login   = "/var/ftp/${display_login}",
+  $display_first_chdir = '.message',
+  $dir_ftp             = '/etc/bacula/clients',
+  $login_ftp           = 'AllowAll',
+  $max_clients         = 5,
+  $dir_conf_clients    = $::bacula::dir_conf_clients,
+  $dir_conf_storage    = $::bacula::dir_conf_storage,
+  $package_name        = 'proftpd',
+  $service_name        = 'proftpd',) {
   package { $package_name: ensure => 'installed' }
 
   service { $service_name:
-    require   => Package[$package_name],
+    ensure    => 'running',
     enable    => true,
-    ensure    => running,
     hasstatus => true,
+    require   => Package[$package_name],
   }
 
-  file { "/etc/proftpd.conf":
+  file { '/etc/proftpd.conf':
     require => Package[$package_name],
     content => template('bacula/proftpd/proftpd.conf.erb'),
     notify  => Service[$service_name],
   }
 
-  #file { "${dirDisplayLogin}":
-  file { "${dirDisplayLogin}":
+  file { $dir_display_login:
     ensure  => 'file',
     owner   => 'ftp',
     group   => 'ftp',

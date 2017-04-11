@@ -1,24 +1,20 @@
-# This file is maintained by Puppet.
-# DO NOT EDIT
-
-#STORAGE
 Storage {                             # definition of myself
-  Name = "<%= @hostname %>"
-  SDPort = <%= @sdport %>                    # Director's port
-  WorkingDirectory = "<%= @workingDirectory %>" 
-  Pid Directory = "<%= @pidDirectory %>"
-  Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
+  Name = <%= @fqdn %>
+  SDPort = <%= @sdport %>                  # Director"s port
+  WorkingDirectory = "<%= @working_directory %>"
+  PidDirectory = "<%= @pid_directory %>"
+  Maximum Concurrent Jobs = <%= @maximum_concurrent_jobs %>
 }
 
 Director {
-  Name = bacula-dir
-  Password = "M2U1ZGYyOGIyYWVhZmRjOGE0N2FlM2"
+  Name = <%= @dirserver %>
+  Password = "<%= @passwordclient %>"
 }
 
 Device {
   Name = FileStorage
   Media Type = File1
-  Archive Device = /bacula/backup
+  Archive Device = <%= @dir_backup_file %>
   LabelMedia = yes;                   # lets Bacula label unlabeled media
   Random Access = Yes;
   AutomaticMount = yes;               # when device opened, read it

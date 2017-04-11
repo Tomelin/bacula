@@ -1,15 +1,27 @@
 # bacula
 
+[Bacula Server]: http://blog.bacula.org/
+
+[Puppet module]: https://docs.puppetlabs.com/puppet/latest/reference/modules_fundamentals.html
+
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
+2. [Module Description - What is the bacula module, and what does it do?](#module-description)
 3. [Setup - The basics of getting started with bacula](#setup)
     * [What bacula affects](#what-bacula-affects)
     * [Setup requirements](#setup-requirements)
     * [Beginning with bacula](#beginning-with-bacula)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+    * [Class director affects](#class-director-affects)
+	    * [Dependency class director affects](#dependency-class-director-affects)
+    * [Class storage affects](#class-storage-affects)
+    * [Class client affects](#class-client-affects)
+    * [Class proftpd affects](#class-proftpd-affects)
+    * [Class selinux affects](#class-selinux-affects)
+    * [Class firewall affects](#class-firewall-affects)
+    * [Class monitored affects](#class-monitored-affects)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
 
@@ -22,13 +34,9 @@ OS/Puppet version it works with.
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+[Bacula Server] is a widely used backup the servers windows, linux, MAC.... 
+This [Puppet module] simplifies the task of creating configurations to manage Bacula servers in your infrastructure. It can configure the jobs, pools, bacula storage e bacula clients in linux, also configured monitorament, selinux and firewall with firewalld.
+This module test in bacula version 7x.
 
 ## Setup
 
