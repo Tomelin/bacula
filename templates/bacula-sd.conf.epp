@@ -1,0 +1,40 @@
+# This file is maintained by Puppet.
+# DO NOT EDIT
+
+Storage {
+  Name        = "<%= $bacula::storage::sd_name %>"
+  WorkingDirectory = "<%= $bacula::storage::sd_working_directory %>"
+  Pid Directory = "<%= $bacula::params::sd_pid_directory %>"
+  Maximum Concurrent Jobs = <%= $bacula::storage::sd_maximum_concurrent_jobs %>
+  <% if $bacula::storage::sd_address  { -%>
+
+  SDAddresses = {
+  <% $bacula::storage::sd_address.each |$key| { -%>
+      ipv4 = {
+          addr = <%= $key -%>;
+          port = <%= $bacula::storage::sd_port -%>;
+      }
+  }
+  <% } -%>
+  <% } else {-%>
+  SDPort     = <%= $bacula::storage::sd_port -%>
+  <% } -%>
+}
+
+Director {
+  Name = "<%= $bacula::storage::sd_server %>"
+  Password = "<%= $bacula::storage::sd_password %>"
+}
+
+<% if $bacula::storage::sd_mon { -%>
+Director {
+  Name = "<%= $bacula::storage::sd_mon_name %>"
+  Password = "<%= $bacula::storage::sd_password %>"
+  Monitor = yes
+}
+<% } -%>
+
+Messages {
+  Name = Standard
+  director = "<%= $bacula::storage::sd_server %>" = all, !skipped, !restored
+}

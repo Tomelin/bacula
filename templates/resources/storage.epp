@@ -1,0 +1,13 @@
+#NOT EDIT THIS FILE - MANAGEMENT BY PUPPET
+
+Storage {
+  Name = <%= $bacula::storage::storage::sd_name %>
+  <% $bacula::storage::storage::sd_address.each |$key| { -%>
+  Address = <%= $key -%>
+  <% } -%>
+
+  SDPort = <%= $bacula::storage::storage::sd_port %>
+  Password = <%= $bacula::storage::storage::sd_password %>
+  Device = FileStorage
+  Media Type = File
+}

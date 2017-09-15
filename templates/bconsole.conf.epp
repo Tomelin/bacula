@@ -1,0 +1,9 @@
+# This file is maintained by Puppet.
+# DO NOT EDIT
+
+Director {
+ Name = "<%= $bacula::bconsole::bconsole_name %>"
+ DIRport = "<%= $bacula::bconsole::bconsole_dir_port %>"
+ address = "<%= $bacula::bconsole::bconsole_address %>"
+ Password = "<%= $bacula::bconsole::bconsole_password %>"
+}

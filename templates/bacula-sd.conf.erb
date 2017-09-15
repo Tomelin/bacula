@@ -5,14 +5,14 @@
 Storage {                             # definition of myself
   Name = "<%= @hostname %>"
   SDPort = <%= @sdport %>                    # Director's port
-  WorkingDirectory = "<%= @workingDirectory %>" 
+  WorkingDirectory = "<%= @workingDirectory %>"
   Pid Directory = "<%= @pidDirectory %>"
   Maximum Concurrent Jobs = <%= @maximumConcurrentJobs %>
 }
 
 Director {
-  Name = bacula-dir
-  Password = "M2U1ZGYyOGIyYWVhZmRjOGE0N2FlM2"
+  Name = "<%= $bacula::client::sd_server %>"
+  Password = "<%= $bacula::client::sd_password %>"
 }
 
 Device {
@@ -28,5 +28,5 @@ Device {
 
 Messages {
   Name = Standard
-  director = bacula-dir = all
+  director = "<%= $bacula::client::sd_server %>" = all, !skipped, !restored
 }

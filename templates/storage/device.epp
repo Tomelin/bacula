@@ -1,0 +1,11 @@
+
+Device {
+  Name = <%= $device_name %>
+  Media Type = <%= $device_media_type %>
+  Archive Device = <%= $device_archive_device %>
+  LabelMedia = <%= $device_label_media %>;
+  Random Access = <%= $device_random_access %>;
+  AutomaticMount = <%= $device_automatic_mount %>;
+  RemovableMedia = <%= $device_removable_media %>;
+  AlwaysOpen = <%= $device_always_open %>;
+}

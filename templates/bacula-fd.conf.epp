@@ -1,0 +1,31 @@
+# This file is maintained by Puppet.
+# DO NOT EDIT
+
+Director {
+  Name = "<%= $bacula::client::fd_server %>"
+  Password = "<%= $bacula::client::fd_password %>"
+}
+#
+#
+#Director {
+#  Name = "<%= $bacula::client::fd_mon_name %>"
+#  Password = "<%= $bacula::client::fd_password %>"
+#  Monitor = yes
+#}
+#
+#
+FileDaemon {                          # this is me
+  Name = "<%= $bacula::client::fd_name %>"
+  FDport = <%= $bacula::client::fd_port %>                  # where we listen for the director
+  <% if $bacula::client::fd_address { -%>
+  FDAddresses = <%= $bacula::client::fd_address %>
+  <% } -%>
+  WorkingDirectory = "<%= $bacula::client::fd_working_directory %>"
+  Pid Directory = "<%= $bacula::client::fd_pid_directory %>"
+  Maximum Concurrent Jobs = <%= $bacula::client::fd_maximum_concurrent_jobs %>
+
+}
+Messages {
+  Name = Standard
+  director = "<%= $bacula::client::fd_server %>" = all, !skipped, !restored
+}

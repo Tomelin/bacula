@@ -1,0 +1,60 @@
+#NOT EDIT THIS FILE - MANAGEMENT BY PUPPET
+
+Client {
+  Name = <%= $bacula::client::resource::fd_name %>
+  Address = <%= $bacula::client::resource::fd_address %>
+  FDPort = <%= $bacula::client::resource::fd_port %>
+  Password = <%= $bacula::client::resource::fd_password %>
+  File Retention = <%= $bacula::client::resource::fd_file_retention %>
+  Job Retention = <%= $bacula::client::resource::fd_job_retention %>
+  AutoPrune = <%= $bacula::client::resource::fd_auto_prune %>
+}
+
+#Job - management by puppet
+Job {
+  Name = "<%= $bacula::client::resource::fd_job_name %>"
+  JobDefs = <%= $bacula::client::resource::fd_job_defs %>
+  FileSet = <%= $bacula::client::resource::fd_job_fileset %>
+  <% if $bacula::client::resource::fd_job_type { -%>
+  
+  Type = <%= $bacula::client::resource::fd_job_type %>
+  <% } -%>
+  <% if $bacula::client::resource::fd_job_pool { -%>
+  Pool = <%= $bacula::client::resource::fd_job_pool %>
+  <% } -%>
+
+}
+
+#FileSet - management by puppet
+FileSet {
+  Name = "<%= $bacula::client::resource::fd_fileset_name -%>"
+    <% if $bacula::client::resource::fd_fileset_exclude { -%>
+    Exclude {
+        <% if $bacula::client::resource::fd_fileset_exclude_options { -%>
+        Options = {
+          <% $bacula::client::resource::fd_fileset_exclude_options.each |$key, $value| { -%>
+            <%= $key %> = <%= $value %>
+          <% } -%>
+        }
+        <% } -%>
+
+        <% $bacula::client::resource::fd_fileset_exclude.each |$value| { -%>
+         File = <%= $value %>
+        <% } -%>
+    }
+    <% } -%>
+
+  include {
+    <% if $bacula::client::resource::fd_fileset_include_options { -%>
+    Options = {
+      <% $bacula::client::resource::fd_fileset_include_options.each |$key, $value| { -%>
+        <%= $key %> = <%= $value %>
+      <% } -%>
+    }
+    <% } -%>
+
+    <% $bacula::client::resource::fd_fileset_include.each |$value| { -%>
+     File = <%= $value %>
+    <% } -%>
+   }
+}
